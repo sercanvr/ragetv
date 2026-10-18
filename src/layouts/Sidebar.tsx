@@ -50,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
     <aside
       className={cn(
         'hidden lg:flex flex-col shrink-0 h-screen sticky top-0 bg-surface-deep border-r border-surface-border transition-all duration-300 z-40 select-none',
-        isCollapsed ? 'w-20' : 'w-[260px] tv:w-[320px]'
+        isCollapsed ? 'w-20 overflow-visible z-50' : 'w-[260px] tv:w-[320px]'
       )}
     >
       {/* Top Header / Logo */}
@@ -83,7 +83,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
       </div>
 
       {/* Games Navigation List */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
+      <div className={cn("flex-1 p-3 space-y-1.5", isCollapsed ? "overflow-visible" : "overflow-y-auto")}>
         <div className="px-2 py-1">
           {!isCollapsed && (
             <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500">

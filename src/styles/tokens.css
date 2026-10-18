@@ -11,6 +11,7 @@
   --color-bg-base: #0D0F12;
   --color-bg-surface: #14171E;
   --color-bg-card: #1A1E27;
+  --color-bg-panel: #1A1E26;
   --color-bg-hover: #222733;
 
   /* Borders & Dividers */
@@ -52,6 +53,7 @@ html.light,
   --color-bg-base: #F8F9FA;
   --color-bg-surface: #FFFFFF;
   --color-bg-card: #FFFFFF;
+  --color-bg-panel: #F1F3F5;
   --color-bg-hover: #E9ECEF;
 
   --color-border: #E5E7EB;
@@ -60,7 +62,7 @@ html.light,
 
   --color-text-primary: #111827;
   --color-text-secondary: #4B5563;
-  --color-text-muted: #9CA3AF;
+  --color-text-muted: #6B7280;
 
   --shadow-card: 0 4px 15px -2px rgba(0, 0, 0, 0.08);
 }

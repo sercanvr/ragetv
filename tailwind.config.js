@@ -20,12 +20,12 @@ export default {
           glow: 'rgba(252, 53, 100, 0.25)',
         },
         surface: {
-          deep: '#0A0C0E',
-          base: '#0D0F12',
-          card: '#15181E',
-          panel: '#1A1E26',
-          border: '#242935',
-          borderLight: '#32394A',
+          deep: 'var(--color-bg-deep)',
+          base: 'var(--color-bg-base)',
+          card: 'var(--color-bg-card)',
+          panel: 'var(--color-bg-panel)',
+          border: 'var(--color-border)',
+          borderLight: 'var(--color-border-subtle)',
         },
       },
       fontFamily: {

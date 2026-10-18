@@ -9,7 +9,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 1,
     i18nKey: 'games.cs2',
     icon: 'Crosshair',
-    logoUrl: '/logos/cs2.svg',
+    logoUrl: '/logos/cs2-logo.webp',
     tagline: 'Tactical FPS Tournament Action',
     channels: [
       { platform: 'twitch', login: 'eslcs', label: 'ESL CS', language: 'en', official: true, priority: 1 },
@@ -18,7 +18,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: 'f02mOEt11OQ', // Verified official CS2 major highlight fallback
+      defaultVideoId: '7t7q5ahmsEQ', // PGL CS2 Major Copenhagen 2024 - Grand Final
     },
   },
   {
@@ -29,7 +29,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 2,
     i18nKey: 'games.valorant',
     icon: 'ShieldAlert',
-    logoUrl: '/logos/valorant.svg',
+    logoUrl: '/logos/valorant.png',
     tagline: 'VCT Champions & Masters Tour',
     channels: [
       { platform: 'twitch', login: 'valorant', label: 'VCT Official', language: 'en', official: true, priority: 1 },
@@ -39,7 +39,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: '4T7CwX1x_E4', // Verified official VCT replay fallback
+      defaultVideoId: 'l9VxSMFMlKI', // VALORANT Champions Shanghai - Grand Final
     },
   },
   {
@@ -50,14 +50,14 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 3,
     i18nKey: 'games.pubg',
     icon: 'Target',
-    logoUrl: '/logos/pubg.svg',
+    logoUrl: '/logos/pubg-logo.jpg',
     tagline: 'Global Championship Battle Royale',
     channels: [
       { platform: 'twitch', login: 'pubg_battlegrounds', label: 'PUBG Esports', language: 'en', official: true, priority: 1 },
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: 'kP61KvdzTfM', // Verified official PUBG PGS fallback
+      defaultVideoId: '7-niA4rH38Y', // PUBG Nations Cup (PNC) Best Moments
     },
   },
   {
@@ -68,7 +68,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 4,
     i18nKey: 'games.lol',
     icon: 'Sword',
-    logoUrl: '/logos/lol.svg',
+    logoUrl: '/logos/lol-logo.png',
     tagline: 'MSI, Worlds & Regional Leagues',
     channels: [
       { platform: 'twitch', login: 'riotgames', label: 'Riot Games', language: 'en', official: true, priority: 1 },
@@ -77,7 +77,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: 'Z_J3g8l9G9o', // Verified official Worlds fallback
+      defaultVideoId: 'rZHrffKAc6k', // Worlds 2024 Grand Finals T1 vs BLG
     },
   },
   {
@@ -88,7 +88,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 5,
     i18nKey: 'games.dota2',
     icon: 'Flame',
-    logoUrl: '/logos/dota2.svg',
+    logoUrl: '/logos/dota2-logo.png',
     tagline: 'The International & PGL Tournaments',
     channels: [
       { platform: 'twitch', login: 'pgl_dota2', label: 'PGL Dota 2', language: 'en', official: true, priority: 1 },
@@ -97,7 +97,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: 'm4uE9X1yF3M', // Verified official TI fallback
+      defaultVideoId: 'P2DBDqwC4xw', // The International 2024 Grand Finals
     },
   },
 ];

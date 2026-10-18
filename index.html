@@ -15,8 +15,22 @@
     <meta property="og:site_name" content="RageTV" />
 
     <title>RageTV – Pick a game. Watch live esports.</title>
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('ragetv_theme');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#0D0F12] text-white">
+  <body class="bg-surface-base">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

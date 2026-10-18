@@ -64,7 +64,10 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
                 <img
                   src={game.logoUrl}
                   alt={game.name}
-                  className="w-6 h-6 object-contain"
+                  className="w-6 h-6 object-contain rounded"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                  }}
                 />
               ) : (
                 <FallbackIcon className="w-4 h-4 text-gray-300" />
@@ -91,11 +94,13 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
 
       {/* User Requested Tooltip when collapsed */}
       {isCollapsed && (
-        <div className="absolute left-[calc(100%+11px)] top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out translate-x-1 group-hover/item:translate-x-0">
-          <div className="relative bg-[#FC3564] text-white text-xs font-bold px-4 py-2.5 rounded-[10px] whitespace-nowrap shadow-2xl flex items-center justify-center">
-            {game.name}
-            {/* Left triangle pointer */}
-            <span className="absolute -left-[6px] top-1/2 -translate-y-1/2 w-0 h-0 border-y-[6px] border-y-transparent border-r-[6px] border-r-[#FC3564]" />
+        <div className="absolute left-[calc(100%+11px)] top-1/2 -translate-y-1/2 z-[9999] pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out whitespace-nowrap">
+          <div className="relative min-w-[80px] bg-[#FC3564] text-white text-xs font-bold px-4 py-2.5 rounded-[10px] text-center shadow-2xl flex items-center justify-center">
+            {game.shortName || game.name}
+            {/* Triangle pointer matching user specification */}
+            <span
+              className="absolute -left-[6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-[#FC3564]"
+            />
           </div>
         </div>
       )}
