@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { getGameBySlug, getDefaultGame } from '@shared/registry/games';
 import { PlayerStage } from '@/features/player/PlayerStage';
+import { FixturesSection } from '@/features/fixtures/FixturesSection';
 import { useLiveStatus } from '@/features/live/useLiveStatus';
 
 export const GameView: React.FC = () => {
@@ -26,5 +27,10 @@ export const GameView: React.FC = () => {
   const gameLiveStreams = data?.games[game.slug]?.live || [];
   const activeStream = gameLiveStreams.length > 0 ? gameLiveStreams[0] : null;
 
-  return <PlayerStage game={game} activeStream={activeStream || null} />;
+  return (
+    <div className="space-y-6">
+      <PlayerStage game={game} activeStream={activeStream || null} />
+      <FixturesSection gameSlug={game.slug} />
+    </div>
+  );
 };

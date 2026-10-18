@@ -21,7 +21,11 @@ liveRouter.get('/', async (c) => {
 
   let liveStreams: Stream[] = [];
 
-  if (env.TWITCH_CLIENT_ID && env.TWITCH_CLIENT_SECRET && twitchBreaker.canExecute()) {
+  if (env.TWITCH_CLIENT_ID && env.TWITCH_CLIENT_SECRET) {
+    if (!twitchBreaker.canExecute() && lastSuccessfulResponse) {
+      return c.json({ ...lastSuccessfulResponse, stale: true });
+    }
+
     try {
       liveStreams = await fetchTwitchLiveStreams(
         env.TWITCH_CLIENT_ID,
@@ -31,6 +35,9 @@ liveRouter.get('/', async (c) => {
       twitchBreaker.recordSuccess();
     } catch {
       twitchBreaker.recordFailure();
+      if (lastSuccessfulResponse) {
+        return c.json({ ...lastSuccessfulResponse, stale: true });
+      }
     }
   }
 

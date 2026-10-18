@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { GAMES_REGISTRY } from '../shared/registry/games';
 import { liveRouter } from './routes/live';
 import { vodRouter } from './routes/vod';
+import { fixturesRouter } from './routes/fixtures';
 
 export const app = new Hono().basePath('/api');
 
@@ -15,8 +16,9 @@ app.get('/health', (c) => {
   });
 });
 
-// Mount /api/live and /api/vod
+// Mount /api/live, /api/vod, and /api/fixtures
 app.route('/live', liveRouter);
 app.route('/vod', vodRouter);
+app.route('/fixtures', fixturesRouter);
 
 export default app;
