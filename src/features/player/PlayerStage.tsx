@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Play, ExternalLink, Radio, Eye, Trophy } from 'lucide-react';
+import { Play, ExternalLink, Radio, Eye, Trophy, Calendar } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
+import { Skeleton } from '@/components/ui/Skeleton';
 import { EmbedPlayer } from './EmbedPlayer';
 import { formatViewerCount } from '@/lib/utils';
+import { useVod } from '@/features/vod/useVod';
 
 interface PlayerStageProps {
   game: GameDefinition;
@@ -15,8 +17,9 @@ interface PlayerStageProps {
 export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) => {
   const { t, i18n } = useTranslation();
   const [isPlayingVod, setIsPlayingVod] = useState(false);
+  const { data: vodData, isLoading: isVodLoading } = useVod(game.slug);
 
-  // If there's an active live stream, show live stream directly
+  // 1. Live Stream Active State
   if (activeStream) {
     const streamUrl =
       activeStream.platform === 'twitch'
@@ -38,7 +41,9 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1.5 text-xs text-gray-400 bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
               <Eye className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{formatViewerCount(activeStream.viewers, i18n.language)} {t('player.viewers')}</span>
+              <span>
+                {formatViewerCount(activeStream.viewers, i18n.language)} {t('player.viewers')}
+              </span>
             </span>
           </div>
         </div>
@@ -62,7 +67,9 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
                 {activeStream.title}
               </h2>
               <p className="text-xs text-gray-400 flex items-center gap-2">
-                <span>{t('player.channel')}: <strong className="text-gray-200">@{activeStream.channel}</strong></span>
+                <span>
+                  {t('player.channel')}: <strong className="text-gray-200">@{activeStream.channel}</strong>
+                </span>
               </p>
             </div>
           </div>
@@ -81,8 +88,22 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
     );
   }
 
-  // Fallback VOD / Recent Tournament Match Stage
-  const fallbackVideoId = game.vodSource.defaultVideoId || 'f02mOEt11OQ';
+  // 2. Fallback VOD / Recent Tournament Match Stage
+  const vod = vodData?.vod;
+  const fallbackVideoId = vod?.videoId || game.vodSource.defaultVideoId || 'f02mOEt11OQ';
+  const vodTitle = vod?.title || `${game.name} — Recent Championship Grand Finals`;
+  const vodThumbnail =
+    vod?.thumbnailUrl || `https://i.ytimg.com/vi/${fallbackVideoId}/hqdefault.jpg`;
+
+  if (isVodLoading && !vod) {
+    return (
+      <section className="space-y-4">
+        <Skeleton className="h-10 w-64" />
+        <Skeleton className="w-full aspect-video rounded-2xl" />
+        <Skeleton className="h-14 w-full rounded-xl" />
+      </section>
+    );
+  }
 
   return (
     <section className="space-y-4">
@@ -98,7 +119,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
 
         <span className="flex items-center gap-1.5 text-xs text-gray-400 bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
           <Trophy className="w-3.5 h-3.5 text-blue-400" />
-          <span>Official Replay</span>
+          <span>Official Tournament VOD</span>
         </span>
       </div>
 
@@ -107,18 +128,17 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
         <EmbedPlayer
           platform="youtube"
           channelOrVideoId={fallbackVideoId}
-          title={`${game.name} Recent Tournament Championship Replay`}
+          title={vodTitle}
           isLive={false}
         />
       ) : (
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group">
           {/* Poster Image */}
           <img
-            src={`https://i.ytimg.com/vi/${fallbackVideoId}/maxresdefault.jpg`}
+            src={vodThumbnail}
             alt={game.name}
             className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
             onError={(e) => {
-              // Fallback to hqdefault if maxres not available
               (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${fallbackVideoId}/hqdefault.jpg`;
             }}
           />
@@ -134,13 +154,13 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
             </button>
 
             <div className="mt-4 max-w-lg space-y-1">
-              <Badge variant="vod" className="mb-2">{t('player.vod')}</Badge>
+              <Badge variant="vod" className="mb-2">
+                {t('player.vod')}
+              </Badge>
               <h2 className="text-base sm:text-xl font-bold text-white line-clamp-1">
-                {game.name} — Recent Championship Grand Finals
+                {vodTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-gray-300">
-                {t('player.noLiveDesc')}
-              </p>
+              <p className="text-xs sm:text-sm text-gray-300">{t('player.noLiveDesc')}</p>
             </div>
           </div>
         </div>
@@ -149,7 +169,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
       {/* Metadata Subbar */}
       <div className="glass-panel rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400">
         <div className="flex items-center gap-2">
-          <Trophy className="w-4 h-4 text-blue-400" />
+          <Calendar className="w-4 h-4 text-blue-400" />
           <span>{t('player.noLiveTitle')}</span>
         </div>
 
