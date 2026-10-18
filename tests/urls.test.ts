@@ -4,12 +4,12 @@ import { buildTwitchEmbedUrl, buildYouTubeEmbedUrl, isAllowedEmbedUrl } from '..
 describe('Embed URL Builders & Security Allowlist', () => {
   it('should build valid Twitch embed URL with parent parameter', () => {
     const url = buildTwitchEmbedUrl('eslcs', 'ragetv.app');
-    expect(url).toBe('https://player.twitch.tv/?channel=eslcs&parent=ragetv.app&muted=true&autoplay=true');
+    expect(url).toBe('https://player.twitch.tv/?channel=eslcs&parent=ragetv.app&muted=true&autoplay=false');
   });
 
   it('should strip port from host in Twitch parent parameter', () => {
     const url = buildTwitchEmbedUrl('blastpremier', 'localhost:5173');
-    expect(url).toBe('https://player.twitch.tv/?channel=blastpremier&parent=localhost&muted=true&autoplay=true');
+    expect(url).toBe('https://player.twitch.tv/?channel=blastpremier&parent=localhost&muted=true&autoplay=false');
   });
 
   it('should build valid YouTube no-cookie embed URL', () => {

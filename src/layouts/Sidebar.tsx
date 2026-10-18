@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flame, PanelLeftClose, PanelLeft, Globe } from 'lucide-react';
+import { Flame, PanelLeftClose, PanelLeft, Globe, Sun, Moon } from 'lucide-react';
 import { GAMES_REGISTRY } from '@shared/registry/games';
 import { GameNavItem } from '@/features/games/GameNavItem';
 import { cn } from '@/lib/utils';
@@ -12,6 +12,33 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
   const { t, i18n } = useTranslation();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('ragetv_theme');
+    if (savedTheme === 'light') {
+      setIsLight(true);
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = !isLight;
+    setIsLight(nextTheme);
+    if (nextTheme) {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('ragetv_theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('ragetv_theme', 'dark');
+    }
+  };
 
   const toggleLanguage = () => {
     const nextLang = i18n.language === 'en' ? 'tr' : i18n.language === 'tr' ? 'de' : 'en';
@@ -75,8 +102,30 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
         ))}
       </div>
 
-      {/* Bottom Controls / Language & Version */}
-      <div className="p-3 border-t border-surface-border space-y-2">
+      {/* Bottom Controls / Language & Theme */}
+      <div className="p-3 border-t border-surface-border space-y-1.5">
+        {/* Theme Switcher Button */}
+        <button
+          onClick={toggleTheme}
+          className={cn(
+            'w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors',
+            isCollapsed && 'justify-center'
+          )}
+          title={isLight ? 'Dark Mode' : 'Light Mode'}
+        >
+          {isLight ? (
+            <Moon className="w-4 h-4 shrink-0 text-amber-400" />
+          ) : (
+            <Sun className="w-4 h-4 shrink-0 text-amber-400" />
+          )}
+          {!isCollapsed && (
+            <span className="font-semibold">
+              {isLight ? 'Dark Mode' : 'Light Mode'}
+            </span>
+          )}
+        </button>
+
+        {/* Language Switcher */}
         <button
           onClick={toggleLanguage}
           className={cn(

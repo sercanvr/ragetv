@@ -9,6 +9,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 1,
     i18nKey: 'games.cs2',
     icon: 'Crosshair',
+    logoUrl: '/logos/cs2.svg',
     tagline: 'Tactical FPS Tournament Action',
     channels: [
       { platform: 'twitch', login: 'eslcs', label: 'ESL CS', language: 'en', official: true, priority: 1 },
@@ -28,6 +29,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 2,
     i18nKey: 'games.valorant',
     icon: 'ShieldAlert',
+    logoUrl: '/logos/valorant.svg',
     tagline: 'VCT Champions & Masters Tour',
     channels: [
       { platform: 'twitch', login: 'valorant', label: 'VCT Official', language: 'en', official: true, priority: 1 },
@@ -48,6 +50,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 3,
     i18nKey: 'games.pubg',
     icon: 'Target',
+    logoUrl: '/logos/pubg.svg',
     tagline: 'Global Championship Battle Royale',
     channels: [
       { platform: 'twitch', login: 'pubg_battlegrounds', label: 'PUBG Esports', language: 'en', official: true, priority: 1 },
@@ -65,6 +68,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 4,
     i18nKey: 'games.lol',
     icon: 'Sword',
+    logoUrl: '/logos/lol.svg',
     tagline: 'MSI, Worlds & Regional Leagues',
     channels: [
       { platform: 'twitch', login: 'riotgames', label: 'Riot Games', language: 'en', official: true, priority: 1 },
@@ -84,6 +88,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 5,
     i18nKey: 'games.dota2',
     icon: 'Flame',
+    logoUrl: '/logos/dota2.svg',
     tagline: 'The International & PGL Tournaments',
     channels: [
       { platform: 'twitch', login: 'pgl_dota2', label: 'PGL Dota 2', language: 'en', official: true, priority: 1 },

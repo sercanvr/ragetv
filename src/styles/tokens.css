@@ -6,7 +6,7 @@
   --color-brand-muted: #8A1B35;
   --color-brand-glow: rgba(252, 53, 100, 0.28);
 
-  /* Surface / Background Hierarchy */
+  /* Surface / Background Hierarchy (Dark default) */
   --color-bg-deep: #0A0C0E;
   --color-bg-base: #0D0F12;
   --color-bg-surface: #14171E;
@@ -43,6 +43,26 @@
   --sidebar-collapsed-width: 72px;
   --topbar-height: 64px;
   --bottombar-height: 64px;
+}
+
+/* Light Theme Variables */
+html.light,
+.light {
+  --color-bg-deep: #F1F3F5;
+  --color-bg-base: #F8F9FA;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-hover: #E9ECEF;
+
+  --color-border: #E5E7EB;
+  --color-border-subtle: #F3F4F6;
+  --color-border-focus: #FC3564;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #9CA3AF;
+
+  --shadow-card: 0 4px 15px -2px rgba(0, 0, 0, 0.08);
 }
 
 /* Television / 10-foot UI Scaled Tokens */

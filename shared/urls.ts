@@ -1,6 +1,7 @@
 /**
  * Embed URL builders and host allowlist validation.
  * Strictly adheres to official provider documentation.
+ * Enforces NO-AUTOPLAY policy to prevent user jump scares.
  */
 
 export const ALLOWED_EMBED_HOSTS = [
@@ -13,7 +14,8 @@ export function buildTwitchEmbedUrl(channelLogin: string, currentHost: string, m
   const cleanLogin = encodeURIComponent(channelLogin.trim().toLowerCase());
   // Normalize parent host (remove port if local dev)
   const parentHost = currentHost.split(':')[0] || 'localhost';
-  return `https://player.twitch.tv/?channel=${cleanLogin}&parent=${encodeURIComponent(parentHost)}&muted=${muted}&autoplay=true`;
+  // Autoplay is strictly FALSE by default, muted is true
+  return `https://player.twitch.tv/?channel=${cleanLogin}&parent=${encodeURIComponent(parentHost)}&muted=${muted}&autoplay=false`;
 }
 
 export function buildTwitchVodUrl(videoId: string, currentHost: string): string {

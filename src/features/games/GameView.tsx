@@ -28,9 +28,13 @@ export const GameView: React.FC = () => {
   const activeStream = gameLiveStreams.length > 0 ? gameLiveStreams[0] : null;
 
   return (
-    <div className="space-y-6">
-      <PlayerStage game={game} activeStream={activeStream || null} />
-      <FixturesSection gameSlug={game.slug} />
+    <div className="flex flex-col xl:flex-row gap-6 items-start">
+      <div className="flex-1 min-w-0 w-full">
+        <PlayerStage game={game} activeStream={activeStream || null} />
+      </div>
+      <div className="w-full xl:w-[380px] 2xl:w-[420px] shrink-0 xl:sticky xl:top-6">
+        <FixturesSection gameSlug={game.slug} />
+      </div>
     </div>
   );
 };

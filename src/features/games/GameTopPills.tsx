@@ -40,7 +40,11 @@ export const GameTopPills: React.FC<GameTopPillsProps> = ({
               )
             }
           >
-            <Icon className="w-3.5 h-3.5 shrink-0" />
+            {game.logoUrl ? (
+              <img src={game.logoUrl} alt={game.shortName} className="w-4 h-4 object-contain shrink-0" />
+            ) : (
+              <Icon className="w-3.5 h-3.5 shrink-0" />
+            )}
             <span>{game.shortName}</span>
             {isLive && (
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />

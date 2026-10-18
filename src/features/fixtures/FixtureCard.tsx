@@ -48,8 +48,12 @@ export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }
       <div className="flex items-center justify-between gap-3">
         {/* Team A */}
         <div className="flex-1 flex items-center gap-2 min-w-0">
-          <div className="w-7 h-7 rounded-lg bg-surface-panel border border-surface-border flex items-center justify-center shrink-0 font-bold text-xs text-gray-200">
-            {match.teamA.acronym.slice(0, 3)}
+          <div className="w-8 h-8 rounded-lg bg-surface-panel border border-surface-border flex items-center justify-center shrink-0 overflow-hidden font-bold text-xs text-gray-200">
+            {match.teamA.logoUrl ? (
+              <img src={match.teamA.logoUrl} alt={match.teamA.name} className="w-6 h-6 object-contain" />
+            ) : (
+              match.teamA.acronym.slice(0, 3)
+            )}
           </div>
           <span className="text-sm font-semibold text-white truncate">
             {match.teamA.name}
@@ -74,8 +78,12 @@ export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }
           <span className="text-sm font-semibold text-white truncate">
             {match.teamB.name}
           </span>
-          <div className="w-7 h-7 rounded-lg bg-surface-panel border border-surface-border flex items-center justify-center shrink-0 font-bold text-xs text-gray-200">
-            {match.teamB.acronym.slice(0, 3)}
+          <div className="w-8 h-8 rounded-lg bg-surface-panel border border-surface-border flex items-center justify-center shrink-0 overflow-hidden font-bold text-xs text-gray-200">
+            {match.teamB.logoUrl ? (
+              <img src={match.teamB.logoUrl} alt={match.teamB.name} className="w-6 h-6 object-contain" />
+            ) : (
+              match.teamB.acronym.slice(0, 3)
+            )}
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ export const GameDefinitionSchema = z.object({
   order: z.number(),
   i18nKey: z.string(),
   icon: z.string(),
+  logoUrl: z.string().optional(),
   tagline: z.string(),
   channels: z.array(ChannelRefSchema),
   vodSource: VodSourceRefSchema,
