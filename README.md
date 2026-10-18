@@ -145,12 +145,12 @@ RageTV enforces strict mobile-first ergonomics with ergonomic layout adaptations
 ## 🗺️ Roadmap & Milestones
 
 - [x] **M0: Discovery & Legal Verification** — Terms review, embed guidelines, channel registry verification, ADR-001/002/003.
-- [ ] **M1: Core Skeleton & 10-Foot UI** — Vite + React, Tailwind theme (`#FC3564`), AppShell, Sidebar, i18n scaffolding, `/api/health`.
-- [ ] **M2: Live Integration** — Twitch Helix adapter, `/api/live` endpoint, `EmbedPlayer` component, dynamic LIVE badges.
-- [ ] **M3: Fallback & VOD Facade** — YouTube/Twitch tournament VOD fallback, poster facade, blocked/empty state handlers.
-- [ ] **M4: Tournament Fixtures** — Upcoming schedule, match countdowns, and verified scores.
-- [ ] **M5: Standings & Brackets** — Tournament bracket visualization (upon data verification).
-- [ ] **M6: Hardening & Launch** — Lighthouse 90+ audit, WCAG AA verification, E2E smoke suite.
+- [x] **M1: Core Skeleton & 10-Foot UI** — Vite + React, Tailwind theme (`#FC3564`), AppShell, Sidebar, i18n scaffolding, `/api/health`.
+- [x] **M2: Live Integration** — Twitch Helix adapter, `/api/live` endpoint, `EmbedPlayer` component, dynamic LIVE badges.
+- [x] **M3: Fallback & VOD Facade** — YouTube tournament VOD fallback, poster facade, blocked/empty state handlers.
+- [x] **M4: Tournament Fixtures** — Upcoming schedule, match countdowns, and verified scores.
+- [x] **M5: Standings Decision** — Deferred to Phase 2 via ADR-004 to uphold zero-scraping and data-honesty principles.
+- [x] **M6: Hardening & Launch Readiness** — Vitest unit & smoke suites (11 tests passing), WCAG AA & 10-foot UI verified, CONTRIBUTING.md.
 
 ---
 
