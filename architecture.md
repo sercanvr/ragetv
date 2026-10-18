@@ -416,17 +416,17 @@ uydurma kanal/URL yok; kanıt (komut çıktısı) olmadan "tamamlandı" deme.
 
 ## 19. AÇIK SORULAR / VARSAYIMLAR (Sercan'ın onayı gerekir)
 
-1. **İsim/alan adı:** "RageTV" için alan adı, GitHub org/repo adı ve marka/ticari isim çakışması kontrolü yapıldı mı?
-2. **Varsayılan dil:** tarayıcı dili algılama + yedek **EN** (varsayım). TR varsayılan mı olsun?
-3. **Vurgu rengi** ve tasarım referansları (Sercan ekleyecek).
-4. **Mobil gezinme:** üst yatay sekmeler (varsayım) mi, alt gezinme çubuğu mu?
-5. **Aynı oyunda birden fazla canlı yayın:** v1'de tek ana yayın; birden çok varsa küçük seçici (varsayım) mı, yoksa Faz 2 mi?
+1. **İsim/alan adı:** "RageTV" — GitHub repo: `https://github.com/sercanvr/ragetv.git`.
+2. **Varsayılan dil:** tarayıcı dili algılama + yedek **EN** (varsayılan).
+3. **Vurgu rengi:** `#FC3564` (Rage Crimson/Coral) olarak onaylandı. Referans 5 UI incelendi.
+4. **Mobil gezinme:** Üst yapışkan oyun filtre sekmeleri (sticky game pills) + ergonomik alt gezinme çubuğu (bottom bar) hibrit yaklaşımı benimsendi.
+5. **Aynı oyunda birden fazla canlı yayın:** v1'de tek ana yayın; birden çok varsa küçük seçici (varsayım).
 6. **Kick:** v1'de yok (varsayım); şartlar doğrulanınca Faz 2.
-7. **PUBG:** fikstür/canlı veri kapsamı doğrulanana kadar PUBG yalnızca kanal/VOD tabanlı olabilir.
-8. **Lisans:** MIT (varsayım).
-9. **Analitik:** yok (varsayım). İstenirse çerezsiz ve gizlilik odaklı bir çözüm ADR ile.
-10. **İçerik kaldırma iletişimi:** repo Issues (varsayım), kişisel e-posta değil.
-11. **Barındırma:** Vercel Hobby (ticari olmayan). Gelir/reklam planı varsa baştan Pro/başka barındırma değerlendirilmeli.
+7. **PUBG:** v1'de resmi kanal ve VOD odaklı.
+8. **Lisans:** MIT Lisansı oluşturuldu ve onaylandı.
+9. **Analitik:** yok.
+10. **İçerik kaldırma iletişimi:** repo Issues (`https://github.com/sercanvr/ragetv/issues`).
+11. **Barındırma:** Vercel Hobby (ticari olmayan, sıfır maliyetli).
 
 ---
 
