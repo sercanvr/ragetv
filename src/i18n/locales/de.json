@@ -1,0 +1,35 @@
+{
+  "brand": {
+    "name": "RageTV",
+    "tagline": "Spiel wählen. Live-Esports schauen."
+  },
+  "nav": {
+    "home": "Live-Streams",
+    "tournaments": "Turniere",
+    "fixtures": "Spielplan",
+    "theme": "Design",
+    "language": "Sprache",
+    "collapse": "Seitenleiste einklappen"
+  },
+  "games": {
+    "title": "Spiele",
+    "cs2": "Counter-Strike 2",
+    "valorant": "Valorant",
+    "pubg": "PUBG: Battlegrounds",
+    "lol": "League of Legends",
+    "dota2": "Dota 2"
+  },
+  "player": {
+    "live": "LIVE",
+    "vod": "LETZTES MATCH",
+    "viewers": "Zuschauer",
+    "openOnTwitch": "Auf Twitch öffnen",
+    "openOnYoutube": "Auf YouTube öffnen",
+    "noLiveTitle": "Aktuell keine offizielle Live-Übertragung",
+    "noLiveDesc": "Unten wird das jüngste Meisterschaftsspiel dieses Spiels abgespielt.",
+    "playMatch": "Wiederholung ansehen",
+    "channel": "Kanal",
+    "tournament": "Turnier"
+  },
+  "disclaimer": "RageTV ist eine unabhängige, nicht-kommerzielle Plattform zur Entdeckung von Esports. Es hostet, speichert oder re-streamt keine Videos. Alle Streams werden über offizielle Player von Twitch und YouTube bereitgestellt."
+}

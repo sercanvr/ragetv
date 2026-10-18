@@ -1,0 +1,35 @@
+{
+  "brand": {
+    "name": "RageTV",
+    "tagline": "Bir oyun seç, canlı espor izle."
+  },
+  "nav": {
+    "home": "Canlı Yayınlar",
+    "tournaments": "Turnuvalar",
+    "fixtures": "Fikstür",
+    "theme": "Tema",
+    "language": "Dil",
+    "collapse": "Menüyü Daralt"
+  },
+  "games": {
+    "title": "Oyunlar",
+    "cs2": "Counter-Strike 2",
+    "valorant": "Valorant",
+    "pubg": "PUBG: Battlegrounds",
+    "lol": "League of Legends",
+    "dota2": "Dota 2"
+  },
+  "player": {
+    "live": "CANLI",
+    "vod": "SON MAÇ",
+    "viewers": "izleyici",
+    "openOnTwitch": "Twitch'te Aç",
+    "openOnYoutube": "YouTube'da Aç",
+    "noLiveTitle": "Şu Anda Resmi Canlı Yayın Yok",
+    "noLiveDesc": "Aşağıda bu oyunun en son oynanan turnuva şampiyonluk maçı yer almaktadır.",
+    "playMatch": "Tekrarı İzle",
+    "channel": "Kanal",
+    "tournament": "Turnuva"
+  },
+  "disclaimer": "RageTV, bağımsız ve ticari olmayan bir espor keşif sitesidir. Hiçbir video içeriğini barındırmaz, kaydetmez veya yeniden yayınlamaz. Canlı yayınlar ve videolar, özgün platformların (Twitch, YouTube) resmi gömülü oynatıcıları aracılığıyla gösterilir ve ilgili sahiplerine aittir."
+}
