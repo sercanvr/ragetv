@@ -50,7 +50,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     order: 3,
     i18nKey: 'games.pubg',
     icon: 'Target',
-    logoUrl: '/logos/pubg-logo.jpg',
+    logoUrl: '/logos/pubg-logo.png',
     tagline: 'Global Championship Battle Royale',
     channels: [
       { platform: 'twitch', login: 'pubg_battlegrounds', label: 'PUBG Esports', language: 'en', official: true, priority: 1 },

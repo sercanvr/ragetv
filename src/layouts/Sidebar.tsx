@@ -12,12 +12,16 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
   const { t, i18n } = useTranslation();
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isLight, setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('ragetv_theme') === 'light';
+    }
+    return false;
+  });
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('ragetv_theme');
     if (savedTheme === 'light') {
-      setIsLight(true);
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
     } else {
@@ -56,8 +60,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
       {/* Top Header / Logo */}
       <div className="flex items-center justify-between h-16 px-4 border-b border-surface-border">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand to-rose-400 flex items-center justify-center text-white shadow-brand-glow shrink-0">
-            <Flame className="w-5 h-5 fill-white" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 shadow-brand-glow border border-brand/30 bg-black">
+            <img src="/logos/rtv-logo.png" alt="RageTV" className="w-full h-full object-cover" />
           </div>
           {!isCollapsed && (
             <div className="flex flex-col">

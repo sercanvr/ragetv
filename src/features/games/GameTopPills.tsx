@@ -41,7 +41,7 @@ export const GameTopPills: React.FC<GameTopPillsProps> = ({
             }
           >
             {game.logoUrl ? (
-              <img src={game.logoUrl} alt={game.shortName} className="w-4 h-4 object-contain shrink-0" />
+              <img src={game.logoUrl} alt={game.shortName} className="w-4 h-4 object-cover rounded-full shrink-0" />
             ) : (
               <Icon className="w-3.5 h-3.5 shrink-0" />
             )}

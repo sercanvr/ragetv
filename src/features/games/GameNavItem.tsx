@@ -64,7 +64,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
                 <img
                   src={game.logoUrl}
                   alt={game.name}
-                  className="w-6 h-6 object-contain rounded"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = 'none';
                   }}
