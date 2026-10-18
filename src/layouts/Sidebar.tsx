@@ -54,21 +54,30 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
     <aside
       className={cn(
         'hidden lg:flex flex-col shrink-0 h-screen sticky top-0 bg-surface-deep border-r border-surface-border transition-all duration-300 z-40 select-none',
-        isCollapsed ? 'w-20 overflow-visible z-50' : 'w-[260px] tv:w-[320px]'
+        isCollapsed ? 'w-20 overflow-visible z-50' : 'w-[220px] tv:w-[280px]'
       )}
     >
       {/* Top Header / Logo */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-surface-border">
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 shadow-brand-glow border border-brand/30 bg-black">
-            <img src="/logos/rtv-logo.png" alt="RageTV" className="w-full h-full object-cover" />
-          </div>
+      <div
+        className={cn(
+          'flex border-b border-surface-border transition-all duration-200',
+          isCollapsed
+            ? 'flex-col items-center justify-center py-3 gap-2'
+            : 'items-center justify-between h-16 px-4'
+        )}
+      >
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          <img
+            src="/logos/rtv-logo.png"
+            alt="RageTV"
+            className="w-8 h-8 object-contain shrink-0"
+          />
           {!isCollapsed && (
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-lg tracking-wider text-white">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display font-extrabold text-base tracking-wider text-white">
                 RAGE<span className="text-brand">TV</span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">
+              <span className="text-[9px] uppercase tracking-widest text-gray-400 font-semibold">
                 Esports Hub
               </span>
             </div>
@@ -79,8 +88,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ liveSlugs = [] }) => {
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
-          title={t('nav.collapse')}
-          aria-label={t('nav.collapse')}
+          title={isCollapsed ? 'Genişlet' : t('nav.collapse')}
+          aria-label={isCollapsed ? 'Genişlet' : t('nav.collapse')}
         >
           {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
         </button>

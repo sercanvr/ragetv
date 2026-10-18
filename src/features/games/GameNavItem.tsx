@@ -94,12 +94,12 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
 
       {/* User Requested Tooltip when collapsed */}
       {isCollapsed && (
-        <div className="absolute left-[calc(100%+11px)] top-1/2 -translate-y-1/2 z-[9999] pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out whitespace-nowrap">
-          <div className="relative min-w-[80px] bg-[#FC3564] text-white text-xs font-bold px-4 py-2.5 rounded-[10px] text-center shadow-2xl flex items-center justify-center">
+        <div className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 z-[9999] pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out whitespace-nowrap">
+          <div className="relative bg-[#FC3564] text-white text-[11px] font-bold px-2.5 py-1 rounded-[8px] text-center shadow-lg flex items-center justify-center">
             {game.shortName || game.name}
-            {/* Triangle pointer matching user specification */}
+            {/* Triangle pointer */}
             <span
-              className="absolute -left-[6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-[#FC3564]"
+              className="absolute -left-[5px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[5px] border-r-[#FC3564]"
             />
           </div>
         </div>

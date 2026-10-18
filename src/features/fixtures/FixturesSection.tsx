@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Calendar, CheckCircle2 } from 'lucide-react';
 import { useFixtures } from './useFixtures';
 import { FixtureCard } from './FixtureCard';
-import { MatchCountdown } from './MatchCountdown';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { cn } from '@/lib/utils';
 
@@ -18,7 +17,6 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
 
   const upcomingMatches = data?.upcoming || [];
   const resultMatches = data?.results || [];
-  const nextMatch = upcomingMatches[0];
 
   return (
     <div className="glass-panel rounded-2xl p-4 sm:p-5 space-y-4 w-full">
@@ -30,14 +28,6 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
             Turnuva Fikstürü & Sonuçlar
           </h2>
         </div>
-
-        {/* Next Match Countdown (Referans Görsel 3) */}
-        {activeTab === 'upcoming' && nextMatch && (
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-surface-card border border-surface-border">
-            <span className="text-xs text-gray-400 font-medium">Sıradaki Maç:</span>
-            <MatchCountdown targetDate={nextMatch.scheduledAt} />
-          </div>
-        )}
 
         {/* Tab Buttons */}
         <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep border border-surface-border">
