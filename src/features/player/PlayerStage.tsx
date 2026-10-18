@@ -4,7 +4,6 @@ import { Play, ExternalLink, Radio, Eye, Trophy } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { EmbedPlayer } from './EmbedPlayer';
 import { formatViewerCount } from '@/lib/utils';
 

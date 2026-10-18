@@ -53,7 +53,7 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
     <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-surface-border shadow-2xl">
       <iframe
         src={embedUrl}
-        title={title}
+        title={isLive ? `${title} (Live Stream)` : `${title} (Replay)`}
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
