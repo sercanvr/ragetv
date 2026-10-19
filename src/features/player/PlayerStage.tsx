@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, VolumeX } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
@@ -19,12 +19,6 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
   const [isPlayingLive, setIsPlayingLive] = useState(false);
   const [isPlayingVod, setIsPlayingVod] = useState(false);
   const { data: vodData, isLoading: isVodLoading } = useVod(game.slug);
-
-  // Reset playback state on game switch so it NEVER autoplays
-  useEffect(() => {
-    setIsPlayingLive(false);
-    setIsPlayingVod(false);
-  }, [game.slug]);
 
   // 1. Live Stream Active State
   if (activeStream) {

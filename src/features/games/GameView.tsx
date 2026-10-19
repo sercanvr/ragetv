@@ -30,7 +30,7 @@ export const GameView: React.FC = () => {
   return (
     <div className="flex flex-col xl:flex-row gap-6 items-start">
       <div className="flex-1 min-w-0 w-full">
-        <PlayerStage game={game} activeStream={activeStream || null} />
+        <PlayerStage key={game.slug} game={game} activeStream={activeStream || null} />
       </div>
       <div className="w-full xl:w-[380px] 2xl:w-[420px] shrink-0 xl:sticky xl:top-6">
         <FixturesSection gameSlug={game.slug} />

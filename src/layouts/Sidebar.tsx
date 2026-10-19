@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flame, PanelLeftClose, PanelLeft, Globe, Sun, Moon } from 'lucide-react';
+import { PanelLeftClose, PanelLeft, Globe, Sun, Moon } from 'lucide-react';
 import { GAMES_REGISTRY } from '@shared/registry/games';
 import { GameNavItem } from '@/features/games/GameNavItem';
 import { cn } from '@/lib/utils';
