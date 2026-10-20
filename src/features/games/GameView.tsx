@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
+import { Calendar, Trophy } from 'lucide-react';
 import { getGameBySlug, getDefaultGame } from '@shared/registry/games';
 import { PlayerStage } from '@/features/player/PlayerStage';
 import { FixturesSection } from '@/features/fixtures/FixturesSection';
+import { TeamLeaderboard } from '@/features/leaderboard/TeamLeaderboard';
 import { useLiveStatus } from '@/features/live/useLiveStatus';
+import { cn } from '@/lib/utils';
 
 export const GameView: React.FC = () => {
   const { gameSlug } = useParams<{ gameSlug: string }>();
   const { data } = useLiveStatus();
+  const [activeTab, setActiveTab] = useState<'fixtures' | 'leaderboard'>('fixtures');
 
   // If no slug or invalid slug, fallback to default or redirect
   const game = gameSlug ? getGameBySlug(gameSlug) : getDefaultGame();
@@ -15,7 +19,7 @@ export const GameView: React.FC = () => {
   useEffect(() => {
     if (game) {
       localStorage.setItem('ragetv_last_game', game.slug);
-      document.title = `${game.name} — RageTV | Canlı Esporun Kalbi`;
+      document.title = `${game.name} — RageTV | Turnuvanın Kalbi`;
     }
   }, [game]);
 
@@ -28,12 +32,49 @@ export const GameView: React.FC = () => {
   const activeStream = gameLiveStreams.length > 0 ? gameLiveStreams[0] : null;
 
   return (
-    <div className="flex flex-col xl:flex-row gap-6 items-start">
+    <div className="flex flex-col 2xl:flex-row gap-5 items-start">
+      {/* Left: Kick-style Main Screen Stage */}
       <div className="flex-1 min-w-0 w-full">
         <PlayerStage key={game.slug} game={game} activeStream={activeStream || null} />
       </div>
-      <div className="w-full xl:w-[380px] 2xl:w-[420px] shrink-0 xl:sticky xl:top-6">
-        <FixturesSection gameSlug={game.slug} />
+
+      {/* Right: Kick-style Side Panel (Fixtures & Team Leaderboard) */}
+      <div className="w-full 2xl:w-[460px] shrink-0 2xl:sticky 2xl:top-2 space-y-3">
+        {/* Tab Switcher Header */}
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep/90 border border-surface-border/60 shadow-sm backdrop-blur-md">
+          <button
+            onClick={() => setActiveTab('fixtures')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200 select-none',
+              activeTab === 'fixtures'
+                ? 'bg-brand text-white shadow-md shadow-brand/20'
+                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
+            )}
+          >
+            <Calendar className="w-3.5 h-3.5" />
+            <span>Turnuva Fikstürü</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('leaderboard')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200 select-none',
+              activeTab === 'leaderboard'
+                ? 'bg-brand text-white shadow-md shadow-brand/20'
+                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
+            )}
+          >
+            <Trophy className="w-3.5 h-3.5" />
+            <span>Takım Sıralaması</span>
+          </button>
+        </div>
+
+        {/* Tab Content Display */}
+        {activeTab === 'fixtures' ? (
+          <FixturesSection gameSlug={game.slug} />
+        ) : (
+          <TeamLeaderboard gameSlug={game.slug} />
+        )}
       </div>
     </div>
   );
