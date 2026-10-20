@@ -3,28 +3,30 @@ import { ArrowUp } from 'lucide-react';
 
 interface ScrollToTopProps {
   scrollRef?: React.RefObject<HTMLDivElement | null>;
+  targetRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export const ScrollToTop: React.FC<ScrollToTopProps> = ({ scrollRef }) => {
+export const ScrollToTop: React.FC<ScrollToTopProps> = ({ scrollRef, targetRef }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const activeRef = targetRef || scrollRef;
 
   useEffect(() => {
-    const target = scrollRef?.current || window;
+    const target = activeRef?.current || window;
 
     const handleScroll = () => {
-      const top = scrollRef?.current
-        ? scrollRef.current.scrollTop
+      const top = activeRef?.current
+        ? activeRef.current.scrollTop
         : window.scrollY || document.documentElement.scrollTop;
       setIsVisible(top > 180);
     };
 
     target.addEventListener('scroll', handleScroll, { passive: true });
     return () => target.removeEventListener('scroll', handleScroll);
-  }, [scrollRef]);
+  }, [activeRef]);
 
   const scrollToTop = () => {
-    if (scrollRef?.current) {
-      scrollRef.current.scrollTop = 0;
+    if (activeRef?.current) {
+      activeRef.current.scrollTop = 0;
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
