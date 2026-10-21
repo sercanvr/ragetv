@@ -47,7 +47,10 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
           JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
           '*'
         );
-      } catch {}
+      } catch (error) {
+        // Silently handle cross-origin sandbox restrictions
+        void error;
+      }
     }
   };
 
@@ -66,7 +69,10 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
             }),
             '*'
           );
-        } catch {}
+        } catch (error) {
+          // Silently handle cross-origin sandbox restrictions
+          void error;
+        }
       }
     };
 
@@ -89,7 +95,10 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
               '*'
             );
           }
-        } catch {}
+        } catch (error) {
+          // Silently handle cross-origin sandbox restrictions
+          void error;
+        }
       }
     };
 
