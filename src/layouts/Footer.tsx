@@ -18,11 +18,11 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="disclaimer" className="relative w-full border-t border-surface-border bg-surface-deep/80 mt-auto pt-10 pb-8 px-6 sm:px-8">
+    <footer id="disclaimer" className="relative w-full border-t border-surface-border bg-surface-deep/80 mt-auto pt-10 pb-8 px-6 sm:px-10 lg:px-12">
       {/* Top Ambient Glow / Degrade Aydınlanma (Dual-Theme Compatible) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/40 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.4)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/40 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.4)] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-6 text-sm text-muted-foreground">
+      <div className="w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 lg:gap-20 xl:gap-28 pb-6 text-sm text-muted-foreground">
         {/* Column 1: Brand Logo Only (NO text as requested) */}
         <div className="space-y-3.5">
           <div
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
               className="h-8 w-auto object-contain"
             />
           </div>
-          <p className="leading-relaxed text-xs sm:text-sm text-muted-foreground/80 max-w-sm">
+          <p className="leading-relaxed text-xs sm:text-sm text-muted-foreground/80 max-w-md">
             RageTV, espor tutkunlarına video barındırmaksızın sadece resmi yayıncı platformlarının embed oynatıcıları aracılığıyla kesintisiz, saf ve şeffaf canlı espor deneyimi sunar.
           </p>
         </div>

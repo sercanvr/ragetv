@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Globe,
-  Sun,
-  Moon,
   ChevronDown,
   Check,
 } from 'lucide-react';
@@ -156,8 +153,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
   return (
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
-      {/* Top Navbar — Unified Roof Frame (Zero Margin/Padding, Flush with Window Edge) */}
-      <header className="h-14 shrink-0 px-4 flex items-center justify-between border-b border-surface-border bg-surface-deep z-50">
+      {/* Top Navbar — Unified Roof Frame (Seamlessly connected with sidebar as single frame) */}
+      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50">
         {/* Left: Standalone Big Brand Logo (Fixed, completely unaffected by sidebar toggle) */}
         <div className="flex items-center shrink-0 px-2 py-1">
           <div
@@ -183,7 +180,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               aria-haspopup="true"
               aria-expanded={isLangOpen}
             >
-              <Globe className="w-3.5 h-3.5 text-[#D84040]" />
+              <i className="fa-solid fa-earth-americas text-xs text-[#D84040]" aria-hidden="true" />
               <span className="uppercase tracking-wider font-mono">{currentLangObj.short}</span>
               <ChevronDown className="w-3 h-3 text-muted-foreground ml-0.5 opacity-70" />
             </button>
@@ -226,21 +223,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             )}
           </div>
 
-          {/* 2. Direct Instant Theme Switcher with Tooltip */}
+          {/* 2. Direct Instant Theme Switcher with fa-circle-half-stroke icon only */}
           <div className="relative group/theme">
             <button
               onClick={() => selectTheme(isLight ? 'dark' : 'light')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              className="flex items-center justify-center p-2 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
               aria-label="Toggle Theme"
             >
-              {isLight ? (
-                <Sun className="w-3.5 h-3.5 text-amber-500" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 text-amber-400" />
-              )}
-              <span className="hidden sm:inline font-mono text-xs">
-                {isLight ? 'Light' : 'Dark'}
-              </span>
+              <i className="fa-solid fa-circle-half-stroke text-xs text-foreground" aria-hidden="true" />
             </button>
 
             {/* Tooltip with Brand Accent #D84040 */}
