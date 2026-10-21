@@ -24,11 +24,11 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
         <div className="flex items-center justify-between border-b border-surface-border pb-3">
           <div className="flex items-center gap-2">
             <Trophy className="w-4 h-4 text-amber-400" />
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+            <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
               Dünya Takım Sıralaması (Top 10)
             </h3>
           </div>
-          <span className="text-xs font-semibold text-gray-400">Puan</span>
+          <span className="text-xs font-semibold text-muted-foreground font-mono">Puan</span>
         </div>
 
         {/* Team List (Image 3 layout) */}
@@ -43,7 +43,7 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
                 className={cn(
                   'flex items-center justify-between p-2.5 rounded-xl transition-colors duration-150',
                   isFirst
-                    ? 'bg-amber-500/10 border border-amber-500/30'
+                    ? 'bg-amber-500/10 border border-amber-500/35'
                     : 'bg-surface-card/60 hover:bg-surface-card border border-surface-border'
                 )}
               >
@@ -56,12 +56,12 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
                     ) : (
                       <span
                         className={cn(
-                          'text-xs font-bold',
+                          'text-xs font-bold font-mono',
                           team.rank === 2
-                            ? 'text-gray-300'
+                            ? 'text-gray-300 dark:text-gray-200'
                             : team.rank === 3
                             ? 'text-amber-500'
-                            : 'text-gray-500'
+                            : 'text-muted-foreground'
                         )}
                       >
                         {team.rank}
@@ -81,10 +81,10 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
                   {/* Team Name & Region */}
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-white truncate">
+                      <span className="text-xs font-bold text-foreground truncate">
                         {team.name}
                       </span>
-                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-deep text-gray-400 font-mono">
+                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-deep text-muted-foreground font-mono">
                         {team.region}
                       </span>
                     </div>
@@ -100,7 +100,7 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
                     <ArrowDownRight className="w-3.5 h-3.5 text-rose-400" />
                   )}
                   {team.change === 'same' && (
-                    <Minus className="w-3.5 h-3.5 text-gray-600" />
+                    <Minus className="w-3.5 h-3.5 text-gray-500" />
                   )}
 
                   <span
@@ -109,8 +109,8 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
                       isFirst
                         ? 'text-amber-400'
                         : isTopThree
-                        ? 'text-amber-300'
-                        : 'text-gray-300'
+                        ? 'text-amber-300 dark:text-amber-400'
+                        : 'text-foreground/90'
                     )}
                   >
                     {team.points.toLocaleString()}
@@ -122,7 +122,7 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
         </div>
 
         {/* Source Footer note */}
-        <p className="text-[10px] text-gray-500 text-center pt-1">
+        <p className="text-[10px] text-muted-foreground/70 text-center pt-1 font-mono">
           Kaynak: {data.source} ({data.season})
         </p>
       </div>

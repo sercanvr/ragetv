@@ -48,11 +48,11 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
           <>
             {/* Active Accent Bar on the far right edge of the sidebar */}
             {isActive && (
-              <span className="absolute -right-3 top-0 bottom-0 w-[4px] bg-[#FC3564] rounded-l-full shadow-[0_0_12px_#FC3564]" />
+              <span className="absolute -right-2.5 top-0 bottom-0 w-[4px] bg-[#D84040] rounded-l-full shadow-[0_0_12px_#D84040]" />
             )}
 
-            {/* Game Logo or Icon with static indicator dot */}
-            <div className="relative w-9 h-9 flex items-center justify-center shrink-0">
+            {/* Game Logo in Liquid Glass Rounded Box with static indicator dot */}
+            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-all duration-200 group-hover:border-[#D84040]/40">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}
@@ -69,8 +69,8 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               {/* Static Live Dot (Red if live, light gray if offline) */}
               <span
                 className={cn(
-                  'absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-background',
-                  isLive ? 'bg-red-500' : 'bg-gray-400 dark:bg-gray-600'
+                  'absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border-2 border-background',
+                  isLive ? 'bg-[#D84040]' : 'bg-gray-400 dark:bg-gray-600'
                 )}
                 title={isLive ? 'Canlı Yayın Var' : 'Yayın Yok'}
               />
@@ -97,11 +97,11 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
       {/* User Requested Tooltip when collapsed */}
       {isCollapsed && (
         <div className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 z-[9999] pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out whitespace-nowrap">
-          <div className="relative bg-[#FC3564] text-white text-[11px] font-bold px-2.5 py-1 rounded-[8px] text-center shadow-lg flex items-center justify-center">
+          <div className="relative bg-[#D84040] text-white text-[11px] font-bold px-2.5 py-1 rounded-[8px] text-center shadow-lg flex items-center justify-center">
             {game.shortName || game.name}
             {/* Triangle pointer */}
             <span
-              className="absolute -left-[5px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[5px] border-r-[#FC3564]"
+              className="absolute -left-[5px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[5px] border-r-[#D84040]"
             />
           </div>
         </div>

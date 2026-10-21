@@ -9,10 +9,15 @@
     border-color: var(--color-border);
   }
 
+  ::selection {
+    background: #D84040;
+    color: #ffffff;
+  }
+
   body {
     background-color: var(--color-bg-base);
-    color: var(--color-text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--color-text-secondary);
+    font-family: 'Chakra Petch', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -20,15 +25,20 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Orbitron', 'Chakra Petch', sans-serif;
+    letter-spacing: 0.03em;
+  }
+
   /* 10-Foot UI Focus Styles for Smart TV & Keyboard */
   :focus-visible {
     outline: 3px solid var(--color-brand) !important;
     outline-offset: 3px !important;
-    box-shadow: 0 0 16px rgba(252, 53, 100, 0.6) !important;
+    box-shadow: 0 0 16px rgba(216, 64, 64, 0.6) !important;
   }
 }
 
-/* Custom Scrollbars */
+/* Custom Scrollbars (#D84040 accent thumb) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -37,11 +47,11 @@
   background: var(--color-bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: #D84040;
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
+  background: #E85252;
 }
 
 /* Glassmorphism Surface Utility */
@@ -75,44 +85,44 @@ html.light,
 html.light body,
 html.light #root,
 html.light .bg-surface-base {
-  background-color: #F8F9FA !important;
-  color: #111827 !important;
+  background-color: #FEFAF3 !important;
+  color: #525252 !important;
 }
 
 html.light aside,
 html.light aside.bg-surface-deep {
-  background-color: #FFFFFF !important;
-  border-color: #E5E7EB !important;
+  background-color: #F5EFE6 !important;
+  border-color: #E8E1D5 !important;
 }
 
 html.light .bg-surface-deep {
-  background-color: #F1F3F5 !important;
-  border-color: #E5E7EB !important;
+  background-color: #F5EFE6 !important;
+  border-color: #E8E1D5 !important;
 }
 
 html.light .bg-surface-card {
   background-color: #FFFFFF !important;
-  border-color: #E5E7EB !important;
+  border-color: #E8E1D5 !important;
 }
 
 html.light .bg-surface-panel {
-  background-color: #F1F3F5 !important;
-  border-color: #E5E7EB !important;
+  background-color: #F7F2EA !important;
+  border-color: #E8E1D5 !important;
 }
 
 html.light .border-surface-border {
-  border-color: #E5E7EB !important;
+  border-color: #E8E1D5 !important;
 }
 
 html.light .border-surface-borderLight {
-  border-color: #D1D5DB !important;
+  border-color: #DDD4C6 !important;
 }
 
 html.light footer,
 html.light #disclaimer {
-  background-color: #F1F3F5 !important;
-  border-color: #E5E7EB !important;
-  color: #6B7280 !important;
+  background-color: #F5EFE6 !important;
+  border-color: #E8E1D5 !important;
+  color: #757575 !important;
 }
 
 /* Light Theme Text Contrast */

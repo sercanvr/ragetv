@@ -5,9 +5,9 @@ import tr from './locales/tr.json';
 import de from './locales/de.json';
 
 const savedLang = typeof window !== 'undefined' ? localStorage.getItem('ragetv_locale') : null;
-const browserLang = typeof navigator !== 'undefined' ? navigator.language.split('-')[0] : 'en';
 
-const initialLang = savedLang || (['en', 'tr', 'de'].includes(browserLang || '') ? browserLang : 'en');
+// Default strictly to 'en' unless user explicitly changed it in localStorage
+const initialLang = savedLang || 'en';
 
 i18n.use(initReactI18next).init({
   resources: {

@@ -14,10 +14,10 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#FC3564',
-          hover: '#FF4D79',
-          muted: '#8A1B35',
-          glow: 'rgba(252, 53, 100, 0.25)',
+          DEFAULT: '#D84040',
+          hover: '#E85252',
+          muted: '#8A1B1B',
+          glow: 'rgba(216, 64, 64, 0.28)',
         },
         surface: {
           deep: 'var(--color-bg-deep)',
@@ -29,12 +29,12 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'sans-serif'],
+        sans: ['"Chakra Petch"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Orbitron"', '"Chakra Petch"', 'sans-serif'],
       },
       boxShadow: {
-        'brand-glow': '0 0 24px -4px rgba(252, 53, 100, 0.35)',
-        'tv-focus': '0 0 0 4px #FC3564',
+        'brand-glow': '0 0 24px -4px rgba(216, 64, 64, 0.35)',
+        'tv-focus': '0 0 0 4px #D84040',
       },
     },
   },

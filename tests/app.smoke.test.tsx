@@ -22,9 +22,9 @@ describe('AppShell Smoke Test', () => {
       </QueryClientProvider>
     );
 
-    // Verify brand logo text
-    expect(screen.getByText('RAGE')).toBeDefined();
-    expect(screen.getByText('TV')).toBeDefined();
+    // Verify brand logo text (present in both navbar and footer)
+    expect(screen.getAllByText('RAGE').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('TV').length).toBeGreaterThan(0);
 
     // Verify presence of all 5 supported games in the document
     expect(screen.getByTitle('Counter-Strike 2')).toBeDefined();
