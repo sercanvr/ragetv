@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
 import { StreamPlatform } from '@shared/schemas/stream';
 import { buildTwitchEmbedUrl, buildYouTubeEmbedUrl } from '@shared/urls';
@@ -18,6 +18,9 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
   isLive = true,
 }) => {
   const [hasError, setHasError] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const currentHost = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 
   const embedUrl =
@@ -29,6 +32,75 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
     platform === 'twitch'
       ? `https://www.twitch.tv/${channelOrVideoId}`
       : `https://www.youtube.com/watch?v=${channelOrVideoId}`;
+
+  // Apply default 10% volume and 1080p quality when iframe loads
+  const handleIframeLoad = () => {
+    if (platform === 'youtube' && iframeRef.current?.contentWindow) {
+      try {
+        // Set default volume strictly to 10% to prevent jumpscares
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'setVolume', args: [10] }),
+          '*'
+        );
+        // Request 1080p playback quality
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
+          '*'
+        );
+      } catch {}
+    }
+  };
+
+  // Keyboard shortcut listeners (Ctrl+K: Play/Pause, Ctrl+M: Mute/Unmute)
+  useEffect(() => {
+    const handleTogglePlayback = () => {
+      if (platform === 'youtube' && iframeRef.current?.contentWindow) {
+        try {
+          const nextState = !isPaused;
+          setIsPaused(nextState);
+          iframeRef.current.contentWindow.postMessage(
+            JSON.stringify({
+              event: 'command',
+              func: nextState ? 'pauseVideo' : 'playVideo',
+              args: [],
+            }),
+            '*'
+          );
+        } catch {}
+      }
+    };
+
+    const handleToggleMute = () => {
+      if (platform === 'youtube' && iframeRef.current?.contentWindow) {
+        try {
+          const nextMute = !isMuted;
+          setIsMuted(nextMute);
+          iframeRef.current.contentWindow.postMessage(
+            JSON.stringify({
+              event: 'command',
+              func: nextMute ? 'mute' : 'unMute',
+              args: [],
+            }),
+            '*'
+          );
+          if (!nextMute) {
+            iframeRef.current.contentWindow.postMessage(
+              JSON.stringify({ event: 'command', func: 'setVolume', args: [10] }),
+              '*'
+            );
+          }
+        } catch {}
+      }
+    };
+
+    window.addEventListener('ragetv:toggle-playback', handleTogglePlayback);
+    window.addEventListener('ragetv:toggle-mute', handleToggleMute);
+
+    return () => {
+      window.removeEventListener('ragetv:toggle-playback', handleTogglePlayback);
+      window.removeEventListener('ragetv:toggle-mute', handleToggleMute);
+    };
+  }, [platform, isPaused, isMuted]);
 
   if (hasError) {
     return (
@@ -52,11 +124,13 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
   return (
     <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-surface-border shadow-2xl">
       <iframe
+        ref={iframeRef}
         src={embedUrl}
         title={isLive ? `${title} (Live Stream)` : `${title} (Replay)`}
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
+        onLoad={handleIframeLoad}
         onError={() => setHasError(true)}
         className="w-full h-full border-0 absolute inset-0"
       />

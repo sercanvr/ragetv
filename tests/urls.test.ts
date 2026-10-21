@@ -14,7 +14,7 @@ describe('Embed URL Builders & Security Allowlist', () => {
 
   it('should build valid YouTube no-cookie embed URL', () => {
     const url = buildYouTubeEmbedUrl('f02mOEt11OQ', true);
-    expect(url).toBe('https://www.youtube-nocookie.com/embed/f02mOEt11OQ?autoplay=1&rel=0&modestbranding=1');
+    expect(url).toBe('https://www.youtube-nocookie.com/embed/f02mOEt11OQ?autoplay=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080&playsinline=1');
   });
 
   it('should validate allowed hosts strictly', () => {

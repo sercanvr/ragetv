@@ -12,6 +12,12 @@ export const GameView: React.FC = () => {
   const { gameSlug } = useParams<{ gameSlug: string }>();
   const { data } = useLiveStatus();
   const [activeTab, setActiveTab] = useState<'fixtures' | 'leaderboard'>('fixtures');
+  const [isTheaterMode, setIsTheaterMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('ragetv_theater_mode') === 'true';
+    }
+    return false;
+  });
 
   // If no slug or invalid slug, fallback to default or redirect
   const game = gameSlug ? getGameBySlug(gameSlug) : getDefaultGame();
@@ -23,6 +29,20 @@ export const GameView: React.FC = () => {
     }
   }, [game]);
 
+  // Listen to Ctrl+T theater mode toggle
+  useEffect(() => {
+    const handleToggleTheater = () => {
+      setIsTheaterMode((prev) => {
+        const next = !prev;
+        localStorage.setItem('ragetv_theater_mode', String(next));
+        return next;
+      });
+    };
+
+    window.addEventListener('ragetv:toggle-theater', handleToggleTheater);
+    return () => window.removeEventListener('ragetv:toggle-theater', handleToggleTheater);
+  }, []);
+
   if (!game) {
     return <Navigate to="/cs2" replace />;
   }
@@ -31,15 +51,43 @@ export const GameView: React.FC = () => {
   const gameLiveStreams = data?.games[game.slug]?.live || [];
   const activeStream = gameLiveStreams.length > 0 ? gameLiveStreams[0] : null;
 
+  const toggleTheater = () => {
+    setIsTheaterMode((prev) => {
+      const next = !prev;
+      localStorage.setItem('ragetv_theater_mode', String(next));
+      return next;
+    });
+  };
+
   return (
-    <div className="flex flex-col 2xl:flex-row gap-5 items-start">
-      {/* Left: Kick-style Main Screen Stage */}
-      <div className="flex-1 min-w-0 w-full">
-        <PlayerStage key={game.slug} game={game} activeStream={activeStream || null} />
+    <div
+      className={cn(
+        'transition-all duration-300',
+        isTheaterMode
+          ? 'flex flex-col gap-6'
+          : 'flex flex-col 2xl:flex-row gap-5 items-start'
+      )}
+    >
+      {/* Main Screen Stage (Full width in Theater Mode) */}
+      <div className={cn('min-w-0 w-full transition-all duration-300', isTheaterMode ? 'w-full' : 'flex-1')}>
+        <PlayerStage
+          key={game.slug}
+          game={game}
+          activeStream={activeStream || null}
+          isTheaterMode={isTheaterMode}
+          onToggleTheater={toggleTheater}
+        />
       </div>
 
-      {/* Right: Kick-style Side Panel (Fixtures & Team Leaderboard) */}
-      <div className="w-full 2xl:w-[460px] shrink-0 2xl:sticky 2xl:top-2 space-y-3">
+      {/* Side Panel: In normal mode placed on right side; in Theater Mode shifts below stage */}
+      <div
+        className={cn(
+          'space-y-3 shrink-0 transition-all duration-300',
+          isTheaterMode
+            ? 'w-full max-w-4xl mx-auto pt-2'
+            : 'w-full 2xl:w-[460px] 2xl:sticky 2xl:top-2'
+        )}
+      >
         {/* Tab Switcher Header */}
         <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep/90 border border-surface-border/60 shadow-sm backdrop-blur-md">
           <button

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, VolumeX } from 'lucide-react';
+import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, VolumeX, Maximize2, Minimize2 } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
@@ -12,13 +12,34 @@ import { useVod } from '@/features/vod/useVod';
 interface PlayerStageProps {
   game: GameDefinition;
   activeStream: Stream | null;
+  isTheaterMode?: boolean;
+  onToggleTheater?: () => void;
 }
 
-export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) => {
+export const PlayerStage: React.FC<PlayerStageProps> = ({
+  game,
+  activeStream,
+  isTheaterMode = false,
+  onToggleTheater,
+}) => {
   const { t, i18n } = useTranslation();
   const [isPlayingLive, setIsPlayingLive] = useState(false);
   const [isPlayingVod, setIsPlayingVod] = useState(false);
   const { data: vodData, isLoading: isVodLoading } = useVod(game.slug);
+
+  // If user presses Ctrl+K and video has not started yet, start it immediately
+  useEffect(() => {
+    const handleKeyStart = () => {
+      if (activeStream && !isPlayingLive) {
+        setIsPlayingLive(true);
+      } else if (!activeStream && !isPlayingVod) {
+        setIsPlayingVod(true);
+      }
+    };
+
+    window.addEventListener('ragetv:toggle-playback', handleKeyStart);
+    return () => window.removeEventListener('ragetv:toggle-playback', handleKeyStart);
+  }, [activeStream, isPlayingLive, isPlayingVod]);
 
   // 1. Live Stream Active State
   if (activeStream) {
@@ -44,7 +65,27 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 text-xs text-gray-400 bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
+            {onToggleTheater && (
+              <button
+                onClick={onToggleTheater}
+                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors select-none"
+                title="Sinema Modu (Ctrl + T)"
+              >
+                {isTheaterMode ? (
+                  <>
+                    <Minimize2 className="w-3.5 h-3.5" />
+                    <span>Normal Ekran</span>
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-3.5 h-3.5" />
+                    <span>Sinema Modu (Ctrl+T)</span>
+                  </>
+                )}
+              </button>
+            )}
+
+            <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
               <Eye className="w-3.5 h-3.5 text-emerald-400" />
               <span>
                 {formatViewerCount(activeStream.viewers, i18n.language)} {t('player.viewers')}
@@ -163,10 +204,32 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({ game, activeStream }) 
           <p className="text-xs sm:text-sm text-gray-400">{game.tagline}</p>
         </div>
 
-        <span className="flex items-center gap-1.5 text-xs text-gray-400 bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
-          <Trophy className="w-3.5 h-3.5 text-blue-400" />
-          <span>Official Tournament VOD</span>
-        </span>
+        <div className="flex items-center gap-2">
+          {onToggleTheater && (
+            <button
+              onClick={onToggleTheater}
+              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors select-none"
+              title="Sinema Modu (Ctrl + T)"
+            >
+              {isTheaterMode ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5" />
+                  <span>Normal Ekran</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Sinema Modu (Ctrl+T)</span>
+                </>
+              )}
+            </button>
+          )}
+
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
+            <Trophy className="w-3.5 h-3.5 text-blue-400" />
+            <span>Official Tournament VOD</span>
+          </span>
+        </div>
       </div>
 
       {/* VOD Player or Poster Facade */}

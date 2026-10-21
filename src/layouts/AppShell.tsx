@@ -117,9 +117,45 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
     window.location.reload();
   };
 
+  const DEFAULT_LANGUAGE = { code: 'en', label: 'English', short: 'EN' } as const;
+
   const currentLangObj =
-    LANGUAGES.find((l) => l.code === (i18n.language?.slice(0, 2) || 'en')) ||
-    LANGUAGES[0];
+    LANGUAGES.find((l) => l.code === (i18n.language?.slice(0, 2) || 'en')) ??
+    DEFAULT_LANGUAGE;
+
+  // Global Keyboard Shortcuts (Ctrl+B, Ctrl+T, Ctrl+K, Ctrl+M)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isCtrlOrCmd = e.ctrlKey || e.metaKey;
+      if (!isCtrlOrCmd) return;
+
+      const key = e.key.toLowerCase();
+
+      // Ctrl + B: Toggle Left Sidebar
+      if (key === 'b') {
+        e.preventDefault();
+        toggleSidebar();
+      }
+      // Ctrl + T: Toggle Theater Mode
+      else if (key === 't') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('ragetv:toggle-theater'));
+      }
+      // Ctrl + K: Toggle Video Playback / Pause
+      else if (key === 'k') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('ragetv:toggle-playback'));
+      }
+      // Ctrl + M: Toggle Audio Mute
+      else if (key === 'm') {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('ragetv:toggle-mute'));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div className="h-screen w-screen overflow-hidden p-2 sm:p-2.5 bg-[#0D0D0D] dark:bg-[#0D0D0D] light:bg-[#F5EFE6] text-foreground flex flex-col select-none antialiased">
