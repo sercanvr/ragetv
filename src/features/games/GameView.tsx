@@ -60,74 +60,91 @@ export const GameView: React.FC = () => {
     });
   };
 
-  return (
-    <div
-      className={cn(
-        'transition-all duration-300',
-        isTheaterMode
-          ? 'flex flex-col gap-6'
-          : 'flex flex-col 2xl:flex-row gap-5 items-start'
-      )}
-    >
-      {/* Main Screen Stage (Full width in Theater Mode) */}
-      <div className={cn('min-w-0 w-full space-y-6 transition-all duration-300', isTheaterMode ? 'w-full' : 'flex-1')}>
-        <PlayerStage
-          key={game.slug}
-          game={game}
-          activeStream={activeStream || null}
-          isTheaterMode={isTheaterMode}
-          onToggleTheater={toggleTheater}
-        />
+  const renderSidePanel = () => (
+    <div className="space-y-3 w-full">
+      {/* Tab Switcher Header */}
+      <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep/90 border border-surface-border/60 shadow-sm backdrop-blur-md">
+        <button
+          onClick={() => setActiveTab('fixtures')}
+          className={cn(
+            'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200',
+            activeTab === 'fixtures'
+              ? 'bg-brand text-white shadow-md shadow-brand/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
+          )}
+        >
+          <Calendar className="w-3.5 h-3.5" />
+          <span>Turnuva Fikstürü</span>
+        </button>
 
-        {/* Historical Champions Timeline (Past winners 2026 - inaugural year) */}
-        <HistoricalChampions gameSlug={game.slug} />
+        <button
+          onClick={() => setActiveTab('leaderboard')}
+          className={cn(
+            'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200',
+            activeTab === 'leaderboard'
+              ? 'bg-brand text-white shadow-md shadow-brand/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
+          )}
+        >
+          <Trophy className="w-3.5 h-3.5" />
+          <span>Takım Sıralaması</span>
+        </button>
       </div>
 
-      {/* Side Panel: In normal mode placed on right side; in Theater Mode shifts below stage */}
-      <div
-        className={cn(
-          'space-y-3 shrink-0 transition-all duration-300',
-          isTheaterMode
-            ? 'w-full max-w-4xl mx-auto pt-2'
-            : 'w-full 2xl:w-[460px] 2xl:sticky 2xl:top-2'
-        )}
-      >
-        {/* Tab Switcher Header */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep/90 border border-surface-border/60 shadow-sm backdrop-blur-md">
-          <button
-            onClick={() => setActiveTab('fixtures')}
-            className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200 select-none',
-              activeTab === 'fixtures'
-                ? 'bg-brand text-white shadow-md shadow-brand/20'
-                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
-            )}
-          >
-            <Calendar className="w-3.5 h-3.5" />
-            <span>Turnuva Fikstürü</span>
-          </button>
+      {/* Tab Content Display */}
+      {activeTab === 'fixtures' ? (
+        <FixturesSection gameSlug={game.slug} />
+      ) : (
+        <TeamLeaderboard gameSlug={game.slug} />
+      )}
+    </div>
+  );
 
-          <button
-            onClick={() => setActiveTab('leaderboard')}
-            className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200 select-none',
-              activeTab === 'leaderboard'
-                ? 'bg-brand text-white shadow-md shadow-brand/20'
-                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
-            )}
-          >
-            <Trophy className="w-3.5 h-3.5" />
-            <span>Takım Sıralaması</span>
-          </button>
+  return (
+    <div className="w-full flex flex-col gap-6">
+      {/* Top Section: Player Stage + Side Panel with Symmetrical 300ms Transitions */}
+      <div className="w-full flex flex-col 2xl:flex-row gap-5 items-start">
+        {/* Main Screen Stage */}
+        <div
+          className={cn(
+            'min-w-0 w-full space-y-6 transition-all duration-300 ease-in-out',
+            isTheaterMode ? '2xl:w-full' : '2xl:flex-1'
+          )}
+        >
+          <PlayerStage
+            key={game.slug}
+            game={game}
+            activeStream={activeStream || null}
+            isTheaterMode={isTheaterMode}
+            onToggleTheater={toggleTheater}
+          />
+
+          {/* When in standard mode, show champions directly under player */}
+          {!isTheaterMode && <HistoricalChampions gameSlug={game.slug} />}
         </div>
 
-        {/* Tab Content Display */}
-        {activeTab === 'fixtures' ? (
-          <FixturesSection gameSlug={game.slug} />
-        ) : (
-          <TeamLeaderboard gameSlug={game.slug} />
-        )}
+        {/* Side Panel: Smoothly expands/collapses width & opacity */}
+        <div
+          className={cn(
+            'shrink-0 transition-all duration-300 ease-in-out',
+            isTheaterMode
+              ? 'hidden 2xl:block 2xl:w-0 2xl:h-0 2xl:opacity-0 2xl:overflow-hidden 2xl:pointer-events-none'
+              : 'w-full 2xl:w-[440px] opacity-100'
+          )}
+        >
+          {renderSidePanel()}
+        </div>
       </div>
+
+      {/* In Theater Mode: Champions and Panel Flow Naturally Below */}
+      {isTheaterMode && (
+        <div className="w-full space-y-6 pt-2 animate-in fade-in duration-300">
+          <HistoricalChampions gameSlug={game.slug} />
+          <div className="w-full max-w-4xl mx-auto">
+            {renderSidePanel()}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

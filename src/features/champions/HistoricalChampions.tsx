@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Trophy } from 'lucide-react';
 import { getHistoricalChampions } from '@shared/registry/historicalChampions';
 
@@ -7,6 +8,7 @@ interface HistoricalChampionsProps {
 }
 
 export const HistoricalChampions: React.FC<HistoricalChampionsProps> = ({ gameSlug }) => {
+  const { t } = useTranslation();
   const champions = getHistoricalChampions(gameSlug);
   if (!champions || champions.length === 0) return null;
 
@@ -14,34 +16,34 @@ export const HistoricalChampions: React.FC<HistoricalChampionsProps> = ({ gameSl
   const latestYear = champions[0]?.year || 2026;
 
   return (
-    <section className="w-full space-y-3 pt-2 select-none">
+    <section className="w-full space-y-3 pt-2">
       {/* Title & Date Range Indicator */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Trophy className="w-4 h-4 text-amber-400" />
           <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
-            Geçmiş Şampiyonlar ({latestYear} — {firstYear})
+            {t('champions.title')} ({latestYear} — {firstYear})
           </h3>
         </div>
         <span className="text-[11px] font-mono text-muted-foreground">
-          Dünya / Major Finalleri
+          {t('champions.subtitle')}
         </span>
       </div>
 
-      {/* Horizontal Scrollable Champions Timeline */}
-      <div className="flex items-stretch gap-3 overflow-x-auto pb-2 scrollbar-thin">
+      {/* Downward Wrapping Champions Grid (No Horizontal Scroll on Any Resolution) */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2.5 sm:gap-3">
         {champions.map((item) => (
           <div
             key={`${item.year}-${item.teamName}`}
-            className="shrink-0 w-36 sm:w-40 rounded-xl bg-surface-card/70 hover:bg-surface-card backdrop-blur-md border border-surface-border p-3 flex flex-col items-center text-center transition-all duration-150 hover:border-[#D84040]/40 group"
+            className="w-full rounded-xl bg-surface-card/70 hover:bg-surface-card backdrop-blur-md border border-surface-border p-3 flex flex-col items-center text-center transition-colors duration-150 hover:border-[#D84040]/40 group"
           >
             {/* Year Badge */}
             <span className="font-display text-xs font-extrabold text-[#D84040] tracking-wider mb-2">
               {item.year}
             </span>
 
-            {/* Team Logo in Centered Glass Box */}
-            <div className="w-12 h-12 rounded-xl bg-surface-deep/80 border border-surface-border p-1.5 flex items-center justify-center shrink-0 mb-2 group-hover:scale-105 transition-transform">
+            {/* Team Logo in Centered Glass Box (No Hover Movement) */}
+            <div className="w-12 h-12 rounded-xl bg-surface-deep/80 border border-surface-border p-1.5 flex items-center justify-center shrink-0 mb-2">
               <img
                 src={item.logoUrl}
                 alt={item.teamName}

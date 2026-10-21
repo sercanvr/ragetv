@@ -31,5 +31,15 @@
     "channel": "Channel",
     "tournament": "Tournament"
   },
+  "tooltips": {
+    "changeLanguage": "Change Language",
+    "changeTheme": "Toggle Theme",
+    "theaterMode": "Theater Mode (T)",
+    "normalMode": "Normal Screen (T)"
+  },
+  "champions": {
+    "title": "Historical Champions",
+    "subtitle": "World / Major Finals"
+  },
   "disclaimer": "RageTV is an independent, non-commercial esports discovery platform. It does not host, record, or rebroadcast any video. Live streams and videos are shown through the official embedded players of their original platforms (Twitch and YouTube) and remain the property of their respective owners."
 }

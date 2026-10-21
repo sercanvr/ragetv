@@ -31,5 +31,15 @@
     "channel": "Kanal",
     "tournament": "Turnuva"
   },
+  "tooltips": {
+    "changeLanguage": "Dili Değiştir",
+    "changeTheme": "Tema Değiştir",
+    "theaterMode": "Sinema Modu (T)",
+    "normalMode": "Normal Ekran (T)"
+  },
+  "champions": {
+    "title": "Geçmiş Şampiyonlar",
+    "subtitle": "Dünya / Major Finalleri"
+  },
   "disclaimer": "RageTV, bağımsız ve ticari olmayan bir espor keşif sitesidir. Hiçbir video içeriğini barındırmaz, kaydetmez veya yeniden yayınlamaz. Canlı yayınlar ve videolar, özgün platformların (Twitch, YouTube) resmi gömülü oynatıcıları aracılığıyla gösterilir ve ilgili sahiplerine aittir."
 }

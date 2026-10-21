@@ -68,18 +68,18 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             {onToggleTheater && (
               <button
                 onClick={onToggleTheater}
-                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors select-none"
-                title="Sinema Modu (Ctrl + T)"
+                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors"
+                title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
               >
                 {isTheaterMode ? (
                   <>
                     <Minimize2 className="w-3.5 h-3.5" />
-                    <span>Normal Ekran</span>
+                    <span>{t('tooltips.normalMode') || 'Normal Ekran (T)'}</span>
                   </>
                 ) : (
                   <>
                     <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Sinema Modu (Ctrl+T)</span>
+                    <span>{t('tooltips.theaterMode') || 'Sinema Modu (T)'}</span>
                   </>
                 )}
               </button>
@@ -116,11 +116,11 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
                 }}
               />
 
-              {/* Gradient Overlay & Play Action */}
+              {/* Gradient Overlay & Play Action (No Zoom Hover) */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col items-center justify-center p-6 text-center">
                 <button
                   onClick={() => setIsPlayingLive(true)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow transform group-hover:scale-110 active:scale-95 transition-all duration-200"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow"
                   aria-label="Start Live Stream"
                 >
                   <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white translate-x-0.5" />
@@ -208,18 +208,18 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           {onToggleTheater && (
             <button
               onClick={onToggleTheater}
-              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors select-none"
-              title="Sinema Modu (Ctrl + T)"
+              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors"
+              title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
             >
               {isTheaterMode ? (
                 <>
                   <Minimize2 className="w-3.5 h-3.5" />
-                  <span>Normal Ekran</span>
+                  <span>{t('tooltips.normalMode') || 'Normal Ekran (T)'}</span>
                 </>
               ) : (
                 <>
                   <Maximize2 className="w-3.5 h-3.5" />
-                  <span>Sinema Modu (Ctrl+T)</span>
+                  <span>{t('tooltips.theaterMode') || 'Sinema Modu (T)'}</span>
                 </>
               )}
             </button>
@@ -253,11 +253,11 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               }}
             />
 
-            {/* Gradient Overlay */}
+            {/* Gradient Overlay (No Zoom Hover) */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col items-center justify-center p-6 text-center">
               <button
                 onClick={() => setIsPlayingVod(true)}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow transform group-hover:scale-110 active:scale-95 transition-all duration-200"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow"
                 aria-label={t('player.playMatch')}
               >
                 <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white translate-x-0.5" />

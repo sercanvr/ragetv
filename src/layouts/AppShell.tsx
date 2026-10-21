@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  PanelLeftClose,
-  PanelLeft,
   Globe,
   Sun,
   Moon,
   ChevronDown,
   Check,
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { Sidebar } from './Sidebar';
 import { GameTopPills } from '@/features/games/GameTopPills';
 import { MobileBottomNav } from './MobileBottomNav';
@@ -22,13 +21,13 @@ interface AppShellProps {
 }
 
 const LANGUAGES = [
-  { code: 'en', label: 'English', short: 'EN' },
-  { code: 'tr', label: 'Türkçe', short: 'TR' },
-  { code: 'de', label: 'Deutsch', short: 'DE' },
-];
+  { code: 'tr', label: 'Turkish', short: 'TR', flag: '🇹🇷' },
+  { code: 'en', label: 'English', short: 'EN', flag: '🇺🇸' },
+  { code: 'de', label: 'Deutsch', short: 'DE', flag: '🇩🇪' },
+] as const;
 
 export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // 1. Sidebar Collapsed State (Default: Open / false, persisted in localStorage)
@@ -108,13 +107,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
     window.location.reload();
   };
 
-  const DEFAULT_LANGUAGE = { code: 'en', label: 'English', short: 'EN' } as const;
+  const DEFAULT_LANGUAGE = LANGUAGES[1]; // English
 
   const currentLangObj =
     LANGUAGES.find((l) => l.code === (i18n.language?.slice(0, 2) || 'en')) ??
     DEFAULT_LANGUAGE;
 
-  // Single-key Keyboard Shortcuts (T: Theater, K: Play/Pause, M: Mute, B / Ctrl+B: Sidebar)
+  // Single-key Keyboard Shortcuts (T: Theater, K: Play/Pause, M: Mute, B: Sidebar)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Ignore when user is typing in an input or textarea
@@ -129,12 +128,12 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
       const key = e.key.toLowerCase();
 
-      // T: Toggle Theater Mode (as requested: single key T)
+      // T: Toggle Theater Mode (single key T)
       if (key === 't' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         window.dispatchEvent(new CustomEvent('ragetv:toggle-theater'));
       }
-      // K: Toggle Play / Pause (as requested: single key K)
+      // K: Toggle Play / Pause (single key K)
       else if (key === 'k' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         window.dispatchEvent(new CustomEvent('ragetv:toggle-playback'));
@@ -156,26 +155,19 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   }, []);
 
   return (
-    <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col select-none antialiased">
+    <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
       {/* Top Navbar — Unified Roof Frame (Zero Margin/Padding, Flush with Window Edge) */}
       <header className="h-14 shrink-0 px-4 flex items-center justify-between border-b border-surface-border bg-surface-deep z-50">
-        {/* Left: Sidebar Toggle + Standalone Big Logo (NO text, click to refresh) */}
-        <div className="flex items-center gap-3.5">
-          <button
-            onClick={toggleSidebar}
-            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors focus:outline-none focus:ring-1 focus:ring-[#D84040]"
-            title={isCollapsed ? 'Kenar Çubuğunu Aç (B)' : 'Kenar Çubuğunu Daralt (B)'}
-            aria-label="Toggle Sidebar"
-          >
-            {isCollapsed ? <PanelLeft className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
-          </button>
-
-          <div className="h-5 w-px bg-surface-border" />
-
-          {/* Standalone Big Brand Logo Only (No text, as requested in Item 1) */}
+        {/* Left: Standalone Big Logo Centered above Left Sidebar (NO text, click to refresh) */}
+        <div
+          className={cn(
+            'flex items-center justify-center shrink-0 transition-all duration-300',
+            isCollapsed ? 'w-16' : 'w-[210px] tv:w-[260px]'
+          )}
+        >
           <div
             onClick={handleLogoClick}
-            className="flex items-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none select-none py-1"
+            className="flex items-center justify-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none py-1"
             title="RageTV — Sayfayı Yenile"
           >
             <img
@@ -186,14 +178,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           </div>
         </div>
 
-        {/* Right: Language Dropdown + Instant Direct Theme Toggle (NO theme dropdown) */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Right: Language Dropdown + Instant Direct Theme Toggle (Shifted slightly left with mr-3 sm:mr-5) */}
+        <div className="flex items-center gap-2 sm:gap-3 mr-3 sm:mr-5">
           {/* 1. Language Dropdown Menu (High Z-Index) */}
-          <div className="relative" ref={langDropdownRef}>
+          <div className="relative group/lang" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangOpen((prev) => !prev)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
-              title="Dili Değiştir / Select Language"
               aria-haspopup="true"
               aria-expanded={isLangOpen}
             >
@@ -202,19 +193,37 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               <ChevronDown className="w-3 h-3 text-muted-foreground ml-0.5 opacity-70" />
             </button>
 
-            {/* Language Menu Items */}
+            {/* User Requested Image 4 Tooltip (Hidden when dropdown is open) */}
+            {!isLangOpen && (
+              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-[9999] pointer-events-none opacity-0 group-hover/lang:opacity-100 transition-opacity duration-150 whitespace-nowrap">
+                <div className="relative bg-[#ccff00] text-black font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
+                  {t('tooltips.changeLanguage') || 'Dili Değiştir'}
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#ccff00]" />
+                </div>
+              </div>
+            )}
+
+            {/* Language Menu Items (Image 2 style: Flags, active with rounded border) */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-1.5 w-36 rounded-xl bg-surface-deep border border-surface-border shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100">
+              <div className="absolute right-0 mt-1.5 w-44 rounded-2xl bg-surface-deep border border-surface-border shadow-2xl p-1.5 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-1">
                 {LANGUAGES.map((lang) => {
                   const isSelected = currentLangObj.code === lang.code;
                   return (
                     <button
                       key={lang.code}
                       onClick={() => selectLanguage(lang.code)}
-                      className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium text-left text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
+                      className={cn(
+                        'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-left transition-all',
+                        isSelected
+                          ? 'border border-emerald-500/50 bg-emerald-500/10 text-foreground font-semibold'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
+                      )}
                     >
-                      <span>{lang.label}</span>
-                      {isSelected && <Check className="w-3.5 h-3.5 text-[#D84040]" />}
+                      <span className="flex items-center gap-2.5">
+                        <span className="text-base leading-none">{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </span>
+                      {isSelected && <Check className="w-4 h-4 text-emerald-400" />}
                     </button>
                   );
                 })}
@@ -222,26 +231,35 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             )}
           </div>
 
-          {/* 2. Direct Instant Theme Switcher (NO dropdown, immediate toggle on click) */}
-          <button
-            onClick={() => selectTheme(isLight ? 'dark' : 'light')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
-            title={isLight ? 'Dark Mode’a Geç' : 'Light Mode’a Geç'}
-            aria-label="Toggle Theme"
-          >
-            {isLight ? (
-              <Sun className="w-3.5 h-3.5 text-amber-500" />
-            ) : (
-              <Moon className="w-3.5 h-3.5 text-amber-400" />
-            )}
-            <span className="hidden sm:inline font-mono text-xs">
-              {isLight ? 'Light' : 'Dark'}
-            </span>
-          </button>
+          {/* 2. Direct Instant Theme Switcher with Image 4 Tooltip */}
+          <div className="relative group/theme">
+            <button
+              onClick={() => selectTheme(isLight ? 'dark' : 'light')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              aria-label="Toggle Theme"
+            >
+              {isLight ? (
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
+              ) : (
+                <Moon className="w-3.5 h-3.5 text-amber-400" />
+              )}
+              <span className="hidden sm:inline font-mono text-xs">
+                {isLight ? 'Light' : 'Dark'}
+              </span>
+            </button>
+
+            {/* Image 4 Tooltip */}
+            <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-[9999] pointer-events-none opacity-0 group-hover/theme:opacity-100 transition-opacity duration-150 whitespace-nowrap">
+              <div className="relative bg-[#ccff00] text-black font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
+                {t('tooltips.changeTheme') || 'Tema Değiştir'}
+                <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#ccff00]" />
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Main Body: Fixed Left Sidebar + Framed Inner-Radius Content Canvas (Paint Drawing Architecture) */}
+      {/* Main Body: Fixed Left Sidebar + Framed Content Canvas (Paint Drawing Architecture) */}
       <div className="flex-1 flex overflow-hidden min-h-0 bg-surface-deep relative">
         {/* Left Sidebar: Seamless Wall of the Frame, flush with top/bottom (sliding door effect) */}
         <Sidebar
@@ -250,25 +268,25 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area Wrapper: Provides breathing room for inner-only radius content card */}
-        <div className="flex-1 min-w-0 h-full p-2.5 sm:p-3 overflow-hidden flex flex-col">
-          {/* THE ONLY SCROLLABLE AREA: Inner-radius only card canvas (as requested in Paint drawing) */}
+        {/* Right Area: Zero Gap on Top, Left, and Right against frame borders */}
+        <div className="flex-1 min-w-0 h-full p-0 overflow-hidden flex flex-col">
+          {/* THE ONLY SCROLLABLE AREA: Inner card canvas */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-inner overflow-y-auto overflow-x-hidden relative"
+            className="flex-1 flex flex-col min-w-0 bg-surface-base overflow-y-auto overflow-x-hidden relative"
           >
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
             {/* Main Stage Content */}
-            <main className="flex-1 w-full max-w-[1700px] mx-auto p-3 sm:p-5 lg:p-6 pb-16">
+            <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-16">
               {children}
             </main>
 
             {/* Professional Esports Legal Footer */}
             <Footer />
 
-            {/* Instant Scroll to Top Button (instant behavior) */}
+            {/* Instant Scroll to Top Button */}
             <ScrollToTop targetRef={scrollContainerRef} />
           </div>
         </div>

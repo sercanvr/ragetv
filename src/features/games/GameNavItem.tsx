@@ -35,11 +35,10 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
         onClick={onSelect}
         className={({ isActive }) =>
           cn(
-            'group relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 select-none bg-transparent',
-            'hover:bg-foreground/5 active:scale-[0.98]',
+            'group relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200',
             isActive
-              ? 'text-foreground font-semibold'
-              : 'text-muted-foreground hover:text-foreground'
+              ? 'text-foreground font-semibold bg-foreground/[0.08] dark:bg-white/[0.08] backdrop-blur-md border border-foreground/10 dark:border-white/10 shadow-sm'
+              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
           )
         }
         title={isCollapsed ? undefined : game.name}
@@ -52,12 +51,12 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
             )}
 
             {/* Game Logo in Liquid Glass Rounded Box with static indicator dot */}
-            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-all duration-200 group-hover:border-[#D84040]/40">
+            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-colors duration-200 group-hover:border-[#D84040]/40">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}
                   alt={game.name}
-                  className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-200 group-hover:scale-105"
+                  className="w-full h-full object-contain filter drop-shadow-sm"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = 'none';
                   }}

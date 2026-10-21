@@ -73,7 +73,6 @@
 .glass-card:hover {
   background: rgba(34, 39, 51, 0.85);
   border-color: rgba(252, 53, 100, 0.4);
-  transform: translateY(-2px);
 }
 
 /* Light Theme Overrides */
