@@ -55,8 +55,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* Games Navigation List */}
-      <div className={cn('flex-1 px-2.5 py-1 space-y-2', isCollapsed ? 'overflow-visible' : 'overflow-y-auto')}>
+      {/* Games Navigation List (Flush to Left and Right Edges) */}
+      <div className={cn('flex-1 px-0 py-1 space-y-1', isCollapsed ? 'overflow-visible' : 'overflow-y-auto')}>
         {GAMES_REGISTRY.map((game) => (
           <GameNavItem
             key={game.id}

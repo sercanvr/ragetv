@@ -29,25 +29,26 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
   const FallbackIcon = ICON_MAP[game.icon] || Flame;
 
   return (
-    <div className="relative group/item">
+    <div className="relative group/item w-full">
       <NavLink
         to={`/${game.slug}`}
         onClick={onSelect}
         className={({ isActive }) =>
           cn(
-            'group relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200',
+            'group relative flex items-center transition-all duration-200 w-full',
+            isCollapsed ? 'justify-center py-2.5 px-0' : 'gap-3 px-3.5 py-2.5',
             isActive
-              ? 'text-foreground font-semibold bg-foreground/[0.08] dark:bg-white/[0.08] backdrop-blur-md border border-foreground/10 dark:border-white/10 shadow-sm'
-              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
+              ? 'text-foreground font-semibold bg-foreground/[0.08] dark:bg-white/[0.08] backdrop-blur-md border-y border-foreground/10 dark:border-white/10 shadow-sm'
+              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border-y border-transparent'
           )
         }
         title={isCollapsed ? undefined : game.name}
       >
         {({ isActive }) => (
           <>
-            {/* Active Accent Bar on the far right edge of the sidebar */}
+            {/* Active Accent Bar Flush on Right Edge of Sidebar */}
             {isActive && (
-              <span className="absolute -right-2.5 top-0 bottom-0 w-[4px] bg-[#D84040] rounded-l-full shadow-[0_0_12px_#D84040]" />
+              <span className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#D84040] shadow-[0_0_8px_#D84040]" />
             )}
 
             {/* Game Logo in Liquid Glass Rounded Box with static indicator dot */}
@@ -93,11 +94,11 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
         )}
       </NavLink>
 
-      {/* User Requested Tooltip when collapsed */}
+      {/* User Requested Tooltip with FULL Game Name when collapsed */}
       {isCollapsed && (
         <div className="absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 z-[9999] pointer-events-none opacity-0 group-hover/item:opacity-100 transition-all duration-200 ease-out whitespace-nowrap">
-          <div className="relative bg-[#D84040] text-white text-[11px] font-bold px-2.5 py-1 rounded-[8px] text-center shadow-lg flex items-center justify-center">
-            {game.shortName || game.name}
+          <div className="relative bg-[#D84040] text-white text-[11px] font-bold px-3 py-1.5 rounded-[8px] text-center shadow-lg flex items-center justify-center">
+            {game.name}
             {/* Triangle pointer */}
             <span
               className="absolute -left-[5px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[5px] border-r-[#D84040]"

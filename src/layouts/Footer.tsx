@@ -23,33 +23,30 @@ export const Footer: React.FC = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/40 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.4)] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-6 text-sm text-muted-foreground">
-        {/* Column 1: Brand & About (Click to Refresh) */}
+        {/* Column 1: Brand Logo Only (NO text as requested) */}
         <div className="space-y-3.5">
           <div
             onClick={handleLogoClick}
-            className="inline-flex items-center gap-2.5 cursor-pointer hover:opacity-75 active:opacity-50 transition-none"
+            className="inline-flex items-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none"
             title="RageTV — Sayfayı Yenile"
           >
             <img
               src="/logos/rtv-logo.png"
               alt="RageTV Logo"
-              className="w-8 h-8 object-contain"
+              className="h-8 w-auto object-contain"
             />
-            <span className="font-display font-extrabold text-lg tracking-wider text-foreground">
-              RAGE<span className="text-[#D84040]">TV</span>
-            </span>
           </div>
           <p className="leading-relaxed text-xs sm:text-sm text-muted-foreground/80 max-w-sm">
             RageTV, espor tutkunlarına video barındırmaksızın sadece resmi yayıncı platformlarının embed oynatıcıları aracılığıyla kesintisiz, saf ve şeffaf canlı espor deneyimi sunar.
           </p>
         </div>
 
-        {/* Column 2: Legal / Yasal */}
+        {/* Column 2: Legal / Yasal (Harmonized h4 heading with Column 3 for identical dark text in light theme) */}
         <div className="space-y-3.5">
-          <div className="inline-flex items-center gap-1.5 text-foreground font-bold tracking-wider uppercase text-xs sm:text-sm">
+          <h4 className="inline-flex items-center gap-1.5 text-foreground font-bold tracking-wider uppercase text-xs sm:text-sm">
             <ShieldCheck className="w-4 h-4 text-[#D84040]" />
             <span>Yasal & Telif Politikası</span>
-          </div>
+          </h4>
           <p className="leading-relaxed text-xs sm:text-sm text-muted-foreground/80">
             {t('disclaimer')}
           </p>

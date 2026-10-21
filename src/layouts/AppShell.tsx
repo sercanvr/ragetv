@@ -158,16 +158,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
       {/* Top Navbar — Unified Roof Frame (Zero Margin/Padding, Flush with Window Edge) */}
       <header className="h-14 shrink-0 px-4 flex items-center justify-between border-b border-surface-border bg-surface-deep z-50">
-        {/* Left: Standalone Big Logo Centered above Left Sidebar (NO text, click to refresh) */}
-        <div
-          className={cn(
-            'flex items-center justify-center shrink-0 transition-all duration-300',
-            isCollapsed ? 'w-16' : 'w-[210px] tv:w-[260px]'
-          )}
-        >
+        {/* Left: Standalone Big Brand Logo (Fixed, completely unaffected by sidebar toggle) */}
+        <div className="flex items-center shrink-0 px-2 py-1">
           <div
             onClick={handleLogoClick}
-            className="flex items-center justify-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none py-1"
+            className="flex items-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none"
             title="RageTV — Sayfayı Yenile"
           >
             <img
@@ -203,7 +198,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               </div>
             )}
 
-            {/* Language Menu Items (Image 2 style: Flags, active with rounded border) */}
+            {/* Language Menu Items (Image 2 style: Flags, active with rounded border in brand red #D84040) */}
             {isLangOpen && (
               <div className="absolute right-0 mt-1.5 w-44 rounded-2xl bg-surface-deep border border-surface-border shadow-2xl p-1.5 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-1">
                 {LANGUAGES.map((lang) => {
@@ -215,7 +210,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       className={cn(
                         'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-left transition-all',
                         isSelected
-                          ? 'border border-emerald-500/50 bg-emerald-500/10 text-foreground font-semibold'
+                          ? 'border border-[#D84040]/50 bg-[#D84040]/10 text-foreground font-semibold'
                           : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
                       )}
                     >
@@ -223,7 +218,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                         <span className="text-base leading-none">{lang.flag}</span>
                         <span>{lang.label}</span>
                       </span>
-                      {isSelected && <Check className="w-4 h-4 text-emerald-400" />}
+                      {isSelected && <Check className="w-4 h-4 text-[#D84040]" />}
                     </button>
                   );
                 })}
@@ -259,7 +254,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
         </div>
       </header>
 
-      {/* Main Body: Fixed Left Sidebar + Framed Content Canvas (Paint Drawing Architecture) */}
+      {/* Main Body: Fixed Left Sidebar + Framed Window Content Canvas (Paint Drawing Architecture) */}
       <div className="flex-1 flex overflow-hidden min-h-0 bg-surface-deep relative">
         {/* Left Sidebar: Seamless Wall of the Frame, flush with top/bottom (sliding door effect) */}
         <Sidebar
@@ -268,18 +263,18 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Zero Gap on Top, Left, and Right against frame borders */}
-        <div className="flex-1 min-w-0 h-full p-0 overflow-hidden flex flex-col">
-          {/* THE ONLY SCROLLABLE AREA: Inner card canvas */}
+        {/* Right Area: Window Canvas Framed inside Architecture (Image 5 Mockup) */}
+        <div className="flex-1 min-w-0 h-full p-2 sm:p-2.5 overflow-hidden flex flex-col">
+          {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and border */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 flex flex-col min-w-0 bg-surface-base overflow-y-auto overflow-x-hidden relative"
+            className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-2xl overflow-y-auto overflow-x-hidden relative"
           >
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
-            {/* Main Stage Content */}
-            <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-16">
+            {/* Main Stage Content (Extra bottom padding before footer as requested) */}
+            <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-24 sm:pb-36">
               {children}
             </main>
 
