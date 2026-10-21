@@ -35,8 +35,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
         onClick={onSelect}
         className={({ isActive }) =>
           cn(
-            'group relative flex items-center transition-all duration-200 w-full',
-            isCollapsed ? 'justify-center py-2.5 px-0' : 'gap-3 px-3.5 py-2.5',
+            'group relative flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 w-full overflow-hidden',
             isActive
               ? 'text-foreground font-semibold bg-foreground/[0.08] dark:bg-white/[0.08] backdrop-blur-md border-y border-foreground/10 dark:border-white/10 shadow-sm'
               : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border-y border-transparent'
@@ -76,20 +75,23 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               />
             </div>
 
-            {/* Title & Short Tag */}
-            {!isCollapsed && (
-              <div className="flex-1 min-w-0 text-left">
-                <div className="flex items-center justify-between gap-1.5">
-                  <span className="text-sm font-medium tracking-tight truncate">
-                    {game.name}
-                  </span>
-                  {isLive && <Badge variant="live">LIVE</Badge>}
-                </div>
-                <p className="text-[11px] text-muted-foreground/80 truncate font-normal">
-                  {game.tagline}
-                </p>
+            {/* Title & Short Tag: Smooth width and opacity transition without layout jumping */}
+            <div
+              className={cn(
+                'flex-1 min-w-0 text-left transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
+                isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[160px] opacity-100'
+              )}
+            >
+              <div className="flex items-center justify-between gap-1.5">
+                <span className="text-sm font-medium tracking-tight truncate">
+                  {game.name}
+                </span>
+                {isLive && <Badge variant="live">LIVE</Badge>}
               </div>
-            )}
+              <p className="text-[11px] text-muted-foreground/80 truncate font-normal">
+                {game.tagline}
+              </p>
+            </div>
           </>
         )}
       </NavLink>

@@ -26,23 +26,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
     >
       {/* Category Header with Integrated Toggle Button across from Games title */}
-      <div
-        className={cn(
-          'pt-3 pb-2',
-          isCollapsed
-            ? 'flex items-center justify-center px-2'
-            : 'flex items-center justify-between px-3.5'
-        )}
-      >
-        {!isCollapsed && (
-          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
-            {t('games.title')}
-          </span>
-        )}
+      <div className="h-10 px-3 flex items-center justify-between overflow-hidden shrink-0">
+        <span
+          className={cn(
+            'text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80 transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
+            isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[120px] opacity-100'
+          )}
+        >
+          {t('games.title')}
+        </span>
         {onToggle && (
           <button
             onClick={onToggle}
-            className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors focus:outline-none"
+            className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors focus:outline-none shrink-0"
             title={isCollapsed ? 'Kenar Çubuğunu Aç (B)' : 'Kenar Çubuğunu Daralt (B)'}
             aria-label="Toggle Sidebar"
           >
@@ -68,13 +64,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Sidebar Footer status note */}
-      {!isCollapsed && (
-        <div className="p-3 border-t border-surface-border/40 text-center">
-          <p className="text-[10px] text-muted-foreground/60 tracking-wider uppercase font-semibold">
-            RageTV Esports 2026
-          </p>
-        </div>
-      )}
+      <div className="p-3 border-t border-surface-border/40 text-center overflow-hidden shrink-0">
+        <p
+          className={cn(
+            'text-[10px] text-muted-foreground/60 tracking-wider uppercase font-semibold transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
+            isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[180px] opacity-100'
+          )}
+        >
+          RageTV Esports 2026
+        </p>
+      </div>
     </aside>
   );
 };

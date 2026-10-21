@@ -104,13 +104,8 @@ export const GameView: React.FC = () => {
     <div className="w-full flex flex-col gap-6">
       {/* Top Section: Player Stage + Side Panel with Symmetrical 300ms Transitions */}
       <div className="w-full flex flex-col 2xl:flex-row gap-5 items-start">
-        {/* Main Screen Stage */}
-        <div
-          className={cn(
-            'min-w-0 w-full space-y-6 transition-all duration-300 ease-in-out',
-            isTheaterMode ? '2xl:w-full' : '2xl:flex-1'
-          )}
-        >
+        {/* Main Screen Stage: Stable flex-1 without width snapping */}
+        <div className="flex-1 min-w-0 w-full space-y-6">
           <PlayerStage
             key={game.slug}
             game={game}
@@ -119,16 +114,16 @@ export const GameView: React.FC = () => {
             onToggleTheater={toggleTheater}
           />
 
-          {/* When in standard mode, show champions directly under player */}
-          {!isTheaterMode && <HistoricalChampions gameSlug={game.slug} />}
+          {/* Historical Champions remains stable under player in both modes */}
+          <HistoricalChampions gameSlug={game.slug} />
         </div>
 
-        {/* Side Panel: Smoothly expands/collapses width & opacity */}
+        {/* Side Panel: Smoothly expands/collapses width & opacity symmetrically */}
         <div
           className={cn(
-            'shrink-0 transition-all duration-300 ease-in-out',
+            'shrink-0 transition-all duration-300 ease-in-out overflow-hidden',
             isTheaterMode
-              ? 'hidden 2xl:block 2xl:w-0 2xl:h-0 2xl:opacity-0 2xl:overflow-hidden 2xl:pointer-events-none'
+              ? 'hidden 2xl:block 2xl:w-0 2xl:opacity-0 2xl:pointer-events-none'
               : 'w-full 2xl:w-[440px] opacity-100'
           )}
         >
@@ -136,13 +131,10 @@ export const GameView: React.FC = () => {
         </div>
       </div>
 
-      {/* In Theater Mode: Champions and Panel Flow Naturally Below */}
+      {/* In Theater Mode: Side Panel Flows Below Champions Centered */}
       {isTheaterMode && (
-        <div className="w-full space-y-6 pt-2 animate-in fade-in duration-300">
-          <HistoricalChampions gameSlug={game.slug} />
-          <div className="w-full max-w-4xl mx-auto">
-            {renderSidePanel()}
-          </div>
+        <div className="w-full max-w-4xl mx-auto pt-2 animate-in fade-in duration-300">
+          {renderSidePanel()}
         </div>
       )}
     </div>

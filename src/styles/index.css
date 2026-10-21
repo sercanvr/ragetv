@@ -14,11 +14,15 @@
     color: #ffffff;
   }
 
-  body {
+  html,
+  body,
+  #root {
     background-color: var(--color-bg-base);
     color: var(--color-text-secondary);
     font-family: 'Chakra Petch', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;

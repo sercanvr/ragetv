@@ -188,12 +188,12 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               <ChevronDown className="w-3 h-3 text-muted-foreground ml-0.5 opacity-70" />
             </button>
 
-            {/* User Requested Image 4 Tooltip (Hidden when dropdown is open) */}
+            {/* User Requested Tooltip with Brand Accent #D84040 */}
             {!isLangOpen && (
               <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-[9999] pointer-events-none opacity-0 group-hover/lang:opacity-100 transition-opacity duration-150 whitespace-nowrap">
-                <div className="relative bg-[#ccff00] text-black font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
+                <div className="relative bg-[#D84040] text-white font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
                   {t('tooltips.changeLanguage') || 'Dili Değiştir'}
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#ccff00]" />
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#D84040]" />
                 </div>
               </div>
             )}
@@ -226,7 +226,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             )}
           </div>
 
-          {/* 2. Direct Instant Theme Switcher with Image 4 Tooltip */}
+          {/* 2. Direct Instant Theme Switcher with Tooltip */}
           <div className="relative group/theme">
             <button
               onClick={() => selectTheme(isLight ? 'dark' : 'light')}
@@ -243,11 +243,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               </span>
             </button>
 
-            {/* Image 4 Tooltip */}
+            {/* Tooltip with Brand Accent #D84040 */}
             <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-[9999] pointer-events-none opacity-0 group-hover/theme:opacity-100 transition-opacity duration-150 whitespace-nowrap">
-              <div className="relative bg-[#ccff00] text-black font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
+              <div className="relative bg-[#D84040] text-white font-bold text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center justify-center">
                 {t('tooltips.changeTheme') || 'Tema Değiştir'}
-                <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#ccff00]" />
+                <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[4px] border-b-[#D84040]" />
               </div>
             </div>
           </div>
@@ -263,8 +263,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Window Canvas Framed inside Architecture (Image 5 Mockup) */}
-        <div className="flex-1 min-w-0 h-full p-2 sm:p-2.5 overflow-hidden flex flex-col">
+        {/* Right Area: Window Canvas Framed inside Architecture with zero padding flush against frame */}
+        <div className="flex-1 min-w-0 h-full p-0 overflow-hidden flex flex-col">
           {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and border */}
           <div
             ref={scrollContainerRef}
