@@ -94,8 +94,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           </div>
         </div>
 
-        {/* 16:9 Live Player OR Paused Facade (Strictly No Autoplay) */}
-        <div className="relative rounded-2xl p-[1px] bg-gradient-to-b from-surface-borderLight/40 via-surface-border/30 to-brand/20 backdrop-blur-md shadow-[0_0_35px_-8px_rgba(252,53,100,0.2)]">
+        {/* 16:9 Live Player OR Paused Facade (Prominent Dual-Theme Blurred Border) */}
+        <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border-2 border-surface-border shadow-[0_0_35px_-5px_rgba(216,64,64,0.25)] ring-1 ring-white/10 dark:ring-white/5 transition-all">
           {isPlayingLive ? (
             <EmbedPlayer
               platform={activeStream.platform}
@@ -104,7 +104,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               isLive={true}
             />
           ) : (
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border/50 group shadow-2xl">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
               {/* Live Stream Poster Thumbnail */}
               <img
                 src={liveThumbnail}
@@ -232,8 +232,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
         </div>
       </div>
 
-      {/* VOD Player or Poster Facade */}
-      <div className="relative rounded-2xl p-[1px] bg-gradient-to-b from-surface-borderLight/40 via-surface-border/30 to-brand/20 backdrop-blur-md shadow-[0_0_35px_-8px_rgba(252,53,100,0.2)]">
+      {/* VOD Player or Poster Facade (Prominent Dual-Theme Blurred Border) */}
+      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border-2 border-surface-border shadow-[0_0_35px_-5px_rgba(216,64,64,0.25)] ring-1 ring-white/10 dark:ring-white/5 transition-all">
         {isPlayingVod ? (
           <EmbedPlayer
             platform="youtube"
@@ -242,7 +242,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             isLive={false}
           />
         ) : (
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border/50 group shadow-2xl">
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
             {/* Poster Image */}
             <img
               src={vodThumbnail}

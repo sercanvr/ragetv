@@ -7,6 +7,7 @@ import { FixturesSection } from '@/features/fixtures/FixturesSection';
 import { TeamLeaderboard } from '@/features/leaderboard/TeamLeaderboard';
 import { useLiveStatus } from '@/features/live/useLiveStatus';
 import { cn } from '@/lib/utils';
+import { HistoricalChampions } from '@/features/champions/HistoricalChampions';
 
 export const GameView: React.FC = () => {
   const { gameSlug } = useParams<{ gameSlug: string }>();
@@ -69,7 +70,7 @@ export const GameView: React.FC = () => {
       )}
     >
       {/* Main Screen Stage (Full width in Theater Mode) */}
-      <div className={cn('min-w-0 w-full transition-all duration-300', isTheaterMode ? 'w-full' : 'flex-1')}>
+      <div className={cn('min-w-0 w-full space-y-6 transition-all duration-300', isTheaterMode ? 'w-full' : 'flex-1')}>
         <PlayerStage
           key={game.slug}
           game={game}
@@ -77,6 +78,9 @@ export const GameView: React.FC = () => {
           isTheaterMode={isTheaterMode}
           onToggleTheater={toggleTheater}
         />
+
+        {/* Historical Champions Timeline (Past winners 2026 - inaugural year) */}
+        <HistoricalChampions gameSlug={game.slug} />
       </div>
 
       {/* Side Panel: In normal mode placed on right side; in Theater Mode shifts below stage */}
