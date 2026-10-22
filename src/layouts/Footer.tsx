@@ -18,21 +18,21 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="disclaimer" className="relative w-full border-t border-surface-border bg-surface-deep/80 mt-auto pt-10 pb-8 px-6 sm:px-10 lg:px-12 overflow-hidden">
+    <footer id="disclaimer" className="relative w-full border-t border-surface-border bg-surface-deep/90 mt-24 sm:mt-36 pt-20 pb-14 sm:pt-24 sm:pb-16 min-h-[460px] sm:min-h-[520px] flex flex-col justify-between px-6 sm:px-10 lg:px-12 overflow-hidden">
       {/* Top Ambient Glow / Degrade Aydınlanma (Dual-Theme Compatible) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/40 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.4)] pointer-events-none z-10" />
 
-      {/* Static Dotted World Map Background (Zero Dots/Tooltips, Flush Full Width, Dual-Theme Compatible) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0">
+      {/* Static Dotted World Map Background (Zero Dots/Tooltips, Flush Full Width, Fully Visible) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0 p-4">
         <img
           src="/world-map-dots.svg"
           alt=""
           aria-hidden="true"
-          className="w-full h-full max-w-[1700px] object-cover object-center opacity-[0.06] dark:opacity-[0.13] invert dark:invert-0 select-none"
+          className="w-full h-full max-w-[1600px] object-contain object-center opacity-[0.09] dark:opacity-[0.18] invert dark:invert-0 select-none"
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 lg:gap-20 xl:gap-28 pb-6 text-sm text-muted-foreground">
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 lg:gap-20 xl:gap-28 pb-10 text-sm text-muted-foreground">
         {/* Column 1: Brand Logo Only (NO text as requested) */}
         <div className="space-y-3.5">
           <div

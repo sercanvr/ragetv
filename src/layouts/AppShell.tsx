@@ -195,9 +195,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               </div>
             )}
 
-            {/* Language Menu Items (Compact, Language Names only without country code, tight spacing) */}
+            {/* Language Menu Items (Compact, Language Names only, tight spacing next to checkmark) */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-1.5 w-36 rounded-2xl bg-surface-deep border border-surface-border shadow-2xl p-1.5 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-1">
+              <div className="absolute right-0 mt-1.5 w-28 rounded-xl bg-surface-deep border border-surface-border shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-0.5">
                 {LANGUAGES.map((lang) => {
                   const isSelected = currentLangObj.code === lang.code;
                   return (
@@ -205,13 +205,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       key={lang.code}
                       onClick={() => selectLanguage(lang.code)}
                       className={cn(
-                        'w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-xs transition-all',
+                        'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-all gap-1.5',
                         isSelected
                           ? 'border border-[#D84040]/50 bg-[#D84040]/10 text-foreground font-semibold'
                           : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
                       )}
                     >
-                      <span>{lang.label}</span>
+                      <span className="truncate">{lang.label}</span>
                       {isSelected && <Check className="w-3.5 h-3.5 text-[#D84040] shrink-0" />}
                     </button>
                   );
