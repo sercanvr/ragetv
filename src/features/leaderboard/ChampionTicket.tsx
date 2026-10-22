@@ -8,9 +8,9 @@ interface ChampionTicketProps {
 
 export const ChampionTicket: React.FC<ChampionTicketProps> = ({ champion }) => {
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-r from-[#201810] via-[#1A1815] to-[#251E14] dark:from-[#1E1710] dark:via-[#161412] dark:to-[#221B12] border border-amber-500/35 transition-opacity duration-150 hover:opacity-90 select-none shadow-2xl flex">
+    <div className="relative w-full rounded-2xl bg-gradient-to-r from-[#201810] via-[#1A1815] to-[#251E14] dark:from-[#1E1710] dark:via-[#161412] dark:to-[#221B12] border border-amber-500/35 transition-opacity duration-150 hover:opacity-90 select-none shadow-2xl flex">
       {/* Ticket Left: Main Event & Champion Credentials */}
-      <div className="flex-1 p-3.5 sm:p-4 flex flex-col justify-between gap-3 min-w-0">
+      <div className="flex-1 p-3.5 sm:p-4 flex flex-col justify-between gap-3 min-w-0 rounded-l-2xl overflow-hidden">
         {/* Top Header Badge & Date */}
         <div className="flex items-center justify-between gap-2 border-b border-amber-500/20 pb-2">
           <div className="flex items-center gap-1.5">
@@ -56,20 +56,20 @@ export const ChampionTicket: React.FC<ChampionTicketProps> = ({ champion }) => {
         </div>
       </div>
 
-      {/* Ticket Perforation / Divider with Circular Notches */}
+      {/* Ticket Perforation / Divider with Circular Notches Masking Top/Bottom Borders */}
       <div className="relative flex flex-col items-center justify-between py-1 shrink-0 w-4">
-        {/* Top Notch Hole */}
-        <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-surface-deep border border-amber-500/30" />
+        {/* Top Notch Hole (Overlays border-t, completely masking horizontal line with canvas bg) */}
+        <span className="absolute -top-[8px] left-1/2 -translate-x-1/2 w-[18px] h-[18px] rounded-full bg-surface-base border-b border-l border-r border-amber-500/40 z-20 pointer-events-none" />
 
         {/* Vertical Perforated Dashes */}
         <div className="w-[1.5px] h-full my-2 bg-[repeating-linear-gradient(to_bottom,#F59E0B66_0_4px,transparent_4px_8px)] opacity-60" />
 
-        {/* Bottom Notch Hole */}
-        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-surface-deep border border-amber-500/30" />
+        {/* Bottom Notch Hole (Overlays border-b, completely masking horizontal line with canvas bg) */}
+        <span className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-[18px] h-[18px] rounded-full bg-surface-base border-t border-l border-r border-amber-500/40 z-20 pointer-events-none" />
       </div>
 
       {/* Ticket Right: Stub (Vertical Stamp) */}
-      <div className="w-12 sm:w-14 bg-amber-500/10 border-l border-amber-500/20 flex flex-col items-center justify-center p-2 text-center shrink-0">
+      <div className="w-12 sm:w-14 bg-amber-500/10 border-l border-amber-500/20 flex flex-col items-center justify-center p-2 text-center shrink-0 rounded-r-2xl overflow-hidden">
         <span
           className="font-display text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-amber-400/80 select-none whitespace-nowrap"
           style={{ writingMode: 'vertical-rl' }}

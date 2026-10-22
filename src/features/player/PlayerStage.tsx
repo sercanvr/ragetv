@@ -6,7 +6,7 @@ import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { EmbedPlayer } from './EmbedPlayer';
-import { formatViewerCount } from '@/lib/utils';
+import { cn, formatViewerCount } from '@/lib/utils';
 import { useVod } from '@/features/vod/useVod';
 
 interface PlayerStageProps {
@@ -53,7 +53,12 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
       `https://static-cdn.jtvnw.net/previews-ttv/live_user_${activeStream.channel}-640x360.jpg`;
 
     return (
-      <section className="space-y-4">
+      <section
+        className={cn(
+          'space-y-4 transition-all duration-300 w-full',
+          isTheaterMode && 'max-w-[calc((100vh-230px)*16/9)] mx-auto'
+        )}
+      >
         {/* Game Title Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -193,7 +198,12 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
   }
 
   return (
-    <section className="space-y-4">
+    <section
+      className={cn(
+        'space-y-4 transition-all duration-300 w-full',
+        isTheaterMode && 'max-w-[calc((100vh-230px)*16/9)] mx-auto'
+      )}
+    >
       {/* Game Title Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>

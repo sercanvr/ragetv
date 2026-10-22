@@ -60,7 +60,7 @@ Card/Border/Panel Dark: #1B1B1B / #292929
 /* Light Theme Variables (#FEFAF3 background, #525252 text) */
 html.light,
 .light {
-  --color-bg-deep: #F5EFE6;
+  --color-bg-deep: #FAF6EE;
   --color-bg-base: #FEFAF3;
   --color-bg-surface: #FFFFFF;
   --color-bg-card: #FFFFFF;

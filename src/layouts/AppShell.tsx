@@ -176,7 +176,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           <div className="relative group/lang" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangOpen((prev) => !prev)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              className="h-8 px-2.5 flex items-center gap-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
               aria-haspopup="true"
               aria-expanded={isLangOpen}
             >
@@ -195,9 +195,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               </div>
             )}
 
-            {/* Language Menu Items (Image 2 style: Flags, active with rounded border in brand red #D84040) */}
+            {/* Language Menu Items (Compact, Language Names only without country code, tight spacing) */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-1.5 w-44 rounded-2xl bg-surface-deep border border-surface-border shadow-2xl p-1.5 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-1">
+              <div className="absolute right-0 mt-1.5 w-36 rounded-2xl bg-surface-deep border border-surface-border shadow-2xl p-1.5 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-1">
                 {LANGUAGES.map((lang) => {
                   const isSelected = currentLangObj.code === lang.code;
                   return (
@@ -205,17 +205,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       key={lang.code}
                       onClick={() => selectLanguage(lang.code)}
                       className={cn(
-                        'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-left transition-all',
+                        'w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-xs transition-all',
                         isSelected
                           ? 'border border-[#D84040]/50 bg-[#D84040]/10 text-foreground font-semibold'
                           : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
                       )}
                     >
-                      <span className="flex items-center gap-2.5">
-                        <span className="text-base leading-none">{lang.flag}</span>
-                        <span>{lang.label}</span>
-                      </span>
-                      {isSelected && <Check className="w-4 h-4 text-[#D84040]" />}
+                      <span>{lang.label}</span>
+                      {isSelected && <Check className="w-3.5 h-3.5 text-[#D84040] shrink-0" />}
                     </button>
                   );
                 })}
@@ -223,11 +220,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             )}
           </div>
 
-          {/* 2. Direct Instant Theme Switcher with fa-circle-half-stroke icon only */}
+          {/* 2. Direct Instant Theme Switcher with matching h-8 w-8 height */}
           <div className="relative group/theme">
             <button
               onClick={() => selectTheme(isLight ? 'dark' : 'light')}
-              className="flex items-center justify-center p-2 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              className="h-8 w-8 flex items-center justify-center rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
               aria-label="Toggle Theme"
             >
               <i className="fa-solid fa-circle-half-stroke text-xs text-foreground" aria-hidden="true" />
@@ -255,10 +252,10 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
         {/* Right Area: Window Canvas Framed inside Architecture with zero padding flush against frame */}
         <div className="flex-1 min-w-0 h-full p-0 overflow-hidden flex flex-col">
-          {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and border */}
+          {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and subtle/dark shadow */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-2xl overflow-y-auto overflow-x-hidden relative"
+            className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-sm dark:shadow-2xl overflow-y-auto overflow-x-hidden relative"
           >
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />

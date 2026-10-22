@@ -37,7 +37,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
           cn(
             'group relative flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 w-full overflow-hidden',
             isActive
-              ? 'text-foreground font-semibold bg-foreground/[0.08] dark:bg-white/[0.08] backdrop-blur-md border-y border-foreground/10 dark:border-white/10 shadow-sm'
+              ? 'text-foreground font-semibold bg-black/[0.11] dark:bg-white/[0.15] backdrop-blur-md border-y border-black/10 dark:border-white/15 shadow-sm'
               : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border-y border-transparent'
           )
         }
