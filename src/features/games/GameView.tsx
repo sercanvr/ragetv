@@ -107,15 +107,15 @@ export const GameView: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-6">
-      {/* Top Section: Player Stage + Side Panel with Symmetrical 300ms Transitions */}
-      <div className="w-full flex flex-col 2xl:flex-row gap-5 items-start">
-        {/* Main Screen Stage: Smooth transition on width and max-width without layout snapping */}
+      {/* Top Section: Player Stage + Side Panel with Ultra-Smooth Cubic-Bezier Transitions */}
+      <div className="w-full flex flex-col 2xl:flex-row gap-6 items-start justify-center">
+        {/* Main Screen Stage: Smoothly centers and scales with zero frame jump */}
         <div
           className={cn(
-            'min-w-0 w-full transition-[max-width,width,margin] duration-300 ease-in-out space-y-6',
+            'min-w-0 w-full flex-1 space-y-6 transition-[max-width,margin] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]',
             isTheaterMode
-              ? 'flex-1 max-w-[calc((100vh-230px)*16/9)] mx-auto'
-              : 'flex-1 max-w-full'
+              ? 'max-w-[calc((100vh-230px)*16/9)] mx-auto'
+              : 'max-w-full mx-0'
           )}
         >
           <PlayerStage
@@ -130,16 +130,18 @@ export const GameView: React.FC = () => {
           <HistoricalChampions gameSlug={game.slug} />
         </div>
 
-        {/* Side Panel: Smoothly expands/collapses width & opacity symmetrically */}
+        {/* Side Panel: Smoothly expands/collapses width & opacity symmetrically without squishing children */}
         <div
           className={cn(
-            'shrink-0 transition-all duration-300 ease-in-out overflow-hidden',
+            'shrink-0 overflow-hidden transition-[width,opacity,margin] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]',
             isTheaterMode
-              ? 'hidden 2xl:block 2xl:w-0 2xl:opacity-0 2xl:pointer-events-none'
+              ? 'hidden 2xl:block 2xl:w-0 2xl:opacity-0 2xl:pointer-events-none 2xl:m-0'
               : 'w-full 2xl:w-[440px] opacity-100'
           )}
         >
-          {renderSidePanel()}
+          <div className="w-full 2xl:w-[440px]">
+            {renderSidePanel()}
+          </div>
         </div>
       </div>
 

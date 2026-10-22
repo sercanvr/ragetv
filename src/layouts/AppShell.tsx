@@ -250,13 +250,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Window Canvas Framed inside Architecture with spacing to reveal top-right and bottom-right rounded-3xl radii */}
-        <div className="flex-1 min-w-0 h-full p-0 pr-2 pb-2 sm:pr-3 sm:pb-3 overflow-hidden flex flex-col">
-          {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and subtle/dark shadow */}
-          <div
-            ref={scrollContainerRef}
-            className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-sm dark:shadow-2xl overflow-y-auto overflow-x-hidden relative"
-          >
+        {/* Right Area: Scrollable Viewport with Scrollbar Flush to the Extreme Right Edge */}
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col pl-0.5"
+        >
+          {/* Encased Window Pane: Independent Framed Canvas completely separated from scrollbar, fully displaying rounded-3xl corners */}
+          <div className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-sm dark:shadow-2xl mr-3 sm:mr-4 mb-3 sm:mb-4 relative">
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 

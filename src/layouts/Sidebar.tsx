@@ -21,7 +21,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside
       className={cn(
-        'hidden lg:flex flex-col shrink-0 bg-surface-deep transition-all duration-300 z-40 h-full',
+        'hidden lg:flex flex-col shrink-0 bg-surface-deep transition-[width] duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] z-40 h-full',
         isCollapsed ? 'w-16 overflow-visible' : 'w-[210px] tv:w-[260px]'
       )}
     >
