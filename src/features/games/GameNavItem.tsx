@@ -38,7 +38,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
             'group relative flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 w-full overflow-hidden',
             isActive
               ? 'text-foreground font-semibold bg-black/[0.11] dark:bg-white/[0.15] backdrop-blur-md border-y border-black/10 dark:border-white/15 shadow-sm'
-              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border-y border-transparent'
+              : 'text-muted-foreground hover:text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border-y border-transparent'
           )
         }
         title={isCollapsed ? undefined : game.name}
@@ -50,8 +50,8 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               <span className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#D84040] shadow-[0_0_8px_#D84040]" />
             )}
 
-            {/* Game Logo in Liquid Glass Rounded Box with static indicator dot */}
-            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-colors duration-200 group-hover:border-[#D84040]/40">
+            {/* Game Logo in Liquid Glass Rounded Box with static indicator dot (No cheap red border on hover) */}
+            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-colors duration-200">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}

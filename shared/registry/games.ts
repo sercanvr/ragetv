@@ -39,7 +39,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: 'l9VxSMFMlKI', // VALORANT Champions Shanghai - Grand Final
+      defaultVideoId: 'paXOFTp3Hx0', // VALORANT Champions Seoul 2024 - Grand Final EDG vs Heretics
     },
   },
   {
@@ -57,7 +57,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     ],
     vodSource: {
       platform: 'youtube',
-      defaultVideoId: '7-niA4rH38Y', // PUBG Nations Cup (PNC) Best Moments
+      defaultVideoId: 'dNwJdxlnsbE', // PUBG Global Championship (PGC) Grand Finals Day 3
     },
   },
   {

@@ -109,8 +109,15 @@ export const GameView: React.FC = () => {
     <div className="w-full flex flex-col gap-6">
       {/* Top Section: Player Stage + Side Panel with Symmetrical 300ms Transitions */}
       <div className="w-full flex flex-col 2xl:flex-row gap-5 items-start">
-        {/* Main Screen Stage: Stable flex-1 without width snapping */}
-        <div className="flex-1 min-w-0 w-full space-y-6">
+        {/* Main Screen Stage: Smooth transition on width and max-width without layout snapping */}
+        <div
+          className={cn(
+            'min-w-0 w-full transition-[max-width,width,margin] duration-300 ease-in-out space-y-6',
+            isTheaterMode
+              ? 'flex-1 max-w-[calc((100vh-230px)*16/9)] mx-auto'
+              : 'flex-1 max-w-full'
+          )}
+        >
           <PlayerStage
             key={game.slug}
             game={game}
@@ -136,12 +143,15 @@ export const GameView: React.FC = () => {
         </div>
       </div>
 
-      {/* In Theater Mode: Side Panel Flows Below Champions Centered */}
-      {isTheaterMode && (
-        <div className="w-full max-w-4xl mx-auto pt-2 animate-in fade-in duration-300">
-          {renderSidePanel()}
-        </div>
-      )}
+      {/* In Theater Mode: Side Panel Flows Below Champions Centered with smooth height/opacity transition */}
+      <div
+        className={cn(
+          'w-full max-w-4xl mx-auto pt-2 transition-all duration-300 ease-in-out overflow-hidden',
+          isTheaterMode ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        )}
+      >
+        {renderSidePanel()}
+      </div>
     </div>
   );
 };

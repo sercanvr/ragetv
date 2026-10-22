@@ -195,9 +195,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               </div>
             )}
 
-            {/* Language Menu Items (Compact, Language Names only, tight spacing next to checkmark) */}
+            {/* Language Menu Items (Compact, Language Names only, left-aligned, tight checkmark spacing, light-gray hover) */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-1.5 w-28 rounded-xl bg-surface-deep border border-surface-border shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-0.5">
+              <div className="absolute right-0 mt-1.5 w-auto min-w-[100px] rounded-xl bg-surface-deep border border-surface-border shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-0.5">
                 {LANGUAGES.map((lang) => {
                   const isSelected = currentLangObj.code === lang.code;
                   return (
@@ -205,10 +205,10 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       key={lang.code}
                       onClick={() => selectLanguage(lang.code)}
                       className={cn(
-                        'w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-all gap-1.5',
+                        'w-full flex items-center justify-start text-left px-2.5 py-1.5 rounded-lg text-xs transition-colors gap-2',
                         isSelected
                           ? 'border border-[#D84040]/50 bg-[#D84040]/10 text-foreground font-semibold'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5 border border-transparent'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-neutral-200/80 dark:hover:bg-neutral-800/80 border border-transparent'
                       )}
                     >
                       <span className="truncate">{lang.label}</span>
@@ -250,8 +250,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Window Canvas Framed inside Architecture with zero padding flush against frame */}
-        <div className="flex-1 min-w-0 h-full p-0 overflow-hidden flex flex-col">
+        {/* Right Area: Window Canvas Framed inside Architecture with spacing to reveal top-right and bottom-right rounded-3xl radii */}
+        <div className="flex-1 min-w-0 h-full p-0 pr-2 pb-2 sm:pr-3 sm:pb-3 overflow-hidden flex flex-col">
           {/* THE ONLY SCROLLABLE AREA: Encased Window Pane with rounded-2xl/3xl and subtle/dark shadow */}
           <div
             ref={scrollContainerRef}

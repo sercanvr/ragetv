@@ -7,8 +7,8 @@ export interface HistoricalChampion {
 
 export const HISTORICAL_CHAMPIONS: Record<string, HistoricalChampion[]> = {
   cs2: [
-    { year: 2026, teamName: 'Natus Vincere', tournament: 'PGL CS2 World Championship', logoUrl: '/teams/navi.png' },
-    { year: 2025, teamName: 'Team Vitality', tournament: 'Perfect World Shanghai Major', logoUrl: '/teams/vitality.png' },
+    { year: 2025, teamName: 'Team Vitality', tournament: 'BLAST.tv Austin Major', logoUrl: '/teams/vitality.png' },
+    { year: 2024, teamName: 'Team Spirit', tournament: 'Perfect World Shanghai Major', logoUrl: '/teams/spirit.png' },
     { year: 2024, teamName: 'Natus Vincere', tournament: 'PGL Major Copenhagen', logoUrl: '/teams/navi.png' },
     { year: 2023, teamName: 'Team Vitality', tournament: 'BLAST.tv Paris Major', logoUrl: '/teams/vitality.png' },
     { year: 2022, teamName: 'FaZe Clan', tournament: 'PGL Major Antwerp', logoUrl: '/teams/faze.png' },
@@ -22,16 +22,13 @@ export const HISTORICAL_CHAMPIONS: Record<string, HistoricalChampion[]> = {
     { year: 2013, teamName: 'Fnatic', tournament: 'DreamHack Winter', logoUrl: '/teams/fnatic.png' },
   ],
   valorant: [
-    { year: 2026, teamName: 'EDward Gaming', tournament: 'VCT Champions Paris', logoUrl: '/teams/edg.png' },
-    { year: 2025, teamName: 'Sentinels', tournament: 'VCT Champions Tokyo', logoUrl: '/teams/sen.png' },
     { year: 2024, teamName: 'EDward Gaming', tournament: 'VCT Champions Seoul', logoUrl: '/teams/edg.png' },
     { year: 2023, teamName: 'Evil Geniuses', tournament: 'VCT Champions Los Angeles', logoUrl: '/teams/eg.png' },
     { year: 2022, teamName: 'LOUD', tournament: 'VCT Champions Istanbul', logoUrl: '/teams/loud.png' },
     { year: 2021, teamName: 'Acend', tournament: 'VCT Champions Berlin', logoUrl: '/teams/acend.png' },
   ],
   lol: [
-    { year: 2026, teamName: 'T1', tournament: 'LoL World Championship', logoUrl: '/teams/t1.png' },
-    { year: 2025, teamName: 'Bilibili Gaming', tournament: 'LoL World Championship', logoUrl: '/teams/blg.png' },
+    { year: 2025, teamName: 'T1', tournament: 'LoL World Championship', logoUrl: '/teams/t1.png' },
     { year: 2024, teamName: 'T1', tournament: 'Worlds London Grand Finals', logoUrl: '/teams/t1.png' },
     { year: 2023, teamName: 'T1', tournament: 'Worlds Seoul Grand Finals', logoUrl: '/teams/t1.png' },
     { year: 2022, teamName: 'DRX', tournament: 'Worlds San Francisco', logoUrl: '/teams/drx.png' },
@@ -48,8 +45,7 @@ export const HISTORICAL_CHAMPIONS: Record<string, HistoricalChampion[]> = {
     { year: 2011, teamName: 'Fnatic', tournament: 'Season 1 World Championship', logoUrl: '/teams/fnatic.png' },
   ],
   dota2: [
-    { year: 2026, teamName: 'Team Liquid', tournament: 'The International', logoUrl: '/teams/liquid.png' },
-    { year: 2025, teamName: 'Gaimin Gladiators', tournament: 'The International', logoUrl: '/teams/gg.png' },
+    { year: 2025, teamName: 'Team Falcons', tournament: 'The International Hamburg', logoUrl: '/teams/falcons.png' },
     { year: 2024, teamName: 'Team Liquid', tournament: 'The International Copenhagen', logoUrl: '/teams/liquid.png' },
     { year: 2023, teamName: 'Team Spirit', tournament: 'The International Seattle', logoUrl: '/teams/spirit.png' },
     { year: 2022, teamName: 'Tundra Esports', tournament: 'The International Singapore', logoUrl: '/teams/tundra.png' },
@@ -65,9 +61,7 @@ export const HISTORICAL_CHAMPIONS: Record<string, HistoricalChampion[]> = {
     { year: 2011, teamName: 'Natus Vincere', tournament: 'The International Cologne', logoUrl: '/teams/navi.png' },
   ],
   pubg: [
-    { year: 2026, teamName: 'Twisted Minds', tournament: 'PGS 7 Grand Finals', logoUrl: '/teams/twisted.png' },
-    { year: 2025, teamName: 'Soniqs', tournament: 'PUBG Global Championship', logoUrl: '/teams/soniqs.png' },
-    { year: 2024, teamName: 'Twisted Minds', tournament: 'PGS 6 Grand Finals', logoUrl: '/teams/twisted.png' },
+    { year: 2024, teamName: 'The Expendables', tournament: 'PGC Grand Finals Kuala Lumpur', logoUrl: '/teams/cerberus.png' },
     { year: 2023, teamName: 'Danawa e-sports', tournament: 'PUBG Global Championship Bangkok', logoUrl: '/teams/danawa.png' },
     { year: 2022, teamName: 'Natus Vincere', tournament: 'PUBG Global Championship Dubai', logoUrl: '/teams/navi.png' },
     { year: 2021, teamName: 'NewHappy', tournament: 'PUBG Global Championship Incheon', logoUrl: '/teams/newhappy.png' },
