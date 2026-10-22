@@ -56,16 +56,16 @@ export const ChampionTicket: React.FC<ChampionTicketProps> = ({ champion }) => {
         </div>
       </div>
 
-      {/* Ticket Perforation / Divider with Circular Notches Masking Top/Bottom Borders */}
+      {/* Ticket Perforation / Divider with Semicircular Notches (Yarım Daire) */}
       <div className="relative flex flex-col items-center justify-between py-1 shrink-0 w-4">
-        {/* Top Notch Hole (Overlays border-t, completely masking horizontal line with canvas bg) */}
-        <span className="absolute -top-[8px] left-1/2 -translate-x-1/2 w-[18px] h-[18px] rounded-full bg-surface-base border-b border-l border-r border-amber-500/40 z-20 pointer-events-none" />
+        {/* Top Notch: Semicircle dipping downwards into ticket */}
+        <span className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-[18px] h-[10px] rounded-b-full bg-surface-base border-b border-x border-amber-500/40 z-20 pointer-events-none" />
 
         {/* Vertical Perforated Dashes */}
-        <div className="w-[1.5px] h-full my-2 bg-[repeating-linear-gradient(to_bottom,#F59E0B66_0_4px,transparent_4px_8px)] opacity-60" />
+        <div className="w-[1.5px] h-full my-3 bg-[repeating-linear-gradient(to_bottom,#F59E0B66_0_4px,transparent_4px_8px)] opacity-60" />
 
-        {/* Bottom Notch Hole (Overlays border-b, completely masking horizontal line with canvas bg) */}
-        <span className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-[18px] h-[18px] rounded-full bg-surface-base border-t border-l border-r border-amber-500/40 z-20 pointer-events-none" />
+        {/* Bottom Notch: Semicircle dipping upwards into ticket */}
+        <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[18px] h-[10px] rounded-t-full bg-surface-base border-t border-x border-amber-500/40 z-20 pointer-events-none" />
       </div>
 
       {/* Ticket Right: Stub (Vertical Stamp) */}
