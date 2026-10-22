@@ -11,6 +11,7 @@ describe('Domain: selectPrimaryStream Hierarchy', () => {
     viewers: 25000,
     language: 'en',
     official: true,
+    thumbnailUrl: null,
   };
 
   const streamTrOfficial: Stream = {
@@ -21,6 +22,7 @@ describe('Domain: selectPrimaryStream Hierarchy', () => {
     viewers: 12000,
     language: 'tr',
     official: true,
+    thumbnailUrl: null,
   };
 
   const streamEnCommunity: Stream = {
@@ -31,6 +33,7 @@ describe('Domain: selectPrimaryStream Hierarchy', () => {
     viewers: 50000,
     language: 'en',
     official: false,
+    thumbnailUrl: null,
   };
 
   it('should return null for empty or undefined stream list', () => {
