@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, Trophy } from 'lucide-react';
 import { getGameBySlug, getDefaultGame } from '@shared/registry/games';
+import { selectPrimaryStream } from '@shared/streamSelection';
+import { useTranslation } from 'react-i18next';
 import { PlayerStage } from '@/features/player/PlayerStage';
 import { FixturesSection } from '@/features/fixtures/FixturesSection';
 import { TeamLeaderboard } from '@/features/leaderboard/TeamLeaderboard';
@@ -12,6 +14,7 @@ import { HistoricalChampions } from '@/features/champions/HistoricalChampions';
 export const GameView: React.FC = () => {
   const { gameSlug } = useParams<{ gameSlug: string }>();
   const { data } = useLiveStatus();
+  const { i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'fixtures' | 'leaderboard'>('fixtures');
   const [isTheaterMode, setIsTheaterMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -48,9 +51,11 @@ export const GameView: React.FC = () => {
     return <Navigate to="/cs2" replace />;
   }
 
-  // Get primary live stream if available for this game
+  // Get primary live stream using pure domain selection hierarchy
   const gameLiveStreams = data?.games[game.slug]?.live || [];
-  const activeStream = gameLiveStreams.length > 0 ? gameLiveStreams[0] : null;
+  const activeStream = selectPrimaryStream(gameLiveStreams, {
+    preferredLanguage: i18n.language,
+  });
 
   const toggleTheater = () => {
     setIsTheaterMode((prev) => {

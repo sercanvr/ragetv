@@ -22,7 +22,8 @@ describe('Games & Killswitch Registry Integrity', () => {
       expect(found).toBeDefined();
       expect(found?.id).toBe(game.id);
       expect(found?.channels.length).toBeGreaterThan(0);
-      expect(found?.vodSource.defaultVideoId.length).toBeGreaterThan(0);
+      expect(found?.vodSource.defaultVideoId).toBeDefined();
+      expect(found?.vodSource.defaultVideoId?.length).toBeGreaterThan(0);
     }
   });
 

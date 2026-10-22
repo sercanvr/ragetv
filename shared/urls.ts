@@ -32,6 +32,7 @@ export function buildYouTubeEmbedUrl(videoId: string, autoplay = false): string 
 export function isAllowedEmbedUrl(url: string): boolean {
   try {
     const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return false;
     return (ALLOWED_EMBED_HOSTS as readonly string[]).includes(parsed.hostname);
   } catch {
     return false;
