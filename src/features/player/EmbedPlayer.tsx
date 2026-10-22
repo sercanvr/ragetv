@@ -34,18 +34,20 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
       : `https://www.youtube.com/watch?v=${channelOrVideoId}`;
 
   // Apply default 10% volume and 1080p quality when iframe loads
+  const YOUTUBE_ORIGIN = 'https://www.youtube-nocookie.com';
+
   const handleIframeLoad = () => {
     if (platform === 'youtube' && iframeRef.current?.contentWindow) {
       try {
         // Set default volume strictly to 10% to prevent jumpscares
         iframeRef.current.contentWindow.postMessage(
           JSON.stringify({ event: 'command', func: 'setVolume', args: [10] }),
-          '*'
+          YOUTUBE_ORIGIN
         );
         // Request 1080p playback quality
         iframeRef.current.contentWindow.postMessage(
           JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
-          '*'
+          YOUTUBE_ORIGIN
         );
       } catch (error) {
         // Silently handle cross-origin sandbox restrictions
@@ -67,7 +69,7 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
               func: nextState ? 'pauseVideo' : 'playVideo',
               args: [],
             }),
-            '*'
+            YOUTUBE_ORIGIN
           );
         } catch (error) {
           // Silently handle cross-origin sandbox restrictions
@@ -87,12 +89,12 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
               func: nextMute ? 'mute' : 'unMute',
               args: [],
             }),
-            '*'
+            YOUTUBE_ORIGIN
           );
           if (!nextMute) {
             iframeRef.current.contentWindow.postMessage(
               JSON.stringify({ event: 'command', func: 'setVolume', args: [10] }),
-              '*'
+              YOUTUBE_ORIGIN
             );
           }
         } catch (error) {

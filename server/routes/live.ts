@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { GAMES_REGISTRY } from '../../shared/registry/games';
+import { isChannelBlocked, isGameBlocked } from '../../shared/registry/killswitch';
 import { Stream, LiveStatusResponse } from '../../shared/schemas/stream';
 import { getServerEnv } from '../lib/env';
 import { CircuitBreaker } from '../lib/circuitBreaker';
@@ -15,9 +16,13 @@ liveRouter.get('/', async (c) => {
   c.header('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
 
   const env = getServerEnv();
-  const allTwitchLogins = GAMES_REGISTRY.flatMap((g) =>
-    g.channels.filter((ch) => ch.platform === 'twitch').map((ch) => ch.login)
-  );
+  const allTwitchLogins = GAMES_REGISTRY
+    .filter((g) => !isGameBlocked(g.id))
+    .flatMap((g) =>
+      g.channels
+        .filter((ch) => ch.platform === 'twitch' && !isChannelBlocked(ch.login))
+        .map((ch) => ch.login)
+    );
 
   let liveStreams: Stream[] = [];
 
