@@ -57,11 +57,11 @@ Card/Border/Panel Dark: #1B1B1B / #292929
   --bottombar-height: 64px;
 }
 
-/* Light Theme Variables (Inverted: Outer Shell is Whiter #FEFAF3, Inner Canvas is Cream #F5EFE6) */
+/* Light Theme Variables: Hafif Koyu Beyaz Dışta (#F5EFE6), Daha Beyaz Olan İçte (#FFFFFF) */
 html.light,
 .light {
-  --color-bg-deep: #FEFAF3;
-  --color-bg-base: #F5EFE6;
+  --color-bg-deep: #F5EFE6;
+  --color-bg-base: #FFFFFF;
   --color-bg-surface: #FFFFFF;
   --color-bg-card: #FFFFFF;
   --color-bg-panel: #EBE4D8;

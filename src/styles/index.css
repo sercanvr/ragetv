@@ -88,18 +88,18 @@ html.light,
 html.light body,
 html.light #root,
 html.light .bg-surface-deep {
-  background-color: #FEFAF3 !important;
+  background-color: #F5EFE6 !important;
   color: #525252 !important;
 }
 
 html.light aside,
 html.light aside.bg-surface-deep {
-  background-color: #FEFAF3 !important;
+  background-color: #F5EFE6 !important;
   border-color: #DFD7CB !important;
 }
 
 html.light .bg-surface-base {
-  background-color: #F5EFE6 !important;
+  background-color: #FFFFFF !important;
   border-color: #DFD7CB !important;
 }
 
@@ -135,6 +135,26 @@ html.light h3,
 html.light h4,
 html.light .text-white {
   color: #111827 !important;
+}
+
+/* Champion Cards: Always keep crisp bright text on dark collector cards in both modes */
+.champion-card h4,
+.champion-card .champion-title,
+html.light .champion-card h4,
+html.light .champion-card .champion-title {
+  color: #FFFFFF !important;
+}
+
+.champion-card p,
+.champion-card .champion-sub,
+html.light .champion-card p,
+html.light .champion-card .champion-sub {
+  color: #D1D5DB !important;
+}
+
+.champion-card .champion-badge,
+html.light .champion-card .champion-badge {
+  color: #FFFFFF !important;
 }
 
 html.light .text-gray-100 {

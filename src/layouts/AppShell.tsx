@@ -269,26 +269,28 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Scrollable Viewport with Scrollbar Flush to the Extreme Right Edge */}
-        <div
-          ref={scrollContainerRef}
-          className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden pl-0.5"
-        >
-          {/* Encased Window Pane: Independent Framed Canvas expanding fully with content as a single unit without frame cutoff */}
-          <div className="min-h-[calc(100%-1rem)] flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] shadow-none mr-3 sm:mr-4 mb-3 sm:mb-4 relative">
-            {/* Mobile Game Top Pills (for mobile viewport only) */}
-            <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
+        {/* Right Area: Framed Window Pane (Fixed Outer Frame with Permanent Top/Bottom Rounded Borders) */}
+        <div className="flex-1 min-w-0 h-full min-h-0 flex flex-col pl-0.5 pr-3 sm:pr-4 pb-3 sm:pb-4">
+          <div className="flex-1 min-w-0 min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none">
+            {/* Scrollable Viewport: Content scrolls smoothly inside the fixed frame */}
+            <div
+              ref={scrollContainerRef}
+              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col scrollbar-thin"
+            >
+              {/* Mobile Game Top Pills (for mobile viewport only) */}
+              <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
-            {/* Main Stage Content (Extra bottom padding before footer as requested) */}
-            <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-24 sm:pb-36">
-              {children}
-            </main>
+              {/* Main Stage Content */}
+              <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-20 sm:pb-28">
+                {children}
+              </main>
 
-            {/* Professional Esports Legal Footer */}
-            <Footer />
+              {/* Professional Esports Legal Footer */}
+              <Footer />
 
-            {/* Instant Scroll to Top Button */}
-            <ScrollToTop targetRef={scrollContainerRef} />
+              {/* Instant Scroll to Top Button */}
+              <ScrollToTop targetRef={scrollContainerRef} />
+            </div>
           </div>
         </div>
       </div>

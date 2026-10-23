@@ -30,7 +30,7 @@ export const GameView: React.FC = () => {
   useEffect(() => {
     if (game) {
       localStorage.setItem('ragetv_last_game', game.slug);
-      document.title = `${game.name} - RageTV – Live e-sports streams`;
+      document.title = `${game.name} - RageTV – Live Esports Streams`;
     }
   }, [game, i18n.language]);
 

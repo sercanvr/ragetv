@@ -8,7 +8,6 @@ export interface HistoricalChampion {
 export const HISTORICAL_CHAMPIONS: Record<string, HistoricalChampion[]> = {
   cs2: [
     { year: 2025, teamName: 'Team Vitality', tournament: 'BLAST.tv Austin Major', logoUrl: '/teams/vitality.png' },
-    { year: 2024, teamName: 'Team Spirit', tournament: 'Perfect World Shanghai Major', logoUrl: '/teams/spirit.png' },
     { year: 2024, teamName: 'Natus Vincere', tournament: 'PGL Major Copenhagen', logoUrl: '/teams/navi.png' },
     { year: 2023, teamName: 'Team Vitality', tournament: 'BLAST.tv Paris Major', logoUrl: '/teams/vitality.png' },
     { year: 2022, teamName: 'FaZe Clan', tournament: 'PGL Major Antwerp', logoUrl: '/teams/faze.png' },
