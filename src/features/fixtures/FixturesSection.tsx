@@ -5,7 +5,6 @@ import { useFixtures } from './useFixtures';
 import { FixtureCard } from './FixtureCard';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { PopButton } from '@/components/ui/PopButton';
-import { cn } from '@/lib/utils';
 
 interface FixturesSectionProps {
   gameSlug: string;

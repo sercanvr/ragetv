@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { PopButton } from '@/components/ui/PopButton';
 import { EmbedPlayer } from './EmbedPlayer';
-import { cn, formatViewerCount } from '@/lib/utils';
+import { formatViewerCount } from '@/lib/utils';
 import { useVod } from '@/features/vod/useVod';
 
 interface PlayerStageProps {

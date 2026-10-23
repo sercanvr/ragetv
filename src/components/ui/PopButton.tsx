@@ -16,31 +16,13 @@ export interface PopButtonProps
   color?: Color;
   size?: SizeVariant;
   children: React.ReactNode;
-  asChild?: boolean;
 }
-
-// Lightweight, type-safe Slot implementation
-const Slot = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement> & { children?: React.ReactNode }>(
-  ({ children, ...props }, ref) => {
-    if (React.isValidElement(children)) {
-      return React.cloneElement(children as React.ReactElement<any>, {
-        ...props,
-        ...(children.props as any),
-        ref,
-        className: cn(props.className, (children.props as any)?.className),
-      });
-    }
-    return null;
-  }
-);
-Slot.displayName = 'Slot';
 
 export const PopButton = React.forwardRef<HTMLButtonElement, PopButtonProps>(
   (
-    { className, color = 'default', size = 'default', children, asChild = false, ...props },
+    { className, color = 'default', size = 'default', children, ...props },
     ref,
   ) => {
-    const Comp = asChild ? (Slot as any) : 'button';
 
     const baseClasses =
       'inline-flex select-none transition-colors items-center justify-center whitespace-nowrap rounded-xl ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 active:border-b-2 active:translate-y-0.5 border-x-2 border-t-2 border-b-4 origin-bottom cursor-pointer font-medium';
@@ -67,7 +49,7 @@ export const PopButton = React.forwardRef<HTMLButtonElement, PopButtonProps>(
     };
 
     return (
-      <Comp
+      <button
         ref={ref}
         className={cn(
           baseClasses,
@@ -78,7 +60,7 @@ export const PopButton = React.forwardRef<HTMLButtonElement, PopButtonProps>(
         {...props}
       >
         {children}
-      </Comp>
+      </button>
     );
   },
 );
