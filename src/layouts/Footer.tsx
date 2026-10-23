@@ -23,9 +23,9 @@ export const Footer: React.FC = () => {
       {/* 2. Top Interior Ambient Radial Glow (Illuminates down into the center of the footer) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[950px] h-[280px] bg-[radial-gradient(ellipse_at_top,_rgba(216,64,64,0.30)_0%,_rgba(216,64,64,0.10)_45%,_transparent_75%)] pointer-events-none z-10 blur-2xl" />
 
-      {/* 3. Pure Vector SVG Curved Globe Horizon World Map (Flush Full Width, Zero PNG Raster) */}
+      {/* 3. Solid Curved Globe Horizon World Map (Flush Edge-to-Edge, Dual-Theme Compatible) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0">
-        <WorldMap className="w-full h-full text-neutral-900/[0.08] dark:text-white/[0.13]" />
+        <WorldMap className="w-full h-full text-neutral-900/[0.10] dark:text-white/[0.14]" />
       </div>
 
       <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 lg:gap-20 xl:gap-28 pb-10 text-sm text-muted-foreground">

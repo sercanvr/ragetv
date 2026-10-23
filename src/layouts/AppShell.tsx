@@ -255,8 +255,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           ref={scrollContainerRef}
           className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col pl-0.5"
         >
-          {/* Encased Window Pane: Independent Framed Canvas completely separated from scrollbar, fully displaying rounded-3xl corners */}
-          <div className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-sm dark:shadow-2xl mr-3 sm:mr-4 mb-3 sm:mb-4 relative">
+          {/* Encased Window Pane: Independent Framed Canvas completely separated from scrollbar, fully displaying rounded-3xl corners without external shadow */}
+          <div className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-none mr-3 sm:mr-4 mb-3 sm:mb-4 relative">
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
