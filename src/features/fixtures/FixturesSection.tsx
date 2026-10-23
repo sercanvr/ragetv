@@ -4,6 +4,7 @@ import { Calendar, CheckCircle2 } from 'lucide-react';
 import { useFixtures } from './useFixtures';
 import { FixtureCard } from './FixtureCard';
 import { Skeleton } from '@/components/ui/Skeleton';
+import { PopButton } from '@/components/ui/PopButton';
 import { cn } from '@/lib/utils';
 
 interface FixturesSectionProps {
@@ -29,38 +30,37 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
           </h2>
         </div>
 
-        {/* Tab Buttons */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep border border-surface-border">
-          <button
+        {/* Tab Buttons using PopButton */}
+        <div className="flex items-center gap-2 pt-0.5">
+          <PopButton
             onClick={() => setActiveTab('upcoming')}
-            className={cn(
-              'flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-semibold transition-all select-none',
-              activeTab === 'upcoming'
-                ? 'bg-brand text-white shadow-brand-glow'
-                : 'text-gray-400 hover:text-white'
-            )}
+            size="sm"
+            color={activeTab === 'upcoming' ? 'red' : 'default'}
+            className="flex-1 h-8 gap-1.5 text-xs font-semibold"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Yaklaşan</span>
             {upcomingMatches.length > 0 && (
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 text-white">
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 text-white ml-1">
                 {upcomingMatches.length}
               </span>
             )}
-          </button>
+          </PopButton>
 
-          <button
+          <PopButton
             onClick={() => setActiveTab('results')}
-            className={cn(
-              'flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-semibold transition-all select-none',
-              activeTab === 'results'
-                ? 'bg-brand text-white shadow-brand-glow'
-                : 'text-gray-400 hover:text-white'
-            )}
+            size="sm"
+            color={activeTab === 'results' ? 'red' : 'default'}
+            className="flex-1 h-8 gap-1.5 text-xs font-semibold"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Sonuçlar</span>
-          </button>
+            {resultMatches.length > 0 && (
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 text-white ml-1">
+                {resultMatches.length}
+              </span>
+            )}
+          </PopButton>
         </div>
       </div>
 

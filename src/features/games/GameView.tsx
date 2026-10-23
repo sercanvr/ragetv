@@ -9,6 +9,7 @@ import { FixturesSection } from '@/features/fixtures/FixturesSection';
 import { TeamLeaderboard } from '@/features/leaderboard/TeamLeaderboard';
 import { useLiveStatus } from '@/features/live/useLiveStatus';
 import { cn } from '@/lib/utils';
+import { PopButton } from '@/components/ui/PopButton';
 import { HistoricalChampions } from '@/features/champions/HistoricalChampions';
 
 export const GameView: React.FC = () => {
@@ -67,33 +68,27 @@ export const GameView: React.FC = () => {
 
   const renderSidePanel = () => (
     <div className="space-y-3 w-full">
-      {/* Tab Switcher Header */}
-      <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-deep/90 border border-surface-border/60 shadow-sm backdrop-blur-md">
-        <button
+      {/* Tab Switcher Header using PopButton */}
+      <div className="flex items-center gap-2">
+        <PopButton
           onClick={() => setActiveTab('fixtures')}
-          className={cn(
-            'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200',
-            activeTab === 'fixtures'
-              ? 'bg-brand text-white shadow-md shadow-brand/20'
-              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
-          )}
+          size="sm"
+          color={activeTab === 'fixtures' ? 'red' : 'default'}
+          className="flex-1 h-9 gap-2 text-xs font-semibold"
         >
           <Calendar className="w-3.5 h-3.5" />
           <span>Turnuva Fikstürü</span>
-        </button>
+        </PopButton>
 
-        <button
+        <PopButton
           onClick={() => setActiveTab('leaderboard')}
-          className={cn(
-            'flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200',
-            activeTab === 'leaderboard'
-              ? 'bg-brand text-white shadow-md shadow-brand/20'
-              : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
-          )}
+          size="sm"
+          color={activeTab === 'leaderboard' ? 'red' : 'default'}
+          className="flex-1 h-9 gap-2 text-xs font-semibold"
         >
           <Trophy className="w-3.5 h-3.5" />
           <span>Takım Sıralaması</span>
-        </button>
+        </PopButton>
       </div>
 
       {/* Tab Content Display */}

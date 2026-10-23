@@ -5,6 +5,7 @@ import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
 import { Skeleton } from '@/components/ui/Skeleton';
+import { PopButton } from '@/components/ui/PopButton';
 import { EmbedPlayer } from './EmbedPlayer';
 import { cn, formatViewerCount } from '@/lib/utils';
 import { useVod } from '@/features/vod/useVod';
@@ -41,16 +42,6 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
     return () => window.removeEventListener('ragetv:toggle-playback', handleKeyStart);
   }, [activeStream, isPlayingLive, isPlayingVod]);
 
-  // Precision Esports Corner Markers Component
-  const CornerAccents = () => (
-    <>
-      <span className="absolute top-1.5 left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[#D84040] rounded-tl-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
-      <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-[#D84040] rounded-tr-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
-      <span className="absolute bottom-1.5 left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-[#D84040] rounded-bl-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
-      <span className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#D84040] rounded-br-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
-    </>
-  );
-
   // 1. Live Stream Active State
   if (activeStream) {
     const streamUrl =
@@ -64,10 +55,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
     return (
       <section className="space-y-4 w-full transition-all duration-300">
-        {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel) */}
+        {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel, Clean Frame) */}
         <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
-          <CornerAccents />
-
           {isPlayingLive ? (
             <EmbedPlayer
               platform={activeStream.platform}
@@ -88,11 +77,11 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
                 }}
               />
 
-              {/* Minimalist Centered Play Button (Zero Distracting Description Text) */}
+              {/* Minimalist Centered Play Button (Zero Distracting Description Text, Zero Jump Hover) */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
                 <button
                   onClick={() => setIsPlayingLive(true)}
-                  className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_25px_rgba(216,64,64,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
                   aria-label="Start Live Stream"
                 >
                   <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
@@ -112,11 +101,12 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             <p className="text-xs sm:text-sm text-gray-400">{game.tagline}</p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             {onToggleTheater && (
-              <button
+              <PopButton
                 onClick={onToggleTheater}
-                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors cursor-pointer"
+                size="sm"
+                className="hidden lg:flex gap-1.5"
                 title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
               >
                 {isTheaterMode ? (
@@ -130,10 +120,10 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
                     <span>{t('tooltips.theaterMode') || 'Sinema Modu (T)'}</span>
                   </>
                 )}
-              </button>
+              </PopButton>
             )}
 
-            <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
+            <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-xl border border-surface-border">
               <Eye className="w-3.5 h-3.5 text-emerald-400" />
               <span>
                 {formatViewerCount(activeStream.viewers, i18n.language)} {t('player.viewers')}
@@ -193,10 +183,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
   return (
     <section className="space-y-4 w-full transition-all duration-300">
-      {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel) */}
+      {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel, Clean Frame) */}
       <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
-        <CornerAccents />
-
         {isPlayingVod ? (
           <EmbedPlayer
             platform="youtube"
@@ -216,11 +204,11 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               }}
             />
 
-            {/* Minimalist Centered Play Button (Zero Distracting Description Text) */}
+            {/* Minimalist Centered Play Button (Zero Distracting Description Text, Zero Jump Hover) */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
               <button
                 onClick={() => setIsPlayingVod(true)}
-                className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_25px_rgba(216,64,64,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
                 aria-label={t('player.playMatch')}
               >
                 <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
@@ -240,11 +228,12 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           <p className="text-xs sm:text-sm text-gray-400">{game.tagline}</p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {onToggleTheater && (
-            <button
+            <PopButton
               onClick={onToggleTheater}
-              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors cursor-pointer"
+              size="sm"
+              className="hidden lg:flex gap-1.5"
               title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
             >
               {isTheaterMode ? (
@@ -258,10 +247,10 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
                   <span>{t('tooltips.theaterMode') || 'Sinema Modu (T)'}</span>
                 </>
               )}
-            </button>
+            </PopButton>
           )}
 
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-full border border-surface-border">
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-xl border border-surface-border">
             <Trophy className="w-3.5 h-3.5 text-blue-400" />
             <span>Official Tournament VOD</span>
           </span>
