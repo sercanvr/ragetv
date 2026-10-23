@@ -17,17 +17,17 @@ Card/Border/Panel Dark: #1B1B1B / #292929
   --color-brand-muted: #8A1B1B;
   --color-brand-glow: rgba(216, 64, 64, 0.28);
 
-  /* Surface / Background Hierarchy (Dark default #121212) */
-  --color-bg-deep: #0D0D0D;
-  --color-bg-base: #121212;
-  --color-bg-surface: #181818;
-  --color-bg-card: #1B1B1B;
-  --color-bg-panel: #202020;
-  --color-bg-hover: #292929;
+  /* Surface / Background Hierarchy (Inverted: Inner Canvas is Deeper Black #0B0B0E, Outer Shell is Charcoal #16161A) */
+  --color-bg-deep: #16161A;
+  --color-bg-base: #0B0B0E;
+  --color-bg-surface: #121216;
+  --color-bg-card: #17171C;
+  --color-bg-panel: #1D1D23;
+  --color-bg-hover: #26262E;
 
   /* Borders & Dividers */
-  --color-border: #292929;
-  --color-border-subtle: #1F1F1F;
+  --color-border: #2A2A32;
+  --color-border-subtle: #1E1E24;
   --color-border-focus: #D84040;
 
   /* Text Hierarchy (#A7A7A7 text color) */
@@ -57,18 +57,18 @@ Card/Border/Panel Dark: #1B1B1B / #292929
   --bottombar-height: 64px;
 }
 
-/* Light Theme Variables (#FEFAF3 background, #525252 text) */
+/* Light Theme Variables (Inverted: Outer Shell is Whiter #FEFAF3, Inner Canvas is Cream #F5EFE6) */
 html.light,
 .light {
-  --color-bg-deep: #FAF6EE;
-  --color-bg-base: #FEFAF3;
+  --color-bg-deep: #FEFAF3;
+  --color-bg-base: #F5EFE6;
   --color-bg-surface: #FFFFFF;
   --color-bg-card: #FFFFFF;
-  --color-bg-panel: #F7F2EA;
-  --color-bg-hover: #EFE8DC;
+  --color-bg-panel: #EBE4D8;
+  --color-bg-hover: #E3DBCF;
 
-  --color-border: #E8E1D5;
-  --color-border-subtle: #F0EAE0;
+  --color-border: #DFD7CB;
+  --color-border-subtle: #E8E1D5;
   --color-border-focus: #D84040;
 
   --color-text-primary: #1F1F1F;

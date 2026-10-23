@@ -87,30 +87,30 @@ html.light {
 html.light,
 html.light body,
 html.light #root,
-html.light .bg-surface-base {
+html.light .bg-surface-deep {
   background-color: #FEFAF3 !important;
   color: #525252 !important;
 }
 
 html.light aside,
 html.light aside.bg-surface-deep {
-  background-color: #F5EFE6 !important;
-  border-color: #E8E1D5 !important;
+  background-color: #FEFAF3 !important;
+  border-color: #DFD7CB !important;
 }
 
-html.light .bg-surface-deep {
+html.light .bg-surface-base {
   background-color: #F5EFE6 !important;
-  border-color: #E8E1D5 !important;
+  border-color: #DFD7CB !important;
 }
 
 html.light .bg-surface-card {
   background-color: #FFFFFF !important;
-  border-color: #E8E1D5 !important;
+  border-color: #DFD7CB !important;
 }
 
 html.light .bg-surface-panel {
-  background-color: #F7F2EA !important;
-  border-color: #E8E1D5 !important;
+  background-color: #EBE4D8 !important;
+  border-color: #DFD7CB !important;
 }
 
 html.light .border-surface-border {

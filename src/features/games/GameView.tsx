@@ -30,9 +30,9 @@ export const GameView: React.FC = () => {
   useEffect(() => {
     if (game) {
       localStorage.setItem('ragetv_last_game', game.slug);
-      document.title = `${game.name} — RageTV | Turnuvanın Kalbi`;
+      document.title = `${game.name} - RageTV – Live e-sports streams`;
     }
-  }, [game]);
+  }, [game, i18n.language]);
 
   // Listen to Ctrl+T theater mode toggle
   useEffect(() => {
@@ -120,9 +120,6 @@ export const GameView: React.FC = () => {
             isTheaterMode={isTheaterMode}
             onToggleTheater={toggleTheater}
           />
-
-          {/* Historical Champions remains stable under player in both modes */}
-          <HistoricalChampions gameSlug={game.slug} />
         </div>
 
         {/* Side Panel: Smoothly expands/collapses width & opacity symmetrically without squishing children */}
@@ -140,7 +137,7 @@ export const GameView: React.FC = () => {
         </div>
       </div>
 
-      {/* In Theater Mode: Side Panel Flows Below Champions Centered with smooth height/opacity transition */}
+      {/* In Theater Mode: Side Panel Flows Below Player Centered with smooth height/opacity transition */}
       <div
         className={cn(
           'w-full max-w-4xl mx-auto pt-2 transition-all duration-300 ease-in-out overflow-hidden',
@@ -149,6 +146,9 @@ export const GameView: React.FC = () => {
       >
         {renderSidePanel()}
       </div>
+
+      {/* Historical Champions: Full Width Across Entire Container */}
+      <HistoricalChampions gameSlug={game.slug} />
     </div>
   );
 };

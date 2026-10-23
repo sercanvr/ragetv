@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="disclaimer" className="relative w-full border-t border-neutral-300/80 dark:border-white/[0.12] bg-surface-deep/95 mt-24 sm:mt-36 pt-20 pb-14 sm:pt-24 sm:pb-16 min-h-[460px] sm:min-h-[520px] flex flex-col justify-between px-6 sm:px-10 lg:px-12 overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
+    <footer id="disclaimer" className="relative w-full border-t border-neutral-300/80 dark:border-white/[0.12] bg-surface-base/95 mt-24 sm:mt-36 pt-20 pb-14 sm:pt-24 sm:pb-16 min-h-[460px] sm:min-h-[520px] flex flex-col justify-between px-6 sm:px-10 lg:px-12 overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
       {/* 1. Top Border Line Accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/60 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.5)] pointer-events-none z-10" />
 

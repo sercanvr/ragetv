@@ -47,7 +47,7 @@ export const PopButton = React.forwardRef<HTMLButtonElement, PopButtonProps>(
 
     const colors: Record<Color, string> = {
       default:
-        'bg-neutral-100 hover:bg-neutral-200/90 border-neutral-300 border-b-neutral-400 text-neutral-800 dark:bg-neutral-800/90 dark:hover:bg-neutral-700/90 dark:border-neutral-700 dark:border-b-neutral-950 dark:text-neutral-100 shadow-sm',
+        'bg-white hover:bg-neutral-100 border-neutral-300 border-b-neutral-400 text-neutral-800 dark:bg-[#242429] dark:hover:bg-[#2D2D34] dark:border-[#4A4A54] dark:border-b-[#121215] dark:text-white shadow-sm',
       red:
         'bg-[#D84040] hover:bg-[#E85252] border-[#D84040] border-b-[#8A1B1B] text-white shadow-sm shadow-[#D84040]/20',
       blue:
@@ -57,7 +57,7 @@ export const PopButton = React.forwardRef<HTMLButtonElement, PopButtonProps>(
       green:
         'bg-emerald-600 hover:bg-emerald-500 border-emerald-600 border-b-emerald-900 text-white shadow-sm',
       neutral:
-        'bg-neutral-200 hover:bg-neutral-300 border-neutral-400 border-b-neutral-500 text-neutral-900 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:border-b-black dark:text-neutral-200 shadow-sm',
+        'bg-neutral-100 hover:bg-neutral-200 border-neutral-300 border-b-neutral-400 text-neutral-900 dark:bg-[#1E1E23] dark:hover:bg-[#27272D] dark:border-[#42424C] dark:border-b-[#101012] dark:text-neutral-200 shadow-sm',
     };
 
     const sizes = {
