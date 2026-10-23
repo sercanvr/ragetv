@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, VolumeX, Maximize2, Minimize2 } from 'lucide-react';
+import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, Maximize2, Minimize2 } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
@@ -41,6 +41,16 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
     return () => window.removeEventListener('ragetv:toggle-playback', handleKeyStart);
   }, [activeStream, isPlayingLive, isPlayingVod]);
 
+  // Precision Esports Corner Markers Component
+  const CornerAccents = () => (
+    <>
+      <span className="absolute top-1.5 left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[#D84040] rounded-tl-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
+      <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-[#D84040] rounded-tr-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
+      <span className="absolute bottom-1.5 left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-[#D84040] rounded-bl-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
+      <span className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#D84040] rounded-br-xl pointer-events-none z-20 shadow-[0_0_8px_#D84040]" />
+    </>
+  );
+
   // 1. Live Stream Active State
   if (activeStream) {
     const streamUrl =
@@ -54,8 +64,46 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
     return (
       <section className="space-y-4 w-full transition-all duration-300">
-        {/* Game Title Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
+        {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel) */}
+        <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
+          <CornerAccents />
+
+          {isPlayingLive ? (
+            <EmbedPlayer
+              platform={activeStream.platform}
+              channelOrVideoId={activeStream.channel}
+              title={activeStream.title}
+              isLive={true}
+            />
+          ) : (
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
+              {/* Live Stream Poster Thumbnail */}
+              <img
+                src={liveThumbnail}
+                alt={activeStream.title}
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1280&q=80';
+                }}
+              />
+
+              {/* Minimalist Centered Play Button (Zero Distracting Description Text) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
+                <button
+                  onClick={() => setIsPlayingLive(true)}
+                  className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_25px_rgba(216,64,64,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  aria-label="Start Live Stream"
+                >
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 2. Game Title & Controls Bar (Moved Below Video Screen) */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
               <span>{game.name}</span>
@@ -68,7 +116,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             {onToggleTheater && (
               <button
                 onClick={onToggleTheater}
-                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors cursor-pointer"
                 title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
               >
                 {isTheaterMode ? (
@@ -94,56 +142,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           </div>
         </div>
 
-        {/* 16:9 Live Player OR Paused Facade (Prominent Dual-Theme Blurred Border) */}
-        <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border-2 border-surface-border shadow-[0_0_35px_-5px_rgba(216,64,64,0.25)] ring-1 ring-white/10 dark:ring-white/5 transition-all">
-          {isPlayingLive ? (
-            <EmbedPlayer
-              platform={activeStream.platform}
-              channelOrVideoId={activeStream.channel}
-              title={activeStream.title}
-              isLive={true}
-            />
-          ) : (
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
-              {/* Live Stream Poster Thumbnail */}
-              <img
-                src={liveThumbnail}
-                alt={activeStream.title}
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1280&q=80';
-                }}
-              />
-
-              {/* Gradient Overlay & Play Action (No Zoom Hover) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col items-center justify-center p-6 text-center">
-                <button
-                  onClick={() => setIsPlayingLive(true)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow"
-                  aria-label="Start Live Stream"
-                >
-                  <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white translate-x-0.5" />
-                </button>
-
-                <div className="mt-4 max-w-lg space-y-1.5">
-                  <Badge variant="live" className="mb-1">
-                    CANLI YAYIN BEKLEMEDE
-                  </Badge>
-                  <h2 className="text-base sm:text-xl font-bold text-white line-clamp-1">
-                    {activeStream.title}
-                  </h2>
-                  <p className="text-xs text-gray-300 flex items-center justify-center gap-1.5">
-                    <VolumeX className="w-3.5 h-3.5 text-gray-400" />
-                    Sürpriz ses olmaması için yayın duraklatıldı. Başlatmak için tıklayın.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Player Metadata Subbar */}
+        {/* 3. Player Metadata Subbar */}
         <div className="glass-panel rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand shrink-0">
@@ -185,8 +184,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
   if (isVodLoading && !vod) {
     return (
       <section className="space-y-4">
+        <Skeleton className="w-full aspect-video rounded-3xl" />
         <Skeleton className="h-10 w-64" />
-        <Skeleton className="w-full aspect-video rounded-2xl" />
         <Skeleton className="h-14 w-full rounded-xl" />
       </section>
     );
@@ -194,8 +193,45 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
   return (
     <section className="space-y-4 w-full transition-all duration-300">
-      {/* Game Title Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel) */}
+      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
+        <CornerAccents />
+
+        {isPlayingVod ? (
+          <EmbedPlayer
+            platform="youtube"
+            channelOrVideoId={fallbackVideoId}
+            title={vodTitle}
+            isLive={false}
+          />
+        ) : (
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
+            {/* Poster Image */}
+            <img
+              src={vodThumbnail}
+              alt={game.name}
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${fallbackVideoId}/hqdefault.jpg`;
+              }}
+            />
+
+            {/* Minimalist Centered Play Button (Zero Distracting Description Text) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
+              <button
+                onClick={() => setIsPlayingVod(true)}
+                className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_25px_rgba(216,64,64,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                aria-label={t('player.playMatch')}
+              >
+                <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 2. Game Title & Controls Bar (Moved Below Video Screen) */}
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
             <span>{game.name}</span>
@@ -208,7 +244,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           {onToggleTheater && (
             <button
               onClick={onToggleTheater}
-              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors"
+              className="hidden lg:flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-surface-card hover:bg-surface-panel px-3 py-1.5 rounded-full border border-surface-border transition-colors cursor-pointer"
               title={isTheaterMode ? (t('tooltips.normalMode') || 'Normal Ekran (T)') : (t('tooltips.theaterMode') || 'Sinema Modu (T)')}
             >
               {isTheaterMode ? (
@@ -232,55 +268,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
         </div>
       </div>
 
-      {/* VOD Player or Poster Facade (Prominent Dual-Theme Blurred Border) */}
-      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border-2 border-surface-border shadow-[0_0_35px_-5px_rgba(216,64,64,0.25)] ring-1 ring-white/10 dark:ring-white/5 transition-all">
-        {isPlayingVod ? (
-          <EmbedPlayer
-            platform="youtube"
-            channelOrVideoId={fallbackVideoId}
-            title={vodTitle}
-            isLive={false}
-          />
-        ) : (
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
-            {/* Poster Image */}
-            <img
-              src={vodThumbnail}
-              alt={game.name}
-              className="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${fallbackVideoId}/hqdefault.jpg`;
-              }}
-            />
-
-            {/* Gradient Overlay (No Zoom Hover) */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col items-center justify-center p-6 text-center">
-              <button
-                onClick={() => setIsPlayingVod(true)}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand hover:bg-brand-hover text-white flex items-center justify-center shadow-brand-glow"
-                aria-label={t('player.playMatch')}
-              >
-                <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white translate-x-0.5" />
-              </button>
-
-              <div className="mt-4 max-w-lg space-y-1">
-                <Badge variant="vod" className="mb-2">
-                  {t('player.vod')}
-                </Badge>
-                <h2 className="text-base sm:text-xl font-bold text-white line-clamp-1">
-                  {vodTitle}
-                </h2>
-                <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1.5">
-                  <VolumeX className="w-3.5 h-3.5 text-gray-400" />
-                  {t('player.noLiveDesc')} (Tıklayarak başlatabilirsiniz)
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Metadata Subbar */}
+      {/* 3. Metadata Subbar */}
       <div className="glass-panel rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400">
         <div className="flex items-center gap-2">
           <Calendar className="w-4 h-4 text-blue-400" />
@@ -299,3 +287,5 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
     </section>
   );
 };
+
+export default PlayerStage;

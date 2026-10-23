@@ -13,43 +13,48 @@ interface ChampionCardProps {
 
 const ChampionCard: React.FC<ChampionCardProps> = ({ champion }) => {
   return (
-    <div className="group relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden border border-surface-border bg-gradient-to-b from-surface-card/95 via-surface-card to-surface-deep/95 shadow-md hover:shadow-2xl hover:border-[#D84040]/60 transition-all duration-300 flex flex-col justify-between cursor-pointer select-none">
-      {/* Top Header: Year Badge & Championship Trophy Tag */}
-      <div className="relative z-10 p-3.5 sm:p-4 flex items-center justify-between">
-        <span className="font-display font-black text-xs sm:text-sm text-[#D84040] uppercase tracking-wider bg-[#D84040]/15 px-3 py-1 rounded-full border border-[#D84040]/30 shadow-sm flex items-center gap-1.5">
+    <div className="group relative h-80 sm:h-[340px] w-full rounded-[24px] overflow-hidden p-[2px] bg-gradient-to-br from-white/35 via-neutral-800/80 to-black/90 dark:from-white/30 dark:via-neutral-900/90 dark:to-neutral-950 border-2 border-neutral-500/50 dark:border-white/20 shadow-xl hover:shadow-[0_0_35px_rgba(216,64,64,0.4)] hover:border-[#D84040]/80 transition-all duration-300 flex flex-col justify-between cursor-pointer select-none">
+      {/* Top-Left Enhanced Specular Corner Gleam (Matching User Screenshot Spec) */}
+      <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-white/45 via-white/10 to-transparent pointer-events-none rounded-tl-[24px] blur-[1px] z-10" />
+      <div className="absolute -top-8 -left-8 w-28 h-28 bg-[#D84040]/30 rounded-full blur-2xl pointer-events-none z-10" />
+
+      {/* Atmospheric Background Watermark Logo */}
+      <div className="absolute inset-0 flex items-center justify-center p-6 overflow-hidden pointer-events-none opacity-10 dark:opacity-20">
+        <img
+          src={champion.logoUrl}
+          alt=""
+          className="w-56 h-56 object-contain filter blur-[1px] select-none"
+        />
+      </div>
+
+      {/* Top Header: Frosted Glass Year Badge & Trophy Status Pill */}
+      <div className="relative z-20 p-4 flex items-center justify-between">
+        <div className="relative px-3 py-1.5 rounded-[14px] bg-white/[0.12] dark:bg-white/[0.08] backdrop-blur-md border border-white/40 dark:border-white/25 shadow-sm flex items-center gap-1.5 text-xs font-bold font-display uppercase tracking-wider text-[#D84040]">
           <Sparkles className="w-3.5 h-3.5 text-[#D84040]" />
           <span>{champion.year}</span>
-        </span>
-        <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-muted-foreground bg-black/40 dark:bg-black/60 px-2.5 py-1 rounded-full border border-surface-border/60 flex items-center gap-1.5">
+        </div>
+        <span className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-muted-foreground bg-black/60 dark:bg-black/75 px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-1.5">
           <Trophy className="w-3.5 h-3.5 text-amber-400" />
           <span>ŞAMPİYON</span>
         </span>
       </div>
 
-      {/* Atmospheric Background Watermark Logo (Fills the Card Body completely) */}
-      <div className="absolute inset-0 flex items-center justify-center p-4 overflow-hidden pointer-events-none opacity-15 dark:opacity-25">
-        <img
-          src={champion.logoUrl}
-          alt=""
-          className="w-52 h-52 object-contain filter blur-[1px] select-none"
-        />
-      </div>
-
       {/* Center: Prominent Big Team Logo */}
-      <div className="relative z-10 flex-1 flex items-center justify-center p-4 -mt-2">
+      <div className="relative z-20 flex-1 flex items-center justify-center p-4 -mt-2">
         <img
           src={champion.logoUrl}
           alt={champion.teamName}
-          className="w-28 h-28 sm:w-36 sm:h-36 object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] select-none"
+          className="w-32 h-32 sm:w-36 sm:h-36 object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] select-none transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
-      {/* Bottom: Wide Horizontal Frosted Glass Blur Bar with Team Name */}
-      <div className="relative z-10 w-full px-4 py-3 bg-black/60 dark:bg-black/75 backdrop-blur-xl border-t border-white/10 dark:border-white/5 flex flex-col items-center justify-center text-center transition-colors group-hover:bg-black/70">
+      {/* Bottom: Sleek Team Name & Tournament with Center Divider */}
+      <div className="relative z-20 w-full px-5 py-3.5 bg-black/75 dark:bg-black/85 backdrop-blur-xl border-t border-white/10 flex flex-col items-center justify-center text-center">
         <h4 className="font-bold text-sm sm:text-base text-white tracking-wide truncate w-full group-hover:text-[#D84040] transition-colors">
           {champion.teamName}
         </h4>
-        <p className="text-[11px] sm:text-xs text-gray-300/85 dark:text-muted-foreground truncate w-full mt-0.5 font-medium">
+        <div className="w-full my-1.5 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+        <p className="text-[11px] sm:text-xs text-gray-300/85 dark:text-muted-foreground truncate w-full font-medium">
           {champion.tournament}
         </p>
       </div>
@@ -66,7 +71,17 @@ export const HistoricalChampions: React.FC<HistoricalChampionsProps> = ({ gameSl
   const latestYear = champions[0]?.year || 2025;
 
   return (
-    <section className="w-full space-y-5 pt-6 pb-12 sm:pb-16">
+    <section className="w-full space-y-6 pt-6 pb-12 sm:pb-16">
+      {/* Hidden SVG Filter for Radiant Frame Effects */}
+      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <filter id="turbulent-displace" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={3} result="noise" seed={1} />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale={6} xChannelSelector="R" yChannelSelector="B" />
+          </filter>
+        </defs>
+      </svg>
+
       {/* Title & Date Range Indicator */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -80,12 +95,20 @@ export const HistoricalChampions: React.FC<HistoricalChampionsProps> = ({ gameSl
         </span>
       </div>
 
-      {/* Responsive Downward Wrapping Wide Champions Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5 sm:gap-6">
-        {champions.map((item) => (
-          <ChampionCard key={`${item.year}-${item.teamName}-${item.tournament}`} champion={item} />
-        ))}
+      {/* Dashed Timeline Connector Track Tracking Across Cards */}
+      <div className="relative w-full">
+        {/* Horizontal Dashed Line (Eksi Eksi Çizgi) Behind Cards */}
+        <div className="hidden lg:block absolute top-[45%] left-2 right-2 h-0 border-t-2 border-dashed border-neutral-600/40 dark:border-white/15 pointer-events-none z-0" />
+
+        {/* Responsive Downward Wrapping Wide Champions Grid */}
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5 sm:gap-6">
+          {champions.map((item) => (
+            <ChampionCard key={`${item.year}-${item.teamName}-${item.tournament}`} champion={item} />
+          ))}
+        </div>
       </div>
     </section>
   );
 };
+
+export default HistoricalChampions;

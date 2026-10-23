@@ -35,7 +35,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
         onClick={onSelect}
         className={({ isActive }) =>
           cn(
-            'group relative flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 w-full overflow-hidden',
+            'group relative flex items-center gap-3 px-3 py-2.5 transition-none w-full overflow-hidden',
             isActive
               ? 'text-foreground font-semibold bg-black/[0.11] dark:bg-white/[0.15] backdrop-blur-md border-y border-black/10 dark:border-white/15 shadow-sm'
               : 'text-muted-foreground hover:text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border-y border-transparent'
@@ -51,7 +51,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
             )}
 
             {/* Game Logo in Liquid Glass Rounded Box with static indicator dot (No cheap red border on hover) */}
-            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-colors duration-200">
+            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-none">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}

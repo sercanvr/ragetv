@@ -16,16 +16,16 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="disclaimer" className="relative w-full border-t border-surface-border bg-surface-deep/95 mt-24 sm:mt-36 pt-20 pb-14 sm:pt-24 sm:pb-16 min-h-[460px] sm:min-h-[520px] flex flex-col justify-between px-6 sm:px-10 lg:px-12 overflow-hidden">
+    <footer id="disclaimer" className="relative w-full border-t border-neutral-300/80 dark:border-white/[0.12] bg-surface-deep/95 mt-24 sm:mt-36 pt-20 pb-14 sm:pt-24 sm:pb-16 min-h-[460px] sm:min-h-[520px] flex flex-col justify-between px-6 sm:px-10 lg:px-12 overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
       {/* 1. Top Border Line Accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-[#D84040]/60 to-transparent shadow-[0_0_15px_rgba(216,64,64,0.5)] pointer-events-none z-10" />
 
       {/* 2. Top Interior Ambient Radial Glow (Illuminates down into the center of the footer) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[950px] h-[280px] bg-[radial-gradient(ellipse_at_top,_rgba(216,64,64,0.30)_0%,_rgba(216,64,64,0.10)_45%,_transparent_75%)] pointer-events-none z-10 blur-2xl" />
 
-      {/* 3. Solid Curved Globe Horizon World Map (Flush Edge-to-Edge, Dual-Theme Compatible) */}
+      {/* 3. Solid Curved Globe Horizon World Map (Flush Edge-to-Edge, Embedded Subtle Opacity) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center z-0">
-        <WorldMap className="w-full h-full text-neutral-900/[0.10] dark:text-white/[0.14]" />
+        <WorldMap className="w-full h-full text-neutral-900/[0.05] dark:text-white/[0.07]" />
       </div>
 
       <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 lg:gap-20 xl:gap-28 pb-10 text-sm text-muted-foreground">

@@ -7,22 +7,22 @@ interface WorldMapProps {
 
 /**
  * Authentic Curved Globe Horizon World Map (Solid Flat Silhouette)
- * - Faithfully reproduces the curved globe horizon silhouette matching user specifications.
+ * - High-DPI 2044x1086 supersampled Hermite smoothstep anti-aliasing.
  * - Flat solid continents (zero dotted patterns, zero interactive pins or distracting tooltips).
- * - 100% responsive and dual-theme native via CSS mask-image and currentColor.
- * - Automatically inherits foreground/text color with smooth theme transitions.
+ * - Instantaneous theme switching without flicker or laggy transitions.
+ * - Fully masked and clipped to prevent any protrusion outside parent borders.
  */
 export const WorldMap: React.FC<WorldMapProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        'w-full h-full select-none pointer-events-none relative flex items-center justify-center',
+        'w-full h-full select-none pointer-events-none relative flex items-center justify-center overflow-hidden',
         className
       )}
       aria-hidden="true"
     >
       <div
-        className="w-full h-full bg-current transition-colors duration-300"
+        className="w-full h-full bg-current transition-none"
         style={{
           maskImage: 'url(/world-map.png)',
           WebkitMaskImage: 'url(/world-map.png)',

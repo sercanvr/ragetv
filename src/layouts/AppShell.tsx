@@ -227,7 +227,26 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               className="h-8 w-8 flex items-center justify-center rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
               aria-label="Toggle Theme"
             >
-              <i className="fa-solid fa-circle-half-stroke text-xs text-foreground" aria-hidden="true" />
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 text-foreground"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z"
+                  fill="currentColor"
+                />
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                  fill="currentColor"
+                />
+              </svg>
             </button>
 
             {/* Tooltip with Brand Accent #D84040 */}
@@ -255,8 +274,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           ref={scrollContainerRef}
           className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col pl-0.5"
         >
-          {/* Encased Window Pane: Independent Framed Canvas completely separated from scrollbar, fully displaying rounded-3xl corners without external shadow */}
-          <div className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-surface-border shadow-none mr-3 sm:mr-4 mb-3 sm:mb-4 relative">
+          {/* Encased Window Pane: Independent Framed Canvas completely separated from scrollbar, fully displaying rounded-3xl corners with overflow-hidden and luminous border */}
+          <div className="flex-1 flex flex-col min-w-0 rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] shadow-none mr-3 sm:mr-4 mb-3 sm:mb-4 relative overflow-hidden">
             {/* Mobile Game Top Pills (for mobile viewport only) */}
             <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
