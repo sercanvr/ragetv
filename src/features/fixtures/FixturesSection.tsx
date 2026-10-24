@@ -19,7 +19,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
   const resultMatches = data?.results || [];
 
   return (
-    <div className="glass-panel rounded-2xl p-4 sm:p-5 space-y-4 w-full">
+    <div className="glass-panel rounded-2xl p-4 sm:p-5 space-y-4 w-full border-[1.5px] border-neutral-400/90 dark:border-white/[0.22]">
       {/* Panel Title & Tabs */}
       <div className="space-y-3 border-b border-surface-border pb-3">
         <div className="flex items-center justify-between">
@@ -72,9 +72,9 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
         </div>
       )}
 
-      {/* Match Cards Vertical List (Consistent stable min-height prevents height jumps on tab switch) */}
+      {/* Match Cards Vertical List (Locked exact height prevents any jump between Upcoming and Results) */}
       {!isLoading && (
-        <div className="space-y-3 min-h-[400px] max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-2.5 h-[470px] overflow-y-auto pr-1">
           {activeTab === 'upcoming' ? (
             upcomingMatches.length > 0 ? (
               upcomingMatches.map((match) => (

@@ -104,7 +104,7 @@ export const GameView: React.FC = () => {
   return (
     <div className="w-full flex flex-col gap-6">
       {/* Top Section: Player Stage + Side Panel with Ultra-Smooth Cubic-Bezier Transitions */}
-      <div className="w-full flex flex-col 2xl:flex-row gap-6 items-start justify-center">
+      <div className="w-full flex flex-col xl:flex-row gap-6 items-start justify-center">
         {/* Main Screen Stage: Smoothly centers and scales with zero frame jump */}
         <div
           className={cn(
@@ -128,11 +128,11 @@ export const GameView: React.FC = () => {
           className={cn(
             'shrink-0 overflow-hidden transition-[width,opacity,margin] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]',
             isTheaterMode
-              ? 'hidden 2xl:block 2xl:w-0 2xl:opacity-0 2xl:pointer-events-none 2xl:m-0'
-              : 'w-full 2xl:w-[440px] opacity-100'
+              ? 'hidden xl:block xl:w-0 xl:opacity-0 xl:pointer-events-none xl:m-0'
+              : 'w-full xl:w-[410px] 2xl:w-[440px] opacity-100'
           )}
         >
-          <div className="w-full 2xl:w-[440px]">
+          <div className="w-full xl:w-[410px] 2xl:w-[440px]">
             {renderSidePanel()}
           </div>
         </div>

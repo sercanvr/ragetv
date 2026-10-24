@@ -21,7 +21,7 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
       <ChampionTicket champion={data.champion} />
 
       {/* Leaderboard Table / Rankings (Referans Görsel 3) */}
-      <div className="glass-panel rounded-2xl p-4 sm:p-5 space-y-3">
+      <div className="glass-panel rounded-2xl p-4 sm:p-5 space-y-3 border-[1.5px] border-neutral-400/90 dark:border-white/[0.22]">
         {/* Header Row */}
         <div className="flex items-center justify-between border-b border-surface-border pb-3">
           <div className="flex items-center gap-2">
