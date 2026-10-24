@@ -26,7 +26,7 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
         <div className="flex items-center justify-between border-b border-surface-border pb-3">
           <div className="flex items-center gap-2">
             <Trophy className="w-4 h-4 text-amber-400" />
-            <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
+            <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-gradient-title">
               {t('leaderboard.title') || 'Dünya Takım Sıralaması (Top 10)'}
             </h3>
           </div>

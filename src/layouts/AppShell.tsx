@@ -6,7 +6,7 @@ import {
   Menu,
   X,
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
@@ -26,6 +26,7 @@ const LANGUAGES = [
 
 export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) => {
   const { i18n, t } = useTranslation();
+  const location = useLocation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const externalScrollRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
@@ -58,6 +59,17 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Instant Scroll-to-Top on Game/Route Change or Language Change
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+    if (externalScrollRef.current) {
+      externalScrollRef.current.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, [location.pathname, i18n.language]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -151,6 +163,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   const selectTheme = (theme: 'dark' | 'light') => {
     const isLightMode = theme === 'light';
     setIsLight(isLightMode);
+    document.documentElement.classList.add('disable-transitions');
     if (isLightMode) {
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
@@ -160,6 +173,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
       document.documentElement.classList.remove('light');
       localStorage.setItem('ragetv_theme', 'dark');
     }
+    // Force reflow and restore transitions
+    window.getComputedStyle(document.documentElement).opacity;
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('disable-transitions');
+    });
   };
 
   const selectLanguage = (code: string) => {
@@ -222,9 +240,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   return (
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
       {/* Top Navbar — Unified Roof Frame (Seamlessly connected with sidebar as single frame) */}
-      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50 shadow-none relative">
-        {/* Left: Desktop Sidebar Toggle (Kick style) + Standalone Brand Logo */}
-        <div className="flex items-center shrink-0 px-2 py-1">
+      <header className="h-14 shrink-0 pl-1.5 pr-3 sm:pl-2 sm:pr-4 flex items-center justify-between bg-surface-deep z-50 shadow-none relative">
+        {/* Left: Desktop Sidebar Toggle (Kick style) + Standalone Brand Logo (Flush with Sidebar) */}
+        <div className="flex items-center shrink-0 pl-0 pr-2 py-1">
           {/* Desktop Sidebar Toggle Button to the left of the Logo */}
           <button
             onClick={toggleSidebar}
@@ -235,7 +253,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             <Menu className="w-4 h-4" />
           </button>
 
-          {/* Brand Logo with Pronounced Shadow */}
+          {/* Brand Logo with Sharp Black Shadow */}
           <div
             onClick={handleLogoClick}
             className="flex items-center cursor-pointer hover:opacity-85 active:opacity-60 transition-opacity"
@@ -244,7 +262,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             <img
               src="/logos/rtv-logo.png"
               alt="RageTV"
-              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_1px_4px_rgba(216,64,64,0.6)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] drop-shadow-[0_1px_1px_rgba(0,0,0,0.95)]"
             />
           </div>
         </div>
@@ -350,9 +368,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           </button>
         </div>
 
-        {/* Mobile Fullscreen Menu (Appears under navbar, auto-closes on any selection, locks body scroll) */}
+        {/* Mobile Fullscreen Menu (Solid non-blurred background, auto-closes on selection, locks body scroll) */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-14 z-[100] bg-surface-deep/95 backdrop-blur-2xl border-t border-surface-border p-5 overflow-y-auto flex flex-col gap-6 animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="lg:hidden fixed inset-0 top-14 z-[100] bg-surface-deep border-t border-surface-border p-5 overflow-y-auto flex flex-col gap-6 animate-in fade-in slide-in-from-top-2 duration-150">
             {/* 1. Games List */}
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80 px-1">
@@ -483,16 +501,22 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
         <div className="flex-1 min-w-0 h-full min-h-0 flex px-2 sm:px-3 lg:px-0 lg:pl-0.5 pb-2.5 sm:pb-3.5 relative">
           {/* Framed Window Pane Canvas: Ambient Esports Arena Background, Thicker Defined Border, Breathing Room */}
           <div className="right-content-frame right-content-canvas flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl border-[1.5px] border-neutral-400/90 dark:border-white/[0.22] overflow-hidden relative shadow-none mr-0 lg:mr-2.5">
+            {/* Top Ambient Roof Gradient Fade */}
+            <div className="pointer-events-none absolute top-0 left-0 right-0 h-10 sm:h-14 bg-gradient-to-b from-black/25 dark:from-black/40 to-transparent z-10" />
+
             {/* Scrollable Viewport inside the frame: Content scrolls smoothly without any inner scrollbar touching the radius */}
             <div
               ref={scrollContainerRef}
-              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col no-scrollbar"
+              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col no-scrollbar relative"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {/* Main Stage Content (Even padding on mobile without horizontal overflow) */}
-              <main className="flex-1 w-full max-w-[1700px] mx-auto px-2.5 py-4 sm:p-6 lg:p-7 pb-20 sm:pb-28">
+              <main className="flex-1 w-full max-w-[1700px] mx-auto px-2.5 py-4 sm:p-6 lg:p-7 pb-12 sm:pb-16">
                 {children}
               </main>
+
+              {/* Ambient Floor Gradient Fade Above Footer */}
+              <div className="w-full h-14 sm:h-16 bg-gradient-to-t from-[#121216] dark:from-[#121216] to-transparent pointer-events-none shrink-0" />
 
               {/* Professional Esports Legal Footer */}
               <Footer />

@@ -248,8 +248,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
       {/* 2. Game Title & Controls Bar (Moved Below Video Screen) */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
-            <span>{game.name}</span>
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2.5">
+            <span className="text-gradient-title">{game.name}</span>
           </h1>
         </div>
 

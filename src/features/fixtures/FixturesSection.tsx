@@ -23,9 +23,9 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
       {/* Panel Title & Tabs */}
       <div className="space-y-3 border-b border-surface-border pb-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+          <h2 className="text-sm font-bold uppercase tracking-wider flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand" />
-            {t('fixtures.title') || 'Turnuva Fikstürü & Sonuçlar'}
+            <span className="text-gradient-title">{t('fixtures.title') || 'Turnuva Fikstürü & Sonuçlar'}</span>
           </h2>
         </div>
 
@@ -72,9 +72,9 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
         </div>
       )}
 
-      {/* Match Cards Vertical List */}
+      {/* Match Cards Vertical List (Consistent stable min-height prevents height jumps on tab switch) */}
       {!isLoading && (
-        <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-3 min-h-[400px] max-h-[600px] overflow-y-auto pr-1">
           {activeTab === 'upcoming' ? (
             upcomingMatches.length > 0 ? (
               upcomingMatches.map((match) => (

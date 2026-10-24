@@ -286,3 +286,39 @@ html.light .right-content-canvas {
   background-size: 100% 100%, 100% 100%, 24px 24px;
 }
 
+/* Instant Zero-Lag Theme Switching */
+.disable-transitions,
+.disable-transitions *,
+.disable-transitions *::before,
+.disable-transitions *::after {
+  transition: none !important;
+}
+
+/* Solid Opaque Footer Backgrounds (Prevents cross pattern from bleeding into footer) */
+footer#disclaimer,
+.footer-solid-bg {
+  background-color: #121216 !important;
+}
+
+html.light footer#disclaimer,
+html.light .footer-solid-bg {
+  background-color: #F5EFE6 !important;
+}
+
+/* Premium Vertical Degradé Title Text Color (Darker bottom, brighter top) */
+.text-gradient-title {
+  background: linear-gradient(180deg, #FFFFFF 0%, #B8B8C2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+html.light .text-gradient-title {
+  background: linear-gradient(180deg, #18181B 0%, #52525B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+

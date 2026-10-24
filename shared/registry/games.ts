@@ -74,6 +74,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
       { platform: 'twitch', login: 'riotgames', label: 'Riot Games', language: 'en', official: true, priority: 1 },
       { platform: 'twitch', login: 'lec', label: 'LEC Official', language: 'en', official: true, priority: 2 },
       { platform: 'twitch', login: 'lck', label: 'LCK Global', language: 'en', official: true, priority: 3 },
+      { platform: 'youtube', login: 'LoLespor', label: 'LoL Esports TR', language: 'tr', official: true, priority: 4 },
     ],
     vodSource: {
       platform: 'youtube',
