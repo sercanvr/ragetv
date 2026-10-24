@@ -248,14 +248,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
       <header className="h-14 shrink-0 pl-1.5 pr-3 sm:pl-2 sm:pr-4 flex items-center justify-between bg-surface-deep z-50 shadow-none relative">
         {/* Left: Desktop Sidebar Toggle (Kick style) + Standalone Brand Logo (Flush with Sidebar) */}
         <div className="flex items-center shrink-0 pl-0 pr-2 py-1">
-          {/* Desktop Sidebar Toggle Button to the left of the Logo */}
+          {/* Desktop Sidebar Toggle Button to the left of the Logo (Transparent by default, border and bg on hover) */}
           <button
             onClick={toggleSidebar}
-            className="hidden lg:flex items-center justify-center p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-foreground/5 active:scale-95 transition-all cursor-pointer mr-2.5 border border-surface-border"
+            className="hidden lg:flex items-center justify-center p-2 rounded-xl text-foreground/85 hover:text-foreground bg-transparent border border-transparent hover:border-surface-border hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all duration-150 cursor-pointer mr-2"
             title={isCollapsed ? 'Kenar Çubuğunu Aç (B)' : 'Kenar Çubuğunu Daralt (B)'}
             aria-label="Toggle Sidebar"
           >
-            <Menu className="w-4 h-4" />
+            <Menu className="w-5 h-5 stroke-[2.2]" />
           </button>
 
           {/* Brand Logo with Sharp Black Shadow */}
@@ -405,8 +405,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                         <span>{game.name}</span>
                       </div>
                       {isLive && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#D84040] text-white">
-                          LIVE
+                        <span className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#D84040] text-white animate-pulse">
+                          {t('player.live') || 'CANLI'}
                         </span>
                       )}
                     </NavLink>
@@ -554,10 +554,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             <div
               ref={scrollContainerRef}
               className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col no-scrollbar relative"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+              }}
             >
               {/* Inner content wrapper measured by ResizeObserver for 100% accurate height & mobile scrolling */}
-              <div ref={contentInnerRef} className="w-full flex flex-col min-h-full pb-24 sm:pb-16">
+              <div ref={contentInnerRef} className="w-full flex flex-col min-h-full pb-36 sm:pb-20">
                 {/* Main Stage Content (Even padding on mobile without horizontal overflow) */}
                 <main className="flex-1 w-full max-w-[1700px] mx-auto px-2.5 py-4 sm:p-6 lg:p-7 pb-12 sm:pb-16">
                   {children}

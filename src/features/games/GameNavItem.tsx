@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Crosshair, ShieldAlert, Target, Swords, Flame, LucideIcon } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { cn } from '@/lib/utils';
@@ -26,6 +27,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
   isLive = false,
   onSelect,
 }) => {
+  const { t } = useTranslation();
   const FallbackIcon = ICON_MAP[game.icon] || Flame;
 
   return (
@@ -71,21 +73,25 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
                   'absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border-2 border-background',
                   isLive ? 'bg-[#D84040]' : 'bg-gray-400 dark:bg-gray-600'
                 )}
-                title={isLive ? 'Canlı Yayın Var' : 'Yayın Yok'}
+                title={isLive ? (t('player.live') || 'Canlı') : 'Offline'}
               />
             </div>
 
-            {/* Title & Live Status Badge (Clean, vertically centered, no redundant tagline) */}
+            {/* Title & Live Status Badge (Clean, vertically centered, responsive) */}
             <div
               className={cn(
-                'flex-1 min-w-0 flex items-center justify-between gap-1.5 transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
-                isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[160px] opacity-100'
+                'flex-1 min-w-0 flex items-center justify-between gap-1.5 transition-all duration-300 ease-in-out overflow-hidden',
+                isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'opacity-100'
               )}
             >
-              <span className="text-sm font-medium tracking-tight truncate">
+              <span className="text-sm font-medium tracking-tight truncate flex-1">
                 {game.name}
               </span>
-              {isLive && <Badge variant="live">LIVE</Badge>}
+              {isLive && (
+                <Badge variant="live" className="shrink-0 text-[10px] px-1.5 py-0.5 font-bold uppercase tracking-wider">
+                  {t('player.live') || 'CANLI'}
+                </Badge>
+              )}
             </div>
           </>
         )}

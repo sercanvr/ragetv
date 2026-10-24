@@ -51,7 +51,9 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
     const liveThumbnail =
       activeStream.thumbnailUrl ||
-      `https://static-cdn.jtvnw.net/previews-ttv/live_user_${activeStream.channel}-640x360.jpg`;
+      (activeStream.platform === 'twitch'
+        ? `https://static-cdn.jtvnw.net/previews-ttv/live_user_${activeStream.channel}-640x360.jpg`
+        : `https://i.ytimg.com/vi/${activeStream.channel}/hqdefault.jpg`);
 
     return (
       <section className="space-y-4 w-full transition-all duration-300">
@@ -154,7 +156,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
           </div>
 
           <a
-            href={livePlatformUrl}
+            href={streamUrl}
             target="_blank"
             rel="noreferrer"
             className="text-xs font-medium text-brand hover:text-brand-hover flex items-center gap-1.5 ml-auto"

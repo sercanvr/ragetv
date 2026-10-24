@@ -15,6 +15,8 @@ export const GAMES_REGISTRY: GameDefinition[] = [
       { platform: 'twitch', login: 'eslcs', label: 'ESL CS', language: 'en', official: true, priority: 1 },
       { platform: 'twitch', login: 'blastpremier', label: 'BLAST Premier', language: 'en', official: true, priority: 2 },
       { platform: 'twitch', login: 'pgl', label: 'PGL', language: 'en', official: true, priority: 3 },
+      { platform: 'youtube', login: 'ESLCS', label: 'ESL CS', language: 'en', official: true, priority: 4 },
+      { platform: 'youtube', login: 'BLASTPremier', label: 'BLAST Premier', language: 'en', official: true, priority: 5 },
     ],
     vodSource: {
       platform: 'youtube',
@@ -36,6 +38,8 @@ export const GAMES_REGISTRY: GameDefinition[] = [
       { platform: 'twitch', login: 'valorant_emea', label: 'VCT EMEA', language: 'en', official: true, priority: 2 },
       { platform: 'twitch', login: 'valorant_americas', label: 'VCT Americas', language: 'en', official: true, priority: 3 },
       { platform: 'twitch', login: 'valorant_pacific', label: 'VCT Pacific', language: 'en', official: true, priority: 4 },
+      { platform: 'youtube', login: 'ValorantEsports', label: 'VCT Official', language: 'en', official: true, priority: 5 },
+      { platform: 'youtube', login: 'VALORANTEsportsTR', label: 'VCT TR', language: 'tr', official: true, priority: 6 },
     ],
     vodSource: {
       platform: 'youtube',
@@ -54,6 +58,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
     tagline: 'Global Championship Battle Royale',
     channels: [
       { platform: 'twitch', login: 'pubg_battlegrounds', label: 'PUBG Esports', language: 'en', official: true, priority: 1 },
+      { platform: 'youtube', login: 'PUBGEsports', label: 'PUBG Esports', language: 'en', official: true, priority: 2 },
     ],
     vodSource: {
       platform: 'youtube',
@@ -75,6 +80,7 @@ export const GAMES_REGISTRY: GameDefinition[] = [
       { platform: 'twitch', login: 'lec', label: 'LEC Official', language: 'en', official: true, priority: 2 },
       { platform: 'twitch', login: 'lck', label: 'LCK Global', language: 'en', official: true, priority: 3 },
       { platform: 'youtube', login: 'LoLespor', label: 'LoL Esports TR', language: 'tr', official: true, priority: 4 },
+      { platform: 'youtube', login: 'lolesports', label: 'LoL Esports Global', language: 'en', official: true, priority: 5 },
     ],
     vodSource: {
       platform: 'youtube',
@@ -95,6 +101,8 @@ export const GAMES_REGISTRY: GameDefinition[] = [
       { platform: 'twitch', login: 'pgl_dota2', label: 'PGL Dota 2', language: 'en', official: true, priority: 1 },
       { platform: 'twitch', login: 'esl_dota2', label: 'ESL Dota 2', language: 'en', official: true, priority: 2 },
       { platform: 'twitch', login: 'dota2ti', label: 'The International', language: 'en', official: true, priority: 3 },
+      { platform: 'youtube', login: 'pgl_dota2', label: 'PGL Dota 2', language: 'en', official: true, priority: 4 },
+      { platform: 'youtube', login: 'dota2', label: 'Dota 2 Official', language: 'en', official: true, priority: 5 },
     ],
     vodSource: {
       platform: 'youtube',
