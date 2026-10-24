@@ -13,11 +13,7 @@ interface ChampionCardProps {
 
 const ChampionCard: React.FC<ChampionCardProps> = ({ champion }) => {
   return (
-    <div className="champion-card group relative h-80 sm:h-[350px] w-full rounded-[26px] overflow-hidden bg-[#131317] border-2 border-neutral-700/80 dark:border-white/15 hover:border-neutral-400 dark:hover:border-white/40 transition-colors duration-150 flex flex-col justify-between cursor-pointer select-none smooth-elevation-shadow">
-      {/* Diagram Timeline Node Connectors (Flush on Left & Right Edges) */}
-      <span className="hidden md:block absolute -left-[5px] top-[48%] -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#18181D] border-2 border-neutral-400 dark:border-white/40 z-30 pointer-events-none" />
-      <span className="hidden md:block absolute -right-[5px] top-[48%] -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#18181D] border-2 border-neutral-400 dark:border-white/40 z-30 pointer-events-none" />
-
+    <div className="champion-card group relative h-80 sm:h-[350px] w-full rounded-[26px] overflow-hidden bg-[#131317] border-2 border-neutral-700/80 dark:border-white/15 hover:border-neutral-400 dark:hover:border-white/40 transition-colors duration-150 flex flex-col justify-between cursor-pointer select-none shadow-[0_2px_4px_rgba(0,0,0,0.85),0_1px_2px_rgba(0,0,0,0.95)]">
       {/* Top-Left Specular Corner Sheen Reflection (Zero Blur) */}
       <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-white/15 via-white/5 to-transparent pointer-events-none rounded-tl-[24px] z-10" />
 
@@ -47,12 +43,12 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ champion }) => {
         </div>
       </div>
 
-      {/* Center: Prominent Big Team Logo (Stationary, Zero Jumping on Hover) */}
+      {/* Center: Prominent Big Team Logo (Stationary, Sharp Black Drop-Shadow) */}
       <div className="relative z-20 flex-1 flex items-center justify-center p-4 -mt-2">
         <img
           src={champion.logoUrl}
           alt={champion.teamName}
-          className="w-28 h-28 sm:w-32 sm:h-32 object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)] select-none"
+          className="w-28 h-28 sm:w-32 sm:h-32 object-contain filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] drop-shadow-[0_1px_1px_rgba(0,0,0,0.95)] select-none"
         />
       </div>
 
@@ -90,12 +86,8 @@ export const HistoricalChampions: React.FC<HistoricalChampionsProps> = ({ gameSl
         </span>
       </div>
 
-      {/* Dashed Timeline Connector Track Behind Cards */}
+      {/* Champions Grid */}
       <div className="relative w-full">
-        {/* Prominent Horizontal Dashed Diagram Line (Eksi Eksi Çizgi) Connecting Cards */}
-        <div className="hidden md:block absolute top-[48%] left-4 right-4 h-0 border-t-2 border-dashed border-neutral-400/90 dark:border-white/35 pointer-events-none z-0" />
-
-        {/* Responsive Downward Wrapping Wide Champions Grid with Generous Spacing for Diagram Lines */}
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-7 sm:gap-8 lg:gap-9">
           {champions.map((item) => (
             <ChampionCard key={`${item.year}-${item.teamName}-${item.tournament}`} champion={item} />

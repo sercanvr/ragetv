@@ -28,6 +28,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   const { i18n, t } = useTranslation();
   const location = useLocation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const contentInnerRef = useRef<HTMLDivElement>(null);
   const externalScrollRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -86,15 +87,17 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   // Observe content height for exact proportional external scrollbar track
   useEffect(() => {
     const updateHeight = () => {
-      if (scrollContainerRef.current) {
+      if (contentInnerRef.current) {
+        setContentHeight(contentInnerRef.current.scrollHeight);
+      } else if (scrollContainerRef.current) {
         setContentHeight(scrollContainerRef.current.scrollHeight);
       }
     };
     updateHeight();
 
-    if (typeof ResizeObserver !== 'undefined' && scrollContainerRef.current) {
+    if (typeof ResizeObserver !== 'undefined' && contentInnerRef.current) {
       const ro = new ResizeObserver(updateHeight);
-      ro.observe(scrollContainerRef.current);
+      ro.observe(contentInnerRef.current);
       return () => ro.disconnect();
     }
   }, []);
@@ -109,6 +112,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
     let isSyncingOuter = false;
 
     const handleInnerScroll = () => {
+      if (window.innerWidth < 1024 || !outer.clientHeight) return;
       if (isSyncingInner) {
         isSyncingInner = false;
         return;
@@ -118,6 +122,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
     };
 
     const handleOuterScroll = () => {
+      if (window.innerWidth < 1024 || !outer.clientHeight) return;
       if (isSyncingOuter) {
         isSyncingOuter = false;
         return;
@@ -174,7 +179,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
       localStorage.setItem('ragetv_theme', 'dark');
     }
     // Force reflow and restore transitions
-    window.getComputedStyle(document.documentElement).opacity;
+    void document.documentElement.offsetHeight;
     requestAnimationFrame(() => {
       document.documentElement.classList.remove('disable-transitions');
     });
@@ -465,7 +470,29 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       : 'border-surface-border text-muted-foreground hover:text-foreground hover:bg-white/5'
                   )}
                 >
-                  <span className="flex items-center gap-2">🌙 Koyu Tema</span>
+                  <span className="flex items-center gap-2">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-3.5 h-3.5 text-foreground"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    Koyu Tema
+                  </span>
                   {!isLight && <Check className="w-4 h-4 text-[#D84040]" />}
                 </button>
                 <button
@@ -480,7 +507,29 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
                       : 'border-surface-border text-muted-foreground hover:text-foreground hover:bg-white/5'
                   )}
                 >
-                  <span className="flex items-center gap-2">☀️ Açık Tema</span>
+                  <span className="flex items-center gap-2">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-3.5 h-3.5 text-foreground"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    Açık Tema
+                  </span>
                   {isLight && <Check className="w-4 h-4 text-[#D84040]" />}
                 </button>
               </div>
@@ -501,25 +550,22 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
         <div className="flex-1 min-w-0 h-full min-h-0 flex px-2 sm:px-3 lg:px-0 lg:pl-0.5 pb-2.5 sm:pb-3.5 relative">
           {/* Framed Window Pane Canvas: Ambient Esports Arena Background, Thicker Defined Border, Breathing Room */}
           <div className="right-content-frame right-content-canvas flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl border-[1.5px] border-neutral-400/90 dark:border-white/[0.22] overflow-hidden relative shadow-none mr-0 lg:mr-2.5">
-            {/* Top Ambient Roof Gradient Fade */}
-            <div className="pointer-events-none absolute top-0 left-0 right-0 h-10 sm:h-14 bg-gradient-to-b from-black/25 dark:from-black/40 to-transparent z-10" />
-
             {/* Scrollable Viewport inside the frame: Content scrolls smoothly without any inner scrollbar touching the radius */}
             <div
               ref={scrollContainerRef}
               className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col no-scrollbar relative"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {/* Main Stage Content (Even padding on mobile without horizontal overflow) */}
-              <main className="flex-1 w-full max-w-[1700px] mx-auto px-2.5 py-4 sm:p-6 lg:p-7 pb-12 sm:pb-16">
-                {children}
-              </main>
+              {/* Inner content wrapper measured by ResizeObserver for 100% accurate height & mobile scrolling */}
+              <div ref={contentInnerRef} className="w-full flex flex-col min-h-full pb-24 sm:pb-16">
+                {/* Main Stage Content (Even padding on mobile without horizontal overflow) */}
+                <main className="flex-1 w-full max-w-[1700px] mx-auto px-2.5 py-4 sm:p-6 lg:p-7 pb-12 sm:pb-16">
+                  {children}
+                </main>
 
-              {/* Ambient Floor Gradient Fade Above Footer */}
-              <div className="w-full h-14 sm:h-16 bg-gradient-to-t from-[#121216] dark:from-[#121216] to-transparent pointer-events-none shrink-0" />
-
-              {/* Professional Esports Legal Footer */}
-              <Footer />
+                {/* Professional Esports Legal Footer */}
+                <Footer />
+              </div>
 
               {/* Instant Scroll to Top Button */}
               <ScrollToTop targetRef={scrollContainerRef} />

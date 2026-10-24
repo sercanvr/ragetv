@@ -5,6 +5,7 @@ import { Stream, LiveStatusResponse } from '../../shared/schemas/stream';
 import { getServerEnv } from '../lib/env';
 import { CircuitBreaker } from '../lib/circuitBreaker';
 import { fetchTwitchLiveStreams } from '../providers/twitch/client';
+import { checkYouTubeChannelLive } from '../providers/youtube/client';
 
 export const liveRouter = new Hono();
 const twitchBreaker = new CircuitBreaker({ failureThreshold: 3, cooldownPeriodMs: 30_000 });
@@ -46,6 +47,28 @@ liveRouter.get('/', async (c) => {
     }
   }
 
+  // Check registered official YouTube channels for active live broadcasts
+  const allYouTubeChannels = GAMES_REGISTRY
+    .filter((g) => !isGameBlocked(g.id))
+    .flatMap((g) =>
+      g.channels
+        .filter((ch) => ch.platform === 'youtube' && !isChannelBlocked(ch.login))
+        .map((ch) => ({ gameId: g.id, login: ch.login, language: ch.language }))
+    );
+
+  const youtubeStreams: { gameId: string; stream: Stream }[] = [];
+
+  for (const yt of allYouTubeChannels) {
+    try {
+      const ytStream = await checkYouTubeChannelLive(yt.login, yt.language);
+      if (ytStream) {
+        youtubeStreams.push({ gameId: yt.gameId, stream: ytStream });
+      }
+    } catch {
+      // Ignore individual channel check failures
+    }
+  }
+
   // Group streams by game
   const gamesData: LiveStatusResponse['games'] = {};
 
@@ -54,9 +77,15 @@ liveRouter.get('/', async (c) => {
       .filter((ch) => ch.platform === 'twitch')
       .map((ch) => ch.login.toLowerCase());
 
-    const activeGameStreams = liveStreams.filter((stream) =>
+    const activeTwitchStreams = liveStreams.filter((stream) =>
       gameTwitchLogins.includes(stream.channel.toLowerCase())
     );
+
+    const activeYtStreams = youtubeStreams
+      .filter((item) => item.gameId === game.id)
+      .map((item) => item.stream);
+
+    const activeGameStreams = [...activeTwitchStreams, ...activeYtStreams];
 
     gamesData[game.slug] = {
       live: activeGameStreams,
