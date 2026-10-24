@@ -26,6 +26,8 @@ const LANGUAGES = [
 export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) => {
   const { i18n, t } = useTranslation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const externalScrollRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
 
   // 1. Sidebar Collapsed State (Default: Open / false, persisted in localStorage)
   const [isCollapsed, setIsCollapsed] = useState(() => {
@@ -54,6 +56,58 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   // Dropdown States (Language only)
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Observe content height for exact proportional external scrollbar track
+  useEffect(() => {
+    const updateHeight = () => {
+      if (scrollContainerRef.current) {
+        setContentHeight(scrollContainerRef.current.scrollHeight);
+      }
+    };
+    updateHeight();
+
+    if (typeof ResizeObserver !== 'undefined' && scrollContainerRef.current) {
+      const ro = new ResizeObserver(updateHeight);
+      ro.observe(scrollContainerRef.current);
+      return () => ro.disconnect();
+    }
+  }, []);
+
+  // Synchronize internal card scroll with the extreme-right native scrollbar
+  useEffect(() => {
+    const inner = scrollContainerRef.current;
+    const outer = externalScrollRef.current;
+    if (!inner || !outer) return;
+
+    let isSyncingInner = false;
+    let isSyncingOuter = false;
+
+    const handleInnerScroll = () => {
+      if (isSyncingInner) {
+        isSyncingInner = false;
+        return;
+      }
+      isSyncingOuter = true;
+      outer.scrollTop = inner.scrollTop;
+    };
+
+    const handleOuterScroll = () => {
+      if (isSyncingOuter) {
+        isSyncingOuter = false;
+        return;
+      }
+      isSyncingInner = true;
+      inner.scrollTop = outer.scrollTop;
+    };
+
+    inner.addEventListener('scroll', handleInnerScroll, { passive: true });
+    outer.addEventListener('scroll', handleOuterScroll, { passive: true });
+
+    return () => {
+      inner.removeEventListener('scroll', handleInnerScroll);
+      outer.removeEventListener('scroll', handleOuterScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('ragetv_theme');
@@ -269,13 +323,15 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Framed Window Pane (Fixed Outer Frame with Permanent Top/Bottom Rounded Borders) */}
-        <div className="flex-1 min-w-0 h-full min-h-0 flex flex-col pl-0.5 pr-2.5 sm:pr-3.5 pb-2.5 sm:pb-3.5">
-          <div className="flex-1 min-w-0 min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none">
-            {/* Scrollable Viewport: Content scrolls smoothly inside the fixed frame */}
+        {/* Right Area: Fixed Outer Container with Isolated Native Scrollbar at the Extreme Screen Edge */}
+        <div className="flex-1 min-w-0 h-full min-h-0 flex pl-0.5 relative">
+          {/* Framed Window Pane Canvas: Permanent Fixed Bezel at Top and Bottom, unclipped rounded-3xl corners */}
+          <div className="flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none mr-2 sm:mr-3 mb-2.5 sm:mb-3.5">
+            {/* Scrollable Viewport inside the frame: Content scrolls smoothly without any inner scrollbar touching the radius */}
             <div
               ref={scrollContainerRef}
-              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col"
+              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col no-scrollbar"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {/* Mobile Game Top Pills (for mobile viewport only) */}
               <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
@@ -291,6 +347,16 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               {/* Instant Scroll to Top Button */}
               <ScrollToTop targetRef={scrollContainerRef} />
             </div>
+          </div>
+
+          {/* Dedicated External Scrollbar Channel: Flush to the Window's Far Right Edge, completely detached from the card frame */}
+          <div
+            ref={externalScrollRef}
+            className="w-2 h-full overflow-y-auto overflow-x-hidden shrink-0 mr-0.5 mb-2.5 sm:mb-3.5"
+            style={{ overscrollBehavior: 'contain' }}
+            aria-hidden="true"
+          >
+            <div style={{ height: `${contentHeight}px`, width: '1px' }} />
           </div>
         </div>
       </div>

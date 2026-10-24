@@ -75,6 +75,17 @@
   background: #E85252;
 }
 
+/* Hide scrollbar for inner card container to keep corners pristine */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
 /* Glassmorphism Surface Utility */
 .glass-panel {
   background: rgba(20, 23, 30, 0.75);
