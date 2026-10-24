@@ -64,11 +64,19 @@ export async function checkYouTubeChannelLive(
     if (!res.ok) return null;
 
     const html = await res.text();
-    // YouTube embeds "isLive":true or canonical watch url when live
+    // YouTube embeds "isLive":true when it's a live video format.
+    // Crucially filter out scheduled upcoming streams and past streams that have ended:
     const isLive = html.includes('"isLive":true');
+    const isUpcoming =
+      html.includes('upcomingEventData') ||
+      html.includes('"status":"UPCOMING"') ||
+      html.includes('LIVE_STREAM_OFFLINE');
+    const hasEnded = html.includes('"endDate"');
+
+    const isTrulyLiveNow = isLive && !isUpcoming && !hasEnded;
     const videoMatch = html.match(/\/watch\?v=([a-zA-Z0-9_-]{11})/);
 
-    if (!isLive || !videoMatch || !videoMatch[1]) {
+    if (!isTrulyLiveNow || !videoMatch || !videoMatch[1]) {
       return null;
     }
 

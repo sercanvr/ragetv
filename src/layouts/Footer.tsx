@@ -54,9 +54,9 @@ export const Footer: React.FC = () => {
 
         {/* Column 2: Legal / Yasal & Telif Politikası in Center (Clean, No Enclosing Box, GitHub on Top) */}
         <div className="space-y-3.5">
-          <h4 className="inline-flex items-center gap-1.5 font-bold tracking-wider uppercase text-xs sm:text-sm">
+          <h4 className="inline-flex items-center gap-1.5 font-bold tracking-wider uppercase text-xs sm:text-sm text-neutral-900 dark:text-neutral-100">
             <ShieldCheck className="w-4 h-4 text-[#D84040]" />
-            <span className="text-gradient-title">Yasal & Telif Politikası</span>
+            <span>Yasal & Telif Politikası</span>
           </h4>
           <p className="leading-relaxed text-xs sm:text-sm text-foreground/80 dark:text-muted-foreground/90">
             RageTV, bağımsız ve ticari olmayan bir espor keşif sitesidir. Hiçbir video içeriğini barındırmaz, kaydetmez veya yeniden yayınlamaz. Canlı yayınlar ve videolar resmi gömülü oynatıcılar aracılığıyla gösterilir.
@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
 
         {/* Column 3: Official Platforms on the Far Right (Vertical List, No External Link Icons) */}
         <div className="space-y-3.5 flex flex-col items-start md:items-start">
-          <h4 className="font-bold tracking-wider uppercase text-xs sm:text-sm text-gradient-title">
+          <h4 className="font-bold tracking-wider uppercase text-xs sm:text-sm text-neutral-900 dark:text-neutral-100">
             Resmi Platformlar
           </h4>
           <ul className="flex flex-col gap-y-2 text-xs sm:text-sm">

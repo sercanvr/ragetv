@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Crosshair, ShieldAlert, Target, Swords, Flame, LucideIcon } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/Badge';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Crosshair,
@@ -77,21 +76,21 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               />
             </div>
 
-            {/* Title & Live Status Badge (Clean, vertically centered, responsive) */}
+            {/* Title: If live, title text turns red; no bulky badge taking up space on desktop */}
             <div
               className={cn(
-                'flex-1 min-w-0 flex items-center justify-between gap-1.5 transition-all duration-300 ease-in-out overflow-hidden',
+                'flex-1 min-w-0 flex items-center transition-all duration-300 ease-in-out overflow-hidden',
                 isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'opacity-100'
               )}
             >
-              <span className="text-sm font-medium tracking-tight truncate flex-1">
+              <span
+                className={cn(
+                  'text-sm font-medium tracking-tight truncate',
+                  isLive ? 'text-[#D84040] font-semibold' : ''
+                )}
+              >
                 {game.name}
               </span>
-              {isLive && (
-                <Badge variant="live" className="shrink-0 text-[10px] px-1.5 py-0.5 font-bold uppercase tracking-wider">
-                  {t('player.live') || 'CANLI'}
-                </Badge>
-              )}
             </div>
           </>
         )}
