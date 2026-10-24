@@ -186,8 +186,8 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
   return (
     <section className="space-y-4 w-full transition-all duration-300">
-      {/* 1. Video Player Container Top Flush (Thinner refined border with neutral corner sheen highlights) */}
-      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/40 backdrop-blur-xl border border-neutral-300/70 dark:border-white/10 shadow-none transition-all overflow-hidden">
+      {/* 1. Video Player Container Top Flush (Sleek single refined border with neutral corner sheen highlights) */}
+      <div className="relative rounded-2xl sm:rounded-3xl p-1 sm:p-1.5 bg-surface-card/40 backdrop-blur-xl border border-neutral-300/80 dark:border-white/10 shadow-none transition-all overflow-hidden">
         {/* Specular Ambient Corner Sheen (Neutral White, Not Accent Red) */}
         <div className="pointer-events-none absolute -top-10 -left-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
         <div className="pointer-events-none absolute -top-10 -right-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
@@ -202,7 +202,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             isLive={false}
           />
         ) : (
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-surface-card border border-surface-border group shadow-2xl">
+          <div className="relative w-full aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-surface-card border-0 group shadow-2xl">
             {/* Poster Image */}
             <img
               src={vodThumbnail}
@@ -217,20 +217,20 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
               <button
                 onClick={() => setIsPlayingVod(true)}
-                className="play-btn w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] !text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
+                className="play-btn w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] !text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
                 aria-label={t('player.playMatch')}
               >
                 <Play className="play-icon w-5 h-5 sm:w-6 sm:h-6 !fill-white !stroke-white translate-x-0.5" />
               </button>
             </div>
 
-            {/* Kick-style Bottom Center Floating Blurred Info Card */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 px-4 py-2 rounded-xl bg-black/60 dark:bg-black/75 backdrop-blur-xl border border-white/15 text-xs text-gray-200 shadow-2xl pointer-events-auto max-w-[92%] whitespace-nowrap">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-3.5 h-3.5 text-blue-400" />
-                <span className="font-medium text-white/90">{t('player.noLiveTitle') || 'Şu Anda Resmi Canlı Yayın Yok'}</span>
+            {/* Kick-style Bottom Center Floating Blurred Info Card (Fully Responsive on Mobile) */}
+            <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 z-20 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-black/75 dark:bg-black/85 backdrop-blur-xl border border-white/15 text-[11px] sm:text-xs text-gray-200 shadow-2xl pointer-events-auto max-w-[94%] text-center sm:text-left">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                <span className="font-medium text-white/90 truncate">{t('player.noLiveTitle') || 'Şu Anda Resmi Canlı Yayın Yok'}</span>
               </div>
-              <div className="h-3 w-[1px] bg-white/20" />
+              <div className="hidden sm:block h-3 w-[1px] bg-white/20" />
               <a
                 href={`https://www.youtube.com/watch?v=${fallbackVideoId}`}
                 target="_blank"

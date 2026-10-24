@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Trophy, Crown, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
 import { getLeaderboardByGame } from '@shared/registry/leaderboard';
 import { ChampionTicket } from './ChampionTicket';
@@ -9,6 +10,7 @@ interface TeamLeaderboardProps {
 }
 
 export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) => {
+  const { t } = useTranslation();
   const data = getLeaderboardByGame(gameSlug);
 
   if (!data) return null;
@@ -25,10 +27,12 @@ export const TeamLeaderboard: React.FC<TeamLeaderboardProps> = ({ gameSlug }) =>
           <div className="flex items-center gap-2">
             <Trophy className="w-4 h-4 text-amber-400" />
             <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
-              Dünya Takım Sıralaması (Top 10)
+              {t('leaderboard.title') || 'Dünya Takım Sıralaması (Top 10)'}
             </h3>
           </div>
-          <span className="text-xs font-semibold text-muted-foreground font-mono">Puan</span>
+          <span className="text-xs font-semibold text-muted-foreground font-mono">
+            {t('leaderboard.points') || 'Puan'}
+          </span>
         </div>
 
         {/* Team List (Image 3 layout) */}

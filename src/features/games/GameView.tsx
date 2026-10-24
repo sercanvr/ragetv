@@ -15,7 +15,7 @@ import { HistoricalChampions } from '@/features/champions/HistoricalChampions';
 export const GameView: React.FC = () => {
   const { gameSlug } = useParams<{ gameSlug: string }>();
   const { data } = useLiveStatus();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'fixtures' | 'leaderboard'>('fixtures');
   const [isTheaterMode, setIsTheaterMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -30,9 +30,10 @@ export const GameView: React.FC = () => {
   useEffect(() => {
     if (game) {
       localStorage.setItem('ragetv_last_game', game.slug);
-      document.title = `${game.name} - RageTV – Live Esports Streams`;
+      const slogan = t('brand.titleSlogan') || 'Live Esports Streams';
+      document.title = `${game.name} - RageTV – ${slogan}`;
     }
-  }, [game, i18n.language]);
+  }, [game, i18n.language, t]);
 
   // Listen to Ctrl+T theater mode toggle
   useEffect(() => {
@@ -77,7 +78,7 @@ export const GameView: React.FC = () => {
           className="flex-1 h-9 gap-2 text-xs font-semibold"
         >
           <Calendar className="w-3.5 h-3.5" />
-          <span>Turnuva Fikstürü</span>
+          <span>{t('leaderboard.switchFixtures') || 'Turnuva Fikstürü'}</span>
         </PopButton>
 
         <PopButton
@@ -87,7 +88,7 @@ export const GameView: React.FC = () => {
           className="flex-1 h-9 gap-2 text-xs font-semibold"
         >
           <Trophy className="w-3.5 h-3.5" />
-          <span>Takım Sıralaması</span>
+          <span>{t('leaderboard.switchLeaderboard') || 'Takım Sıralaması'}</span>
         </PopButton>
       </div>
 

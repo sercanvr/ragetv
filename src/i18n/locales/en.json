@@ -1,7 +1,8 @@
 {
   "brand": {
     "name": "RageTV",
-    "tagline": "Pick a game. Watch live esports."
+    "tagline": "Pick a game. Watch live esports.",
+    "titleSlogan": "Live Esports Streams"
   },
   "nav": {
     "home": "Live Streams",
@@ -30,6 +31,21 @@
     "playMatch": "Watch Replay",
     "channel": "Channel",
     "tournament": "Tournament"
+  },
+  "fixtures": {
+    "title": "Tournament Fixtures & Results",
+    "upcoming": "Upcoming",
+    "results": "Results",
+    "finished": "Finished",
+    "noUpcoming": "No upcoming tournament matches found for this game.",
+    "noResults": "No recently completed tournament matches found."
+  },
+  "leaderboard": {
+    "title": "World Team Rankings (Top 10)",
+    "points": "Points",
+    "reigningChampion": "Reigning Champion",
+    "switchLeaderboard": "Team Rankings",
+    "switchFixtures": "Match Fixtures"
   },
   "tooltips": {
     "changeLanguage": "Change Language",

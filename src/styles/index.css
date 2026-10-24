@@ -266,14 +266,14 @@ html.dark .smooth-elevation-shadow {
     0 16px 24px 0 rgba(0, 0, 0, 0.6);
 }
 
-/* Right Content Ambient Esports Arena Background (Zero asset weight, responsive, immersive cockpit aesthetic) */
+/* Right Content Ambient Esports Arena Background (Tactical 45-degree cross/x grid pattern, responsive, immersive cockpit aesthetic) */
 .right-content-canvas {
   background-color: var(--color-bg-base);
   background-image:
     radial-gradient(ellipse 900px 500px at 15% -5%, rgba(216, 64, 64, 0.07), transparent 60%),
     radial-gradient(ellipse 800px 500px at 85% 15%, rgba(37, 99, 235, 0.05), transparent 65%),
     radial-gradient(ellipse 1000px 450px at 50% 100%, rgba(216, 64, 64, 0.04), transparent 70%),
-    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L14 14M10 14L14 10' stroke='rgba(255,255,255,0.08)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
   background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
 }
 
@@ -282,7 +282,7 @@ html.light .right-content-canvas {
   background-image:
     radial-gradient(ellipse 800px 450px at 15% -5%, rgba(216, 64, 64, 0.04), transparent 60%),
     radial-gradient(ellipse 700px 400px at 85% 15%, rgba(37, 99, 235, 0.03), transparent 65%),
-    radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L14 14M10 14L14 10' stroke='rgba(0,0,0,0.07)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
   background-size: 100% 100%, 100% 100%, 24px 24px;
 }
 

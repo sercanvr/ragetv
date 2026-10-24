@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Match } from '@shared/schemas/fixture';
 import { Badge } from '@/components/ui/Badge';
 import { Swords, ExternalLink } from 'lucide-react';
@@ -9,6 +10,7 @@ interface FixtureCardProps {
 }
 
 export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }) => {
+  const { t } = useTranslation();
   const matchDate = new Date(match.scheduledAt);
   const formattedTime = new Intl.DateTimeFormat(locale, {
     hour: '2-digit',
@@ -38,8 +40,8 @@ export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }
           </span>
         )}
         {isCompleted && (
-          <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
-            Finished
+          <span className="text-[11px] tracking-wider text-gray-400 font-semibold">
+            {t('fixtures.finished') || 'Finished'}
           </span>
         )}
       </div>

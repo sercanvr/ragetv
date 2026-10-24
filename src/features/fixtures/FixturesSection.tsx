@@ -11,7 +11,7 @@ interface FixturesSectionProps {
 }
 
 export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'upcoming' | 'results'>('upcoming');
   const { data, isLoading } = useFixtures(gameSlug);
 
@@ -25,7 +25,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand" />
-            Turnuva Fikstürü & Sonuçlar
+            {t('fixtures.title') || 'Turnuva Fikstürü & Sonuçlar'}
           </h2>
         </div>
 
@@ -38,7 +38,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
             className="flex-1 h-8 gap-1.5 text-xs font-semibold"
           >
             <Calendar className="w-3.5 h-3.5" />
-            <span>Yaklaşan</span>
+            <span>{t('fixtures.upcoming') || 'Yaklaşan'}</span>
             {upcomingMatches.length > 0 && (
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 text-white ml-1">
                 {upcomingMatches.length}
@@ -53,7 +53,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
             className="flex-1 h-8 gap-1.5 text-xs font-semibold"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Sonuçlar</span>
+            <span>{t('fixtures.results') || 'Sonuçlar'}</span>
             {resultMatches.length > 0 && (
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 text-white ml-1">
                 {resultMatches.length}
@@ -82,7 +82,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
               ))
             ) : (
               <p className="text-xs text-gray-500 py-6 text-center">
-                Bu oyun için planlanmış turnuva maçı bulunamadı.
+                {t('fixtures.noUpcoming') || 'Bu oyun için planlanmış turnuva maçı bulunamadı.'}
               </p>
             )
           ) : resultMatches.length > 0 ? (
@@ -91,7 +91,7 @@ export const FixturesSection: React.FC<FixturesSectionProps> = ({ gameSlug }) =>
             ))
           ) : (
             <p className="text-xs text-gray-500 py-6 text-center">
-              Yakın zamanda tamamlanan turnuva sonucu bulunamadı.
+              {t('fixtures.noResults') || 'Yakın zamanda tamamlanan turnuva sonucu bulunamadı.'}
             </p>
           )}
         </div>

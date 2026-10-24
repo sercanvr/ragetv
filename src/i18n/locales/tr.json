@@ -1,7 +1,8 @@
 {
   "brand": {
     "name": "RageTV",
-    "tagline": "Bir oyun seç, canlı espor izle."
+    "tagline": "Bir oyun seç, canlı espor izle.",
+    "titleSlogan": "Canlı Espor Yayınları"
   },
   "nav": {
     "home": "Canlı Yayınlar",
@@ -30,6 +31,21 @@
     "playMatch": "Tekrarı İzle",
     "channel": "Kanal",
     "tournament": "Turnuva"
+  },
+  "fixtures": {
+    "title": "Turnuva Fikstürü & Sonuçlar",
+    "upcoming": "Yaklaşan",
+    "results": "Sonuçlar",
+    "finished": "Tamamlandı",
+    "noUpcoming": "Bu oyun için planlanmış turnuva maçı bulunamadı.",
+    "noResults": "Yakın zamanda tamamlanan turnuva sonucu bulunamadı."
+  },
+  "leaderboard": {
+    "title": "Dünya Takım Sıralaması (Top 10)",
+    "points": "Puan",
+    "reigningChampion": "Son Şampiyon",
+    "switchLeaderboard": "Takım Sıralaması",
+    "switchFixtures": "Turnuva Fikstürü"
   },
   "tooltips": {
     "changeLanguage": "Dili Değiştir",
