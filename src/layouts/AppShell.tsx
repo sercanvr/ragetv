@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import {
   ChevronDown,
   Check,
+  Menu,
+  X,
 } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Sidebar } from './Sidebar';
 import { GameTopPills } from '@/features/games/GameTopPills';
-import { MobileBottomNav } from './MobileBottomNav';
 import { Footer } from './Footer';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { GAMES_REGISTRY } from '@shared/registry/games';
@@ -55,6 +57,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
   // Dropdown States (Language only)
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
 
   // Observe content height for exact proportional external scrollbar track
@@ -208,29 +211,40 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   return (
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
       {/* Top Navbar — Unified Roof Frame (Seamlessly connected with sidebar as single frame) */}
-      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50 shadow-none">
-        {/* Left: Standalone Big Brand Logo (Fixed, completely unaffected by sidebar toggle) */}
+      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50 shadow-none relative">
+        {/* Left: Desktop Sidebar Toggle (Kick style) + Standalone Brand Logo */}
         <div className="flex items-center shrink-0 px-2 py-1">
+          {/* Desktop Sidebar Toggle Button to the left of the Logo */}
+          <button
+            onClick={toggleSidebar}
+            className="hidden lg:flex items-center justify-center p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-foreground/5 active:scale-95 transition-all cursor-pointer mr-2.5 border border-surface-border"
+            title={isCollapsed ? 'Kenar Çubuğunu Aç (B)' : 'Kenar Çubuğunu Daralt (B)'}
+            aria-label="Toggle Sidebar"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+
+          {/* Brand Logo with Pronounced Shadow */}
           <div
             onClick={handleLogoClick}
-            className="flex items-center cursor-pointer hover:opacity-75 active:opacity-50 transition-none"
+            className="flex items-center cursor-pointer hover:opacity-85 active:opacity-60 transition-opacity"
             title="RageTV — Sayfayı Yenile"
           >
             <img
               src="/logos/rtv-logo.png"
               alt="RageTV"
-              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-sm"
+              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(216,64,64,0.55)] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]"
             />
           </div>
         </div>
 
-        {/* Right: Language Dropdown + Instant Direct Theme Toggle (Shifted slightly left with mr-3 sm:mr-5) */}
-        <div className="flex items-center gap-2 sm:gap-3 mr-3 sm:mr-5">
+        {/* Right (Desktop): Language Dropdown + Instant Direct Theme Toggle */}
+        <div className="hidden lg:flex items-center gap-1 mr-3 sm:mr-5">
           {/* 1. Language Dropdown Menu (High Z-Index) */}
           <div className="relative group/lang" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangOpen((prev) => !prev)}
-              className="h-8 px-2.5 flex items-center gap-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              className="h-8 px-1.5 py-1 flex items-center gap-1 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border-[1.5px] border-neutral-400/90 dark:border-white/30"
               aria-haspopup="true"
               aria-expanded={isLangOpen}
             >
@@ -251,7 +265,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
             {/* Language Menu Items (Compact, Language Names only, left-aligned, tight checkmark spacing, light-gray hover) */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-1.5 w-auto min-w-[100px] rounded-xl bg-surface-deep border border-surface-border shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-0.5">
+              <div className="absolute right-0 mt-1.5 w-auto min-w-[100px] rounded-xl bg-surface-deep border-[1.5px] border-neutral-400/90 dark:border-white/30 shadow-2xl p-1 z-[9999] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100 space-y-0.5">
                 {LANGUAGES.map((lang) => {
                   const isSelected = currentLangObj.code === lang.code;
                   return (
@@ -278,7 +292,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           <div className="relative group/theme">
             <button
               onClick={() => selectTheme(isLight ? 'dark' : 'light')}
-              className="h-8 w-8 flex items-center justify-center rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border border-surface-border"
+              className="h-8 w-8 flex items-center justify-center rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors border-[1.5px] border-neutral-400/90 dark:border-white/30"
               aria-label="Toggle Theme"
             >
               <svg
@@ -312,6 +326,107 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             </div>
           </div>
         </div>
+
+        {/* Right (Mobile): Hamburger Button (Three lines in rounded box) */}
+        <div className="lg:hidden flex items-center mr-1">
+          <button
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="p-2 rounded-xl border border-neutral-400/50 dark:border-white/20 bg-surface-deep text-foreground hover:bg-white/5 active:scale-95 transition-all cursor-pointer"
+            aria-label="Toggle Mobile Menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+
+        {/* Mobile Dropdown Menu (Appears under navbar, auto-closes on any selection) */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-14 left-0 right-0 z-[100] bg-surface-deep/98 backdrop-blur-2xl border-b border-surface-border p-4 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-2 duration-150">
+            {/* 1. Games List */}
+            <div className="flex flex-col gap-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80 px-2 py-1">
+                {t('games.title') || 'Oyunlar'}
+              </span>
+              {GAMES_REGISTRY.map((game) => {
+                const isLive = liveSlugs.includes(game.slug);
+                return (
+                  <NavLink
+                    key={game.id}
+                    to={`/${game.slug}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      cn(
+                        'flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-colors',
+                        isActive
+                          ? 'bg-[#D84040]/15 text-[#D84040] font-semibold border border-[#D84040]/40'
+                          : 'text-foreground hover:bg-white/5'
+                      )
+                    }
+                  >
+                    <div className="flex items-center gap-2.5">
+                      {game.logoUrl && (
+                        <img src={game.logoUrl} alt="" className="w-5 h-5 object-contain" />
+                      )}
+                      <span>{game.name}</span>
+                    </div>
+                    {isLive && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#D84040] text-white">
+                        LIVE
+                      </span>
+                    )}
+                  </NavLink>
+                );
+              })}
+            </div>
+
+            <div className="h-[1px] w-full bg-surface-border/60" />
+
+            {/* 2. Language Selection */}
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80 px-2">
+                {t('tooltips.changeLanguage') || 'Dil'}
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      selectLanguage(lang.code);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      'px-2.5 py-2 rounded-xl text-xs font-semibold border transition-colors flex items-center justify-center gap-1.5',
+                      currentLangObj.code === lang.code
+                        ? 'border-[#D84040] bg-[#D84040]/15 text-foreground'
+                        : 'border-surface-border text-muted-foreground hover:text-foreground hover:bg-white/5'
+                    )}
+                  >
+                    <span>{lang.flag}</span>
+                    <span className="uppercase">{lang.short}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Theme Toggle */}
+            <div className="pt-1">
+              <button
+                onClick={() => {
+                  selectTheme(isLight ? 'dark' : 'light');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full px-3 py-2.5 rounded-xl border border-surface-border bg-surface-card flex items-center justify-between text-xs font-semibold text-foreground hover:bg-white/5 transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  {isLight ? '☀️ Açık Tema' : '🌙 Koyu Tema'}
+                </span>
+                <span className="text-muted-foreground text-[11px]">
+                  {isLight ? 'Koyu Moda Geç' : 'Açık Moda Geç'}
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Body: Fixed Left Sidebar + Framed Window Content Canvas (Paint Drawing Architecture) */}
@@ -320,13 +435,12 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
         <Sidebar
           liveSlugs={liveSlugs}
           isCollapsed={isCollapsed}
-          onToggle={toggleSidebar}
         />
 
         {/* Right Area: Fixed Outer Container with Isolated Native Scrollbar at the Extreme Screen Edge */}
-        <div className="flex-1 min-w-0 h-full min-h-0 flex pl-0.5 relative">
-          {/* Framed Window Pane Canvas: Permanent Fixed Bezel at Top and Bottom, unclipped rounded-3xl corners */}
-          <div className="right-content-frame flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none mr-2 sm:mr-3 mb-4 sm:mb-5 lg:mb-6">
+        <div className="flex-1 min-w-0 h-full min-h-0 flex pl-0.5 pb-2.5 sm:pb-3.5 relative">
+          {/* Framed Window Pane Canvas: Ambient Esports Arena Background, Thicker Defined Border, Breathing Room */}
+          <div className="right-content-frame right-content-canvas flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl border-[1.5px] border-neutral-400/90 dark:border-white/[0.22] overflow-hidden relative shadow-none mr-2 sm:mr-3">
             {/* Scrollable Viewport inside the frame: Content scrolls smoothly without any inner scrollbar touching the radius */}
             <div
               ref={scrollContainerRef}
@@ -352,7 +466,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           {/* Dedicated External Scrollbar Channel: Flush to the Window's Far Right Edge, completely detached from the card frame */}
           <div
             ref={externalScrollRef}
-            className="w-2 h-full overflow-y-auto overflow-x-hidden shrink-0 mr-0.5 mb-4 sm:mb-5 lg:mb-6"
+            className="w-2 h-full overflow-y-auto overflow-x-hidden shrink-0 mr-0.5"
             style={{ overscrollBehavior: 'contain' }}
             aria-hidden="true"
           >
@@ -360,9 +474,6 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           </div>
         </div>
       </div>
-
-      {/* Mobile Bottom Navigation Bar */}
-      <MobileBottomNav />
     </div>
   );
 };

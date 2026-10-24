@@ -158,12 +158,20 @@ html.light #disclaimer {
 }
 
 /* Light Theme Text Contrast */
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light .text-white {
+html.light h1:not(.keep-white),
+html.light h2:not(.keep-white),
+html.light h3:not(.keep-white),
+html.light h4:not(.keep-white),
+html.light .text-white:not(.keep-white):not(.play-btn *):not(.bg-brand *):not(.bg-\[\#D84040\] *) {
   color: #111827 !important;
+}
+
+/* Play Button: Always crisp pure white fill and stroke without black borders */
+.play-btn svg,
+svg.play-icon {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+  fill: #FFFFFF !important;
 }
 
 /* Champion Cards: Always keep crisp bright text on dark collector cards in both modes */
@@ -238,3 +246,43 @@ html.light aside a:hover,
 html.light .hover\:bg-white\/5:hover {
   background-color: rgba(0, 0, 0, 0.04) !important;
 }
+
+/* User Requested Precision Multi-Layer Elevation Shadow (5% Alpha) */
+.smooth-elevation-shadow {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 1px 1px 0 rgba(0, 0, 0, 0.05),
+    0 2px 2px 0 rgba(0, 0, 0, 0.05),
+    0 4px 4px 0 rgba(0, 0, 0, 0.05),
+    0 8px 8px 0 rgba(0, 0, 0, 0.05),
+    0 16px 16px 0 rgba(0, 0, 0, 0.05);
+}
+
+html.dark .smooth-elevation-shadow {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.35),
+    0 6px 12px 0 rgba(0, 0, 0, 0.45),
+    0 16px 24px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* Right Content Ambient Esports Arena Background (Zero asset weight, responsive, immersive cockpit aesthetic) */
+.right-content-canvas {
+  background-color: var(--color-bg-base);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(216, 64, 64, 0.07), transparent 60%),
+    radial-gradient(ellipse 800px 500px at 85% 15%, rgba(37, 99, 235, 0.05), transparent 65%),
+    radial-gradient(ellipse 1000px 450px at 50% 100%, rgba(216, 64, 64, 0.04), transparent 70%),
+    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+}
+
+html.light .right-content-canvas {
+  background-color: #FFFFFF;
+  background-image:
+    radial-gradient(ellipse 800px 450px at 15% -5%, rgba(216, 64, 64, 0.04), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 85% 15%, rgba(37, 99, 235, 0.03), transparent 65%),
+    radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+

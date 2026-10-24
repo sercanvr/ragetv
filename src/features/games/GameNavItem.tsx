@@ -50,8 +50,8 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               <span className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#D84040]" />
             )}
 
-            {/* Game Logo in Liquid Glass Rounded Box with static indicator dot (No cheap red border on hover) */}
-            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 transition-none">
+            {/* Game Logo in Liquid Glass Rounded Box with inner depth and static indicator dot */}
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-white/[0.09] via-white/[0.03] to-transparent dark:from-white/[0.06] dark:via-white/[0.02] dark:to-black/30 backdrop-blur-md border border-black/10 dark:border-white/10 flex items-center justify-center p-1.5 shrink-0 transition-all duration-150 group-hover/item:border-brand/40 group-hover/item:from-brand/10 shadow-inner">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}

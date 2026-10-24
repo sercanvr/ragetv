@@ -55,8 +55,14 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
     return (
       <section className="space-y-4 w-full transition-all duration-300">
-        {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel, Clean Frame) */}
-        <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
+        {/* 1. Video Player Container Top Flush (Thinner refined border with neutral corner sheen highlights) */}
+        <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/40 backdrop-blur-xl border border-neutral-300/70 dark:border-white/10 shadow-none transition-all overflow-hidden">
+          {/* Specular Ambient Corner Sheen (Neutral White, Not Accent Red) */}
+          <div className="pointer-events-none absolute -top-10 -left-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
+          <div className="pointer-events-none absolute -top-10 -right-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
+          <div className="pointer-events-none absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-white/10 dark:bg-white/[0.05] blur-lg" />
+          <div className="pointer-events-none absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-white/10 dark:bg-white/[0.05] blur-lg" />
+
           {isPlayingLive ? (
             <EmbedPlayer
               platform={activeStream.platform}
@@ -77,14 +83,14 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
                 }}
               />
 
-              {/* Minimalist Centered Play Button (Zero Distracting Description Text, Zero Jump Hover) */}
+              {/* Minimalist Centered Play Button (No Black Border in Light Theme) */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
                 <button
                   onClick={() => setIsPlayingLive(true)}
-                  className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
+                  className="play-btn w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] !text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
                   aria-label="Start Live Stream"
                 >
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
+                  <Play className="play-icon w-5 h-5 sm:w-6 sm:h-6 !fill-white !stroke-white translate-x-0.5" />
                 </button>
               </div>
             </div>
@@ -138,24 +144,22 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               <Radio className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <h2 className="text-sm sm:text-base font-semibold text-white line-clamp-1">
+              <h2 className="text-sm font-semibold text-white tracking-wide truncate max-w-md">
                 {activeStream.title}
               </h2>
-              <p className="text-xs text-gray-400 flex items-center gap-2">
-                <span>
-                  {t('player.channel')}: <strong className="text-gray-200">@{activeStream.channel}</strong>
-                </span>
+              <p className="text-xs text-muted-foreground">
+                {activeStream.platform.toUpperCase()} • {activeStream.channel}
               </p>
             </div>
           </div>
 
           <a
-            href={streamUrl}
+            href={livePlatformUrl}
             target="_blank"
             rel="noreferrer"
             className="text-xs font-medium text-brand hover:text-brand-hover flex items-center gap-1.5 ml-auto"
           >
-            {activeStream.platform === 'twitch' ? t('player.openOnTwitch') : t('player.openOnYoutube')}
+            {activeStream.platform === 'youtube' ? t('player.openOnYoutube') : t('player.openOnTwitch')}
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -182,8 +186,14 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
 
   return (
     <section className="space-y-4 w-full transition-all duration-300">
-      {/* 1. Video Player Container Top Flush (Aligns with Side Fixture Panel, Clean Frame) */}
-      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/50 backdrop-blur-xl border border-neutral-300/80 dark:border-white/[0.14] shadow-none ring-1 ring-white/10 dark:ring-white/5 transition-all">
+      {/* 1. Video Player Container Top Flush (Thinner refined border with neutral corner sheen highlights) */}
+      <div className="relative rounded-3xl p-2 sm:p-2.5 bg-surface-card/40 backdrop-blur-xl border border-neutral-300/70 dark:border-white/10 shadow-none transition-all overflow-hidden">
+        {/* Specular Ambient Corner Sheen (Neutral White, Not Accent Red) */}
+        <div className="pointer-events-none absolute -top-10 -left-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
+        <div className="pointer-events-none absolute -top-10 -right-10 w-24 h-24 rounded-full bg-white/15 dark:bg-white/[0.09] blur-lg" />
+        <div className="pointer-events-none absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-white/10 dark:bg-white/[0.05] blur-lg" />
+        <div className="pointer-events-none absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-white/10 dark:bg-white/[0.05] blur-lg" />
+
         {isPlayingVod ? (
           <EmbedPlayer
             platform="youtube"
@@ -203,15 +213,33 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               }}
             />
 
-            {/* Minimalist Centered Play Button (Zero Distracting Description Text, Zero Jump Hover) */}
+            {/* Minimalist Centered Play Button (No Black Border in Light Theme) */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center p-6">
               <button
                 onClick={() => setIsPlayingVod(true)}
-                className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
+                className="play-btn w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-[#D84040] hover:bg-[#E85252] !text-white flex items-center justify-center shadow-[0_0_20px_rgba(216,64,64,0.45)] transition-colors cursor-pointer"
                 aria-label={t('player.playMatch')}
               >
-                <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white translate-x-0.5" />
+                <Play className="play-icon w-5 h-5 sm:w-6 sm:h-6 !fill-white !stroke-white translate-x-0.5" />
               </button>
+            </div>
+
+            {/* Kick-style Bottom Center Floating Blurred Info Card */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 px-4 py-2 rounded-xl bg-black/60 dark:bg-black/75 backdrop-blur-xl border border-white/15 text-xs text-gray-200 shadow-2xl pointer-events-auto max-w-[92%] whitespace-nowrap">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5 text-blue-400" />
+                <span className="font-medium text-white/90">{t('player.noLiveTitle') || 'Şu Anda Resmi Canlı Yayın Yok'}</span>
+              </div>
+              <div className="h-3 w-[1px] bg-white/20" />
+              <a
+                href={`https://www.youtube.com/watch?v=${fallbackVideoId}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 font-semibold text-[#D84040] hover:text-[#E85252] transition-colors"
+              >
+                <span>{t('player.openOnYoutube') || "YouTube'da Aç"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         )}
@@ -222,7 +250,6 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
             <span>{game.name}</span>
-            <Badge variant="vod">{t('player.vod')}</Badge>
           </h1>
         </div>
 
@@ -247,29 +274,7 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               )}
             </PopButton>
           )}
-
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground bg-surface-card px-3 py-1.5 rounded-xl border border-surface-border">
-            <Trophy className="w-3.5 h-3.5 text-blue-400" />
-            <span>Official Tournament VOD</span>
-          </span>
         </div>
-      </div>
-
-      {/* 3. Metadata Subbar */}
-      <div className="glass-panel rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400">
-        <div className="flex items-center gap-2">
-          <Calendar className="w-4 h-4 text-blue-400" />
-          <span>{t('player.noLiveTitle')}</span>
-        </div>
-
-        <a
-          href={`https://www.youtube.com/watch?v=${fallbackVideoId}`}
-          target="_blank"
-          rel="noreferrer"
-          className="text-xs font-medium text-brand hover:text-brand-hover flex items-center gap-1.5 ml-auto"
-        >
-          {t('player.openOnYoutube')} <ExternalLink className="w-3.5 h-3.5" />
-        </a>
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ interface ChampionTicketProps {
 
 export const ChampionTicket: React.FC<ChampionTicketProps> = ({ champion }) => {
   return (
-    <div className="relative w-full rounded-2xl bg-gradient-to-r from-[#201810] via-[#1A1815] to-[#251E14] dark:from-[#1E1710] dark:via-[#161412] dark:to-[#221B12] border border-amber-500/35 transition-opacity duration-150 hover:opacity-90 select-none shadow-2xl flex">
+    <div className="relative w-full rounded-2xl bg-gradient-to-r from-[#201810] via-[#1A1815] to-[#251E14] dark:from-[#1E1710] dark:via-[#161412] dark:to-[#221B12] border border-amber-500/35 transition-opacity duration-150 hover:opacity-90 select-none shadow-none flex">
       {/* Ticket Left: Main Event & Champion Credentials */}
       <div className="flex-1 p-3.5 sm:p-4 flex flex-col justify-between gap-3 min-w-0 rounded-l-2xl overflow-hidden">
         {/* Top Header Badge & Date */}
