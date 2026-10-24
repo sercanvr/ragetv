@@ -282,7 +282,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               aria-haspopup="true"
               aria-expanded={isLangOpen}
             >
-              <i className="fa-solid fa-earth-americas text-xs text-[#D84040]" aria-hidden="true" />
+              <i className="fa-solid fa-earth-americas text-xs text-foreground" aria-hidden="true" />
               <span className="uppercase tracking-wider font-mono">{currentLangObj.short}</span>
               <ChevronDown className="w-3 h-3 text-muted-foreground ml-0.5 opacity-70" />
             </button>
