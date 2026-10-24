@@ -37,7 +37,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({ scrollRef, targetRef }
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-7 sm:bottom-8 right-8 sm:right-10 lg:right-12 z-50 p-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white shadow-brand-glow transition-transform active:scale-90 flex items-center justify-center border border-white/20 select-none cursor-pointer"
+      className="fixed bottom-6 sm:bottom-8 right-4 sm:right-6 lg:right-7 z-50 p-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white shadow-brand-glow transition-transform active:scale-90 flex items-center justify-center border border-white/20 select-none cursor-pointer"
       title="En Üste Çık"
       aria-label="Scroll to top"
     >
