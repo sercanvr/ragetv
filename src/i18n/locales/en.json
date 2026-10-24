@@ -41,5 +41,8 @@
     "title": "Historical Champions",
     "subtitle": "World / Major Finals"
   },
+  "accessibility": {
+    "skipToContent": "Skip to main content"
+  },
   "disclaimer": "RageTV is an independent, non-commercial esports discovery platform. It does not host, record, or rebroadcast any video. Live streams and videos are shown through the official embedded players of their original platforms (Twitch and YouTube) and remain the property of their respective owners."
 }

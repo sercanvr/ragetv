@@ -41,5 +41,8 @@
     "title": "Geçmiş Şampiyonlar",
     "subtitle": "Dünya / Major Finalleri"
   },
+  "accessibility": {
+    "skipToContent": "Ana içeriğe geç"
+  },
   "disclaimer": "RageTV, bağımsız ve ticari olmayan bir espor keşif sitesidir. Hiçbir video içeriğini barındırmaz, kaydetmez veya yeniden yayınlamaz. Canlı yayınlar ve videolar, özgün platformların (Twitch, YouTube) resmi gömülü oynatıcıları aracılığıyla gösterilir ve ilgili sahiplerine aittir."
 }

@@ -22,4 +22,15 @@ i18n.use(initReactI18next).init({
   },
 });
 
+// Sync <html lang="..."> attribute reactively for screen readers and search engines (WCAG 3.1.1 / 3.1.2)
+if (typeof document !== 'undefined') {
+  document.documentElement.lang = initialLang;
+}
+
+i18n.on('languageChanged', (lng) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = lng;
+  }
+});
+
 export default i18n;

@@ -153,6 +153,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
 
   return (
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
+      {/* WCAG 2.2 Skip to Main Content Link for screen readers and keyboard navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-[#D84040] focus:text-white focus:font-bold focus:text-xs focus:rounded-lg focus:shadow-2xl focus:outline-none"
+      >
+        {t('accessibility.skipToContent', 'Skip to main content')}
+      </a>
+
       {/* Top Navbar — Unified Roof Frame (Seamlessly connected with sidebar as single frame) */}
       <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50">
         {/* Left: Standalone Big Brand Logo (Fixed, completely unaffected by sidebar toggle) */}
@@ -281,7 +289,11 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
               <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
 
               {/* Main Stage Content */}
-              <main className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-20 sm:pb-28">
+              <main
+                id="main-content"
+                tabIndex={-1}
+                className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-20 sm:pb-28 outline-none"
+              >
                 {children}
               </main>
 

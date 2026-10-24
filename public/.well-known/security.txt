@@ -1,0 +1,6 @@
+# RageTV Security Policy & Disclosure
+Contact: https://github.com/sercanvr/ragetv/security
+Expires: 2028-12-31T23:59:59.000Z
+Preferred-Languages: en, tr
+Canonical: https://ragetv.vercel.app/.well-known/security.txt
+Policy: https://github.com/sercanvr/ragetv/blob/main/README.md#security

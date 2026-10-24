@@ -41,5 +41,8 @@
     "title": "Bisherige Champions",
     "subtitle": "Welt- / Major-Finals"
   },
+  "accessibility": {
+    "skipToContent": "Zum Hauptinhalt springen"
+  },
   "disclaimer": "RageTV ist eine unabhängige, nicht-kommerzielle Plattform zur Entdeckung von Esports. Es hostet, speichert oder re-streamt keine Videos. Alle Streams werden über offizielle Player von Twitch und YouTube bereitgestellt."
 }
