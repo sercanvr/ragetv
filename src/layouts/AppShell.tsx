@@ -277,32 +277,30 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           onToggle={toggleSidebar}
         />
 
-        {/* Right Area: Framed Window Pane (Fixed Outer Frame with Permanent Top/Bottom Rounded Borders) */}
-        <div className="flex-1 min-w-0 h-full min-h-0 flex flex-col pl-0.5 pr-3 sm:pr-4 pb-3 sm:pb-4">
-          <div className="flex-1 min-w-0 min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none">
-            {/* Scrollable Viewport: Content scrolls smoothly inside the fixed frame */}
-            <div
-              ref={scrollContainerRef}
-              className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col scrollbar-thin"
+        {/* Right Area: Scrollable Viewport with Scrollbar Flush to the Default Extreme Right Edge */}
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden flex flex-col pl-0.5 scrollbar-thin"
+        >
+          {/* Framed Window Pane Canvas: Separated from the right scrollbar with clean margin so rounded-3xl corners remain intact */}
+          <div className="flex-1 min-w-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] mr-3 sm:mr-4 mb-3 sm:mb-4 relative shadow-none">
+            {/* Mobile Game Top Pills (for mobile viewport only) */}
+            <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
+
+            {/* Main Stage Content */}
+            <main
+              id="main-content"
+              tabIndex={-1}
+              className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-20 sm:pb-28 outline-none"
             >
-              {/* Mobile Game Top Pills (for mobile viewport only) */}
-              <GameTopPills games={GAMES_REGISTRY} liveSlugs={liveSlugs} />
+              {children}
+            </main>
 
-              {/* Main Stage Content */}
-              <main
-                id="main-content"
-                tabIndex={-1}
-                className="flex-1 w-full max-w-[1700px] mx-auto p-4 sm:p-6 lg:p-7 pb-20 sm:pb-28 outline-none"
-              >
-                {children}
-              </main>
+            {/* Professional Esports Legal Footer */}
+            <Footer />
 
-              {/* Professional Esports Legal Footer */}
-              <Footer />
-
-              {/* Instant Scroll to Top Button */}
-              <ScrollToTop targetRef={scrollContainerRef} />
-            </div>
+            {/* Instant Scroll to Top Button */}
+            <ScrollToTop targetRef={scrollContainerRef} />
           </div>
         </div>
       </div>
