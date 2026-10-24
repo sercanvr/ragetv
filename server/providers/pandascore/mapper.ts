@@ -20,6 +20,9 @@ export interface PandaScoreMatchItem {
   serie: { name: string };
   opponents: PandaScoreOpponent[];
   results?: Array<{ team_id: number; score: number }>;
+  streams_list?: Array<{ main?: boolean; official?: boolean; raw_url?: string; embed_url?: string }>;
+  live_url?: string | null;
+  official_stream_url?: string | null;
 }
 
 export function mapPandaScoreMatchToDomain(
@@ -63,6 +66,9 @@ export function mapPandaScoreMatchToDomain(
   const scheduled = item.begin_at || item.scheduled_at || new Date().toISOString();
   const tournamentTitle = `${item.league?.name || ''} ${item.serie?.name || ''}`.trim() || 'Premier Tournament';
 
+  const streamItem = item.streams_list?.find((s) => s.main || s.official) || item.streams_list?.[0];
+  const streamUrl = streamItem?.raw_url || streamItem?.embed_url || item.live_url || item.official_stream_url || null;
+
   return {
     id: `ps:${item.id}`,
     gameId,
@@ -72,6 +78,6 @@ export function mapPandaScoreMatchToDomain(
     teamA,
     teamB,
     score,
-    streamUrl: null,
+    streamUrl,
   };
 }

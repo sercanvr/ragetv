@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Match } from '@shared/schemas/fixture';
 import { Badge } from '@/components/ui/Badge';
-import { Swords } from 'lucide-react';
+import { Swords, ExternalLink } from 'lucide-react';
 
 interface FixtureCardProps {
   match: Match;
@@ -26,12 +26,29 @@ export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }
   const isLive = match.status === 'running';
   const isCompleted = match.status === 'completed';
 
+  const CardWrapper = match.streamUrl ? 'a' : 'div';
+  const wrapperProps = match.streamUrl
+    ? {
+        href: match.streamUrl,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        className:
+          'glass-card rounded-xl p-3 sm:p-3.5 flex flex-col justify-between h-[84px] sm:h-[86px] shrink-0 hover:border-brand/40 transition-colors cursor-pointer group',
+        title: `${match.tournamentName} - ${match.teamA.name} vs ${match.teamB.name}`,
+      }
+    : {
+        className: 'glass-card rounded-xl p-3 sm:p-3.5 flex flex-col justify-between h-[84px] sm:h-[86px] shrink-0',
+      };
+
   return (
-    <div className="glass-card rounded-xl p-3 sm:p-3.5 flex flex-col justify-between h-[84px] sm:h-[86px] shrink-0">
+    <CardWrapper {...(wrapperProps as React.HTMLAttributes<HTMLElement>)}>
       {/* Tournament Header */}
       <div className="flex items-center justify-between text-xs text-gray-400 gap-2 min-w-0">
-        <span className="font-medium text-gray-300 truncate min-w-0 flex-1">
-          {match.tournamentName}
+        <span className="font-medium text-gray-300 truncate min-w-0 flex-1 flex items-center gap-1.5">
+          <span className="truncate">{match.tournamentName}</span>
+          {match.streamUrl && (
+            <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-brand transition-colors shrink-0" />
+          )}
         </span>
         {isLive && <Badge variant="live">LIVE</Badge>}
         {!isLive && !isCompleted && (
@@ -89,6 +106,6 @@ export const FixtureCard: React.FC<FixtureCardProps> = ({ match, locale = 'en' }
           </div>
         </div>
       </div>
-    </div>
+    </CardWrapper>
   );
 };
