@@ -14,10 +14,6 @@
     color: #ffffff;
   }
 
-  html {
-    scrollbar-gutter: stable;
-  }
-
   html,
   body,
   #root {
@@ -29,6 +25,8 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    border: none;
+    outline: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -59,13 +57,15 @@
   }
 }
 
-/* Custom Scrollbars (#D84040 accent thumb) */
+/* Custom Scrollbars (#D84040 accent thumb) with track margins to preserve rounded corner aesthetics */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-deep);
+  background: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 ::-webkit-scrollbar-thumb {
   background: #D84040;
