@@ -3,6 +3,15 @@
  * Strictly checks process.env or globalThis.env without exposing secrets to client.
  */
 
+// Dynamically load .env in Node runtime if available and not already loaded
+if (typeof process !== 'undefined' && typeof process.loadEnvFile === 'function') {
+  try {
+    process.loadEnvFile();
+  } catch {
+    // .env may not exist in production or CI environments
+  }
+}
+
 export interface ServerEnv {
   TWITCH_CLIENT_ID: string | null;
   TWITCH_CLIENT_SECRET: string | null;
