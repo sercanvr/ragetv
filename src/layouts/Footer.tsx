@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
         <WorldMap className="w-full h-full text-neutral-900/[0.12] dark:text-white/[0.14]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 pb-8 text-sm text-muted-foreground items-start">
+      <div className="relative z-10 w-full max-w-[1140px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 pb-8 text-sm text-muted-foreground items-start">
         {/* Column 1: Brand Logo & Statement (Left Aligned) */}
         <div className="space-y-4 max-w-sm">
           <div

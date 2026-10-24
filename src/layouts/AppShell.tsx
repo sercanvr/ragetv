@@ -267,7 +267,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
             <img
               src="/logos/rtv-logo.png"
               alt="RageTV"
-              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] drop-shadow-[0_1px_1px_rgba(0,0,0,0.95)]"
+              className="h-7 sm:h-[30px] w-auto object-contain filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] drop-shadow-[0_1px_1px_rgba(0,0,0,0.95)]"
             />
           </div>
         </div>
