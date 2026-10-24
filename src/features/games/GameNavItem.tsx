@@ -37,7 +37,7 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
           cn(
             'group relative flex items-center gap-3 px-3 py-2.5 transition-none w-full overflow-hidden',
             isActive
-              ? 'text-foreground font-semibold bg-black/[0.11] dark:bg-white/[0.15] backdrop-blur-md border-y border-black/10 dark:border-white/15 shadow-sm'
+              ? 'text-foreground font-semibold bg-black/[0.11] dark:bg-white/[0.15] backdrop-blur-md border-y border-black/10 dark:border-white/15'
               : 'text-muted-foreground hover:text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border-y border-transparent'
           )
         }
@@ -47,11 +47,11 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
           <>
             {/* Active Accent Bar Flush on Right Edge of Sidebar */}
             {isActive && (
-              <span className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#D84040] shadow-[0_0_8px_#D84040]" />
+              <span className="absolute right-0 top-0 bottom-0 w-[3px] bg-[#D84040]" />
             )}
 
             {/* Game Logo in Liquid Glass Rounded Box with static indicator dot (No cheap red border on hover) */}
-            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 shadow-sm transition-none">
+            <div className="relative w-10 h-10 rounded-xl bg-white/[0.05] dark:bg-white/[0.03] backdrop-blur-md border border-white/10 dark:border-white/[0.07] flex items-center justify-center p-1.5 shrink-0 transition-none">
               {game.logoUrl ? (
                 <img
                   src={game.logoUrl}
@@ -75,22 +75,17 @@ export const GameNavItem: React.FC<GameNavItemProps> = ({
               />
             </div>
 
-            {/* Title & Short Tag: Smooth width and opacity transition without layout jumping */}
+            {/* Title & Live Status Badge (Clean, vertically centered, no redundant tagline) */}
             <div
               className={cn(
-                'flex-1 min-w-0 text-left transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
+                'flex-1 min-w-0 flex items-center justify-between gap-1.5 transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap',
                 isCollapsed ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[160px] opacity-100'
               )}
             >
-              <div className="flex items-center justify-between gap-1.5">
-                <span className="text-sm font-medium tracking-tight truncate">
-                  {game.name}
-                </span>
-                {isLive && <Badge variant="live">LIVE</Badge>}
-              </div>
-              <p className="text-[11px] text-muted-foreground/80 truncate font-normal">
-                {game.tagline}
-              </p>
+              <span className="text-sm font-medium tracking-tight truncate">
+                {game.name}
+              </span>
+              {isLive && <Badge variant="live">LIVE</Badge>}
             </div>
           </>
         )}

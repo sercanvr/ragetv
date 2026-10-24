@@ -208,7 +208,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
   return (
     <div className="h-screen w-screen overflow-hidden p-0 m-0 bg-surface-deep text-foreground flex flex-col antialiased">
       {/* Top Navbar — Unified Roof Frame (Seamlessly connected with sidebar as single frame) */}
-      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50">
+      <header className="h-14 shrink-0 px-4 flex items-center justify-between bg-surface-deep z-50 shadow-none">
         {/* Left: Standalone Big Brand Logo (Fixed, completely unaffected by sidebar toggle) */}
         <div className="flex items-center shrink-0 px-2 py-1">
           <div
@@ -326,7 +326,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
         {/* Right Area: Fixed Outer Container with Isolated Native Scrollbar at the Extreme Screen Edge */}
         <div className="flex-1 min-w-0 h-full min-h-0 flex pl-0.5 relative">
           {/* Framed Window Pane Canvas: Permanent Fixed Bezel at Top and Bottom, unclipped rounded-3xl corners */}
-          <div className="flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none mr-2 sm:mr-3 mb-2.5 sm:mb-3.5">
+          <div className="right-content-frame flex-1 min-w-0 h-full min-h-0 flex flex-col rounded-2xl sm:rounded-3xl bg-surface-base border border-neutral-300/80 dark:border-white/[0.14] overflow-hidden relative shadow-none mr-2 sm:mr-3 mb-4 sm:mb-5 lg:mb-6">
             {/* Scrollable Viewport inside the frame: Content scrolls smoothly without any inner scrollbar touching the radius */}
             <div
               ref={scrollContainerRef}
@@ -352,7 +352,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, liveSlugs = [] }) 
           {/* Dedicated External Scrollbar Channel: Flush to the Window's Far Right Edge, completely detached from the card frame */}
           <div
             ref={externalScrollRef}
-            className="w-2 h-full overflow-y-auto overflow-x-hidden shrink-0 mr-0.5 mb-2.5 sm:mb-3.5"
+            className="w-2 h-full overflow-y-auto overflow-x-hidden shrink-0 mr-0.5 mb-4 sm:mb-5 lg:mb-6"
             style={{ overscrollBehavior: 'contain' }}
             aria-hidden="true"
           >

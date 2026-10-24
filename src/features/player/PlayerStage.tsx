@@ -98,7 +98,6 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
               <span>{game.name}</span>
               <Badge variant="live">{t('player.live')}</Badge>
             </h1>
-            <p className="text-xs sm:text-sm text-gray-400">{game.tagline}</p>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -225,7 +224,6 @@ export const PlayerStage: React.FC<PlayerStageProps> = ({
             <span>{game.name}</span>
             <Badge variant="vod">{t('player.vod')}</Badge>
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400">{game.tagline}</p>
         </div>
 
         <div className="flex items-center gap-2.5">
