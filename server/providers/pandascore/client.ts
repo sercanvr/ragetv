@@ -4,7 +4,7 @@ import { mapPandaScoreMatchToDomain, PandaScoreMatchItem } from './mapper';
 
 const GAME_ENDPOINT_MAP: Record<GameId, string> = {
   cs2: 'csgo', // Architecture rule D2/Bölüm 9: CS2 uses csgo prefix on PandaScore
-  valorant: 'videogames/valorant',
+  valorant: 'valorant',
   pubg: 'pubg',
   lol: 'lol',
   dota2: 'dota2',
@@ -19,37 +19,36 @@ export async function fetchPandaScoreMatches(
   const endpointPrefix = GAME_ENDPOINT_MAP[gameId] || 'csgo';
 
   try {
-    const url = new URL(`https://api.pandascore.co/${endpointPrefix}/matches`);
-    url.searchParams.set('sort', '-begin_at');
-    url.searchParams.set('per_page', '10');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    };
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
+    const timeout = setTimeout(() => controller.abort(), 6000);
 
-    const res = await fetch(url.toString(), {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-      },
-      signal: controller.signal,
-    });
+    const [upcomingRes, pastRes] = await Promise.all([
+      fetch(`https://api.pandascore.co/${endpointPrefix}/matches/upcoming?sort=begin_at&per_page=5`, {
+        headers,
+        signal: controller.signal,
+      }),
+      fetch(`https://api.pandascore.co/${endpointPrefix}/matches/past?sort=-begin_at&per_page=5`, {
+        headers,
+        signal: controller.signal,
+      }),
+    ]);
     clearTimeout(timeout);
 
-    if (!res.ok) {
-      return { upcoming: [], results: [] };
-    }
+    const upcomingItems: PandaScoreMatchItem[] = upcomingRes.ok ? await upcomingRes.json() : [];
+    const pastItems: PandaScoreMatchItem[] = pastRes.ok ? await pastRes.json() : [];
 
-    const items = (await res.json()) as PandaScoreMatchItem[];
-    if (!Array.isArray(items)) {
-      return { upcoming: [], results: [] };
-    }
-
-    const mapped = items
+    const upcoming = (Array.isArray(upcomingItems) ? upcomingItems : [])
       .map((item) => mapPandaScoreMatchToDomain(item, gameId))
       .filter((m): m is Match => m !== null);
 
-    const upcoming = mapped.filter((m) => m.status === 'upcoming' || m.status === 'running');
-    const results = mapped.filter((m) => m.status === 'completed');
+    const results = (Array.isArray(pastItems) ? pastItems : [])
+      .map((item) => mapPandaScoreMatchToDomain(item, gameId))
+      .filter((m): m is Match => m !== null);
 
     return { upcoming, results };
   } catch {

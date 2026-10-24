@@ -29,8 +29,12 @@ fixturesRouter.get('/', async (c) => {
   }
 
   // Resilient fallback to verified fixtures if upstream has no matches
-  if (matches.upcoming.length === 0 && matches.results.length === 0) {
-    matches = getVerifiedFallbackFixtures(game.slug);
+  const fallback = getVerifiedFallbackFixtures(game.slug);
+  if (matches.upcoming.length === 0) {
+    matches.upcoming = fallback.upcoming;
+  }
+  if (matches.results.length === 0) {
+    matches.results = fallback.results;
   }
 
   const response: FixturesResponse = {
