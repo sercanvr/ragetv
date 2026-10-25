@@ -33,8 +33,8 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
       ? `https://www.twitch.tv/${channelOrVideoId}`
       : `https://www.youtube.com/watch?v=${channelOrVideoId}`;
 
-  // Apply default 10% volume and 1080p quality when iframe loads
-  const YOUTUBE_ORIGIN = 'https://www.youtube-nocookie.com';
+  // Origin for YouTube postMessage commands
+  const YOUTUBE_ORIGIN = 'https://www.youtube.com';
 
   const handleIframeLoad = () => {
     // Native player manages optimal adaptive bitrate and stream playback seamlessly

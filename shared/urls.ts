@@ -26,7 +26,7 @@ export function buildTwitchVodUrl(videoId: string, currentHost: string): string 
 
 export function buildYouTubeEmbedUrl(videoId: string, autoplay = false): string {
   const cleanId = encodeURIComponent(videoId.trim());
-  return `https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=${autoplay ? 1 : 0}&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080&playsinline=1`;
+  return `https://www.youtube.com/embed/${cleanId}?autoplay=${autoplay ? 1 : 0}&rel=0&modestbranding=1&enablejsapi=1&playsinline=1`;
 }
 
 export function isAllowedEmbedUrl(url: string): boolean {

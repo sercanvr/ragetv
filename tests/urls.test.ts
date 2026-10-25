@@ -12,9 +12,9 @@ describe('Embed URL Builders & Security Allowlist', () => {
     expect(url).toBe('https://player.twitch.tv/?channel=blastpremier&parent=localhost&muted=true&autoplay=false');
   });
 
-  it('should build valid YouTube no-cookie embed URL', () => {
+  it('should build valid YouTube embed URL', () => {
     const url = buildYouTubeEmbedUrl('f02mOEt11OQ', true);
-    expect(url).toBe('https://www.youtube-nocookie.com/embed/f02mOEt11OQ?autoplay=1&rel=0&modestbranding=1&enablejsapi=1&vq=hd1080&playsinline=1');
+    expect(url).toBe('https://www.youtube.com/embed/f02mOEt11OQ?autoplay=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1');
   });
 
   it('should validate allowed hosts strictly and reject malicious / insecure URLs', () => {
