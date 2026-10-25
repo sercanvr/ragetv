@@ -15,7 +15,7 @@
 
 An ultra-fast, privacy-first, non-commercial live esports aggregator built exclusively on official embedded players.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-FC3564.svg?style=for-the-badge)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-D84040.svg?style=for-the-badge)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18%20%7C%2019-20232A.svg?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -91,8 +91,9 @@ RageTV enforces strict mobile-first ergonomics with ergonomic layout adaptations
 [ TV: ≥ 1920px ]      ──>  10-Foot UI: High-contrast focus rings (focus-visible), D-pad navigation, enlarged typography
 ```
 
-* **Brand Accent:** `#FC3564` (Rage Crimson)
-* **Theme:** Cinematic Deep Slate / Obsidian Dark Mode (`#0D0F12` background, `#161920` surface panels)
+* **Brand Accent:** `#D84040` (Rage Red)
+* **Themes:** Seamless Dual Theme (Cinematic Obsidian Dark Mode & Pure Crisp Light Mode)
+* **Shortcuts:** Single-key keyboard accessibility (`T`: Theater, `K`: Play/Pause, `M`: Mute, `B`: Sidebar)
 * **Typography:** Self-hosted, low-latency WOFF2 fonts with `font-display: swap`
 
 ---
@@ -122,14 +123,14 @@ RageTV enforces strict mobile-first ergonomics with ergonomic layout adaptations
                 │                      │                      │ │
         ┌───────▼────────┐     ┌───────▼────────┐     ┌───────▼─┴────────┐
         │  Twitch Helix  │     │ YouTube v3 API │     │ PandaScore API   │
-        │  (OAuth App)   │     │  (Playlists)   │     │ (Tournament M4)  │
+        │  (OAuth App)   │     │  (Playlists)   │     │ (Fixtures & Live)│
         └────────────────┘     └────────────────┘     └──────────────────┘
 ```
 
 ### Layer Constraints & Boundaries
 1. `shared/`: Universal contracts, Zod schemas, game/channel registries, and embed URL generators. Has zero dependencies on server or client.
 2. `server/`: BFF layer (Hono). Encapsulates API keys and provider rate-limiting. Client components cannot import from `server/`.
-3. `src/`: Client-side React SPA. Features modularity (`games/`, `player/`, `live/`, `preferences/`).
+3. `src/`: Client-side React SPA. Features modularity (`games/`, `player/`, `live/`, `fixtures/`, `leaderboard/`).
 
 ---
 
@@ -145,12 +146,12 @@ RageTV enforces strict mobile-first ergonomics with ergonomic layout adaptations
 ## 🗺️ Roadmap & Milestones
 
 - [x] **M0: Discovery & Legal Verification** — Terms review, embed guidelines, channel registry verification, ADR-001/002/003.
-- [x] **M1: Core Skeleton & 10-Foot UI** — Vite + React, Tailwind theme (`#FC3564`), AppShell, Sidebar, i18n scaffolding, `/api/health`.
-- [x] **M2: Live Integration** — Twitch Helix adapter, `/api/live` endpoint, `EmbedPlayer` component, dynamic LIVE badges.
-- [x] **M3: Fallback & VOD Facade** — YouTube tournament VOD fallback, poster facade, blocked/empty state handlers.
-- [x] **M4: Tournament Fixtures** — Upcoming schedule, match countdowns, and verified scores.
-- [x] **M5: Standings Decision** — Deferred to Phase 2 via ADR-004 to uphold zero-scraping and data-honesty principles.
-- [x] **M6: Hardening & Launch Readiness** — Vitest unit & smoke suites (11 tests passing), WCAG AA & 10-foot UI verified, CONTRIBUTING.md.
+- [x] **M1: Core Skeleton & 10-Foot UI** — Vite + React 19, Tailwind theme (`#D84040`), AppShell, Sidebar, i18n scaffolding (TR/EN/DE), `/api/health`.
+- [x] **M2: Live Integration** — Twitch Helix API adapter (`client_credentials`), `/api/live` endpoint, `EmbedPlayer` component, dynamic LIVE badges.
+- [x] **M3: Fallback & VOD Facade** — YouTube championship VOD fallback, DRM/EME support, blocked/empty state handlers.
+- [x] **M4: Tournament Fixtures & Live Matches** — Real-time match schedules, live scores, and direct official stream linking powered by PandaScore API.
+- [x] **M5: Team Leaderboards & Historic Champions** — Official esports team rankings and tournament champions showcase for all 5 tier-1 titles.
+- [x] **M6: Hardening & Launch Readiness** — Vitest unit & smoke suites (29 tests passing across 9 files), zero-leak security audits, WCAG AA & 10-foot UI verified, production bundling.
 
 ---
 
