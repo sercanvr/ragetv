@@ -37,23 +37,7 @@ export const EmbedPlayer: React.FC<EmbedPlayerProps> = ({
   const YOUTUBE_ORIGIN = 'https://www.youtube-nocookie.com';
 
   const handleIframeLoad = () => {
-    if (platform === 'youtube' && iframeRef.current?.contentWindow) {
-      try {
-        // Set default volume strictly to 10% to prevent jumpscares
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'setVolume', args: [10] }),
-          YOUTUBE_ORIGIN
-        );
-        // Request 1080p playback quality
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
-          YOUTUBE_ORIGIN
-        );
-      } catch (error) {
-        // Silently handle cross-origin sandbox restrictions
-        void error;
-      }
-    }
+    // Native player manages optimal adaptive bitrate and stream playback seamlessly
   };
 
   // Keyboard shortcut listeners (Ctrl+K: Play/Pause, Ctrl+M: Mute/Unmute)
