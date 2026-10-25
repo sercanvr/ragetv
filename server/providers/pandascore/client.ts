@@ -39,8 +39,12 @@ export async function fetchPandaScoreMatches(
     ]);
     clearTimeout(timeout);
 
-    const upcomingItems: PandaScoreMatchItem[] = upcomingRes.ok ? await upcomingRes.json() : [];
-    const pastItems: PandaScoreMatchItem[] = pastRes.ok ? await pastRes.json() : [];
+    const upcomingItems: PandaScoreMatchItem[] = upcomingRes.ok
+      ? ((await upcomingRes.json()) as PandaScoreMatchItem[])
+      : [];
+    const pastItems: PandaScoreMatchItem[] = pastRes.ok
+      ? ((await pastRes.json()) as PandaScoreMatchItem[])
+      : [];
 
     const upcoming = (Array.isArray(upcomingItems) ? upcomingItems : [])
       .map((item) => mapPandaScoreMatchToDomain(item, gameId))

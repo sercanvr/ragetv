@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Play, ExternalLink, Radio, Eye, Trophy, Calendar, Maximize2, Minimize2 } from 'lucide-react';
+import { Play, ExternalLink, Radio, Eye, Calendar, Maximize2, Minimize2 } from 'lucide-react';
 import { GameDefinition } from '@shared/schemas/game';
 import { Stream } from '@shared/schemas/stream';
 import { Badge } from '@/components/ui/Badge';
