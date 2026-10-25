@@ -1,0 +1,24 @@
+# RageTV
+
+> Ultra-fast, privacy-first live esports hub. Pick a game, watch official tournament streams instantly on Twitch & YouTube with zero clutter and zero video hosting.
+
+## Overview
+RageTV is a zero-latency esports viewing console that aggregates verified official tournament streams directly from authorized platforms (Twitch and YouTube embeds). RageTV does not host, re-stream, store, or monetize video content.
+
+## Key Game Routes
+- Counter-Strike 2: https://ragetv.vercel.app/cs2
+- Valorant: https://ragetv.vercel.app/valorant
+- League of Legends: https://ragetv.vercel.app/lol
+- Dota 2: https://ragetv.vercel.app/dota2
+- PUBG: Battlegrounds: https://ragetv.vercel.app/pubg
+
+## Single-Key Keyboard Controls
+- T: Toggle Theater Mode (centers player, minimizes peripheral clutter)
+- K: Toggle Play / Pause state
+- M: Toggle Audio Mute
+- B: Toggle Left Sidebar drawer
+
+## Architecture & Privacy
+- Completely cookieless: Zero cookies, zero third-party tracking analytics.
+- Official Embeds Only: Uses Twitch Interactive Player and YouTube No-Cookie Player.
+- Client-Side State: User theme (dark/light), locale (tr/en/de), and drawer states are stored strictly in browser localStorage.

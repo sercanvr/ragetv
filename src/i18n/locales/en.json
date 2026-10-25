@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "name": "RageTV",
+    "tagline": "Pick a game. Watch live esports.",
+    "titleSlogan": "Live Esports Streams"
+  },
+  "nav": {
+    "home": "Live Streams",
+    "tournaments": "Tournaments",
+    "fixtures": "Fixtures",
+    "theme": "Theme",
+    "language": "Language",
+    "collapse": "Collapse Sidebar"
+  },
+  "games": {
+    "title": "Games",
+    "cs2": "Counter-Strike 2",
+    "valorant": "Valorant",
+    "pubg": "PUBG: Battlegrounds",
+    "lol": "League of Legends",
+    "dota2": "Dota 2"
+  },
+  "player": {
+    "live": "LIVE",
+    "vod": "RECENT MATCH",
+    "viewers": "viewers",
+    "openOnTwitch": "Open on Twitch",
+    "openOnYoutube": "Open on YouTube",
+    "noLiveTitle": "No Official Live Broadcast Right Now",
+    "noLiveDesc": "Playing the most recent championship tournament match below.",
+    "playMatch": "Watch Replay",
+    "channel": "Channel",
+    "tournament": "Tournament"
+  },
+  "fixtures": {
+    "title": "Tournament Fixtures & Results",
+    "upcoming": "Upcoming",
+    "results": "Results",
+    "finished": "Finished",
+    "noUpcoming": "No upcoming tournament matches found for this game.",
+    "noResults": "No recently completed tournament matches found."
+  },
+  "leaderboard": {
+    "title": "World Team Rankings (Top 10)",
+    "points": "Points",
+    "reigningChampion": "Reigning Champion",
+    "switchLeaderboard": "Team Rankings",
+    "switchFixtures": "Match Fixtures"
+  },
+  "tooltips": {
+    "changeLanguage": "Change Language",
+    "changeTheme": "Toggle Theme",
+    "theaterMode": "Theater Mode (T)",
+    "normalMode": "Normal Screen (T)"
+  },
+  "champions": {
+    "title": "Historical Champions",
+    "subtitle": "World / Major Finals"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content"
+  },
+  "disclaimer": "RageTV is an independent, non-commercial esports discovery platform. It does not host, record, or rebroadcast any video. Live streams and videos are shown through the official embedded players of their original platforms (Twitch and YouTube) and remain the property of their respective owners."
+}

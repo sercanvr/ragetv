@@ -1,0 +1,325 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  ::selection {
+    background: #D84040;
+    color: #ffffff;
+  }
+
+  html,
+  body,
+  #root {
+    background-color: var(--color-bg-deep);
+    color: var(--color-text-secondary);
+    font-family: 'Chakra Petch', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Orbitron', 'Chakra Petch', sans-serif;
+    letter-spacing: 0.03em;
+    text-wrap: balance;
+  }
+
+  /* 10-Foot UI Focus Styles for Smart TV & Keyboard */
+  :focus-visible {
+    outline: 3px solid var(--color-brand) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 16px rgba(216, 64, 64, 0.6) !important;
+  }
+
+  /* Accessibility: Respect Reduced Motion Preferences (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Custom Scrollbars (#D84040 accent thumb) with track margins to preserve rounded corner aesthetics */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #D84040;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E85252;
+}
+
+/* Hide scrollbar for inner card container to keep corners pristine */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Glassmorphism Surface Utility */
+.glass-panel {
+  background: rgba(20, 23, 30, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-card {
+  background: rgba(26, 30, 39, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(34, 39, 51, 0.85);
+  border-color: rgba(252, 53, 100, 0.4);
+}
+
+/* Light Theme Overrides */
+html.light {
+  color-scheme: light;
+}
+
+html.light,
+html.light body,
+html.light #root,
+html.light .bg-surface-deep {
+  background-color: #F5EFE6 !important;
+  color: #525252 !important;
+}
+
+html.light aside,
+html.light aside.bg-surface-deep {
+  background-color: #F5EFE6 !important;
+  border-color: #DFD7CB !important;
+}
+
+html.light .bg-surface-base {
+  background-color: #FFFFFF !important;
+  border-color: #DFD7CB !important;
+}
+
+html.light .bg-surface-card {
+  background-color: #FFFFFF !important;
+  border-color: #DFD7CB !important;
+}
+
+html.light .bg-surface-panel {
+  background-color: #EBE4D8 !important;
+  border-color: #DFD7CB !important;
+}
+
+html.light .border-surface-border {
+  border-color: #E8E1D5 !important;
+}
+
+html.light .border-surface-borderLight {
+  border-color: #DDD4C6 !important;
+}
+
+html.light footer,
+html.light #disclaimer {
+  background-color: #F5EFE6 !important;
+  border-color: #E8E1D5 !important;
+  color: #757575 !important;
+}
+
+/* Light Theme Text Contrast */
+html.light h1:not(.keep-white),
+html.light h2:not(.keep-white),
+html.light h3:not(.keep-white),
+html.light h4:not(.keep-white),
+html.light .text-white:not(.keep-white):not(.play-btn *):not(.bg-brand *):not(.bg-\[\#D84040\] *) {
+  color: #111827 !important;
+}
+
+/* Play Button: Always crisp pure white fill and stroke without black borders */
+.play-btn svg,
+svg.play-icon {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* Champion Cards: Always keep crisp bright text on dark collector cards in both modes */
+.champion-card h4,
+.champion-card .champion-title,
+html.light .champion-card h4,
+html.light .champion-card .champion-title {
+  color: #FFFFFF !important;
+}
+
+.champion-card p,
+.champion-card .champion-sub,
+html.light .champion-card p,
+html.light .champion-card .champion-sub {
+  color: #D1D5DB !important;
+}
+
+.champion-card .champion-badge,
+html.light .champion-card .champion-badge {
+  color: #FFFFFF !important;
+}
+
+html.light .text-gray-100 {
+  color: #1F2937 !important;
+}
+
+html.light .text-gray-200 {
+  color: #374151 !important;
+}
+
+html.light .text-gray-300 {
+  color: #4B5563 !important;
+}
+
+html.light .text-gray-400 {
+  color: #6B7280 !important;
+}
+
+html.light .text-gray-500 {
+  color: #9CA3AF !important;
+}
+
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .glass-card:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(252, 53, 100, 0.5) !important;
+}
+
+/* Zero outer box-shadow on outer boundary components (Navbar, Left Sidebar, Right Content Frame) */
+header,
+header.shadow-none,
+aside,
+aside.shadow-none,
+.right-content-frame,
+.right-content-frame.shadow-none {
+  box-shadow: none !important;
+}
+
+html.light aside button:hover,
+html.light aside a:hover,
+html.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* User Requested Precision Multi-Layer Elevation Shadow (5% Alpha) */
+.smooth-elevation-shadow {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 1px 1px 0 rgba(0, 0, 0, 0.05),
+    0 2px 2px 0 rgba(0, 0, 0, 0.05),
+    0 4px 4px 0 rgba(0, 0, 0, 0.05),
+    0 8px 8px 0 rgba(0, 0, 0, 0.05),
+    0 16px 16px 0 rgba(0, 0, 0, 0.05);
+}
+
+html.dark .smooth-elevation-shadow {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.35),
+    0 6px 12px 0 rgba(0, 0, 0, 0.45),
+    0 16px 24px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* Right Content Ambient Esports Arena Background (Tactical 45-degree cross/x grid pattern with fixed vertical gradient) */
+.right-content-canvas {
+  background-color: #0A0A0E;
+  background-image:
+    linear-gradient(180deg, #07070A 0%, #121217 18%, #121217 82%, #07070A 100%),
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(216, 64, 64, 0.07), transparent 60%),
+    radial-gradient(ellipse 800px 500px at 85% 15%, rgba(37, 99, 235, 0.05), transparent 65%),
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L14 14M10 14L14 10' stroke='rgba(255,255,255,0.08)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+}
+
+html.light .right-content-canvas {
+  background-color: #FAF7F2;
+  background-image:
+    linear-gradient(180deg, #EBE5D8 0%, #FAF8F5 18%, #FAF8F5 82%, #EBE5D8 100%),
+    radial-gradient(ellipse 800px 450px at 15% -5%, rgba(216, 64, 64, 0.04), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 85% 15%, rgba(37, 99, 235, 0.03), transparent 65%),
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L14 14M10 14L14 10' stroke='rgba(0,0,0,0.07)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+}
+
+/* Instant Zero-Lag Theme Switching */
+.disable-transitions,
+.disable-transitions *,
+.disable-transitions *::before,
+.disable-transitions *::after {
+  transition: none !important;
+}
+
+/* Solid Opaque Footer Backgrounds (Prevents cross pattern from bleeding into footer) */
+footer#disclaimer,
+.footer-solid-bg {
+  background-color: #121216 !important;
+}
+
+html.light footer#disclaimer,
+html.light .footer-solid-bg {
+  background-color: #F5EFE6 !important;
+}
+
+/* Premium Vertical Degradé Title Text Color (Darker bottom, brighter top) */
+.text-gradient-title {
+  background: linear-gradient(180deg, #FFFFFF 0%, #B8B8C2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+html.light .text-gradient-title {
+  background: linear-gradient(180deg, #18181B 0%, #52525B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+

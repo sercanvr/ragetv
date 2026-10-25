@@ -1,0 +1,90 @@
+/*
+#NEW COLOR SCHEME
+--Dark mode background-color: #121212
+--Dark mode text-color: #A7A7A7
+
+--Light mode background-color: #FEFAF3
+--Light mode text-color: #525252
+
+--Accent, scrollbar, selection color: #D84040
+Card/Border/Panel Dark: #1B1B1B / #292929
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* Brand Accent & Selection */
+  --color-brand: #D84040;
+  --color-brand-hover: #E85252;
+  --color-brand-muted: #8A1B1B;
+  --color-brand-glow: rgba(216, 64, 64, 0.28);
+
+  /* Surface / Background Hierarchy (Inverted: Inner Canvas is Deeper Black #0B0B0E, Outer Shell is Charcoal #16161A) */
+  --color-bg-deep: #16161A;
+  --color-bg-base: #0B0B0E;
+  --color-bg-surface: #121216;
+  --color-bg-card: #17171C;
+  --color-bg-panel: #1D1D23;
+  --color-bg-hover: #26262E;
+
+  /* Borders & Dividers */
+  --color-border: #2A2A32;
+  --color-border-subtle: #1E1E24;
+  --color-border-focus: #D84040;
+
+  /* Text Hierarchy (#A7A7A7 text color) */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A7A7A7;
+  --color-text-muted: #7E7E7E;
+
+  /* Live & Status Indicators */
+  --color-status-live: #00E676;
+  --color-status-live-glow: rgba(0, 230, 118, 0.35);
+  --color-status-vod: #3B82F6;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
+  --shadow-brand: 0 0 25px -3px rgba(216, 64, 64, 0.35);
+
+  /* Layout Constants */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+  --topbar-height: 52px;
+  --bottombar-height: 64px;
+}
+
+/* Light Theme Variables: Hafif Koyu Beyaz Dışta (#F5EFE6), Daha Beyaz Olan İçte (#FFFFFF) */
+html.light,
+.light {
+  --color-bg-deep: #F5EFE6;
+  --color-bg-base: #FFFFFF;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-panel: #EBE4D8;
+  --color-bg-hover: #E3DBCF;
+
+  --color-border: #DFD7CB;
+  --color-border-subtle: #E8E1D5;
+  --color-border-focus: #D84040;
+
+  --color-text-primary: #1F1F1F;
+  --color-text-secondary: #525252;
+  --color-text-muted: #757575;
+
+  --shadow-card: 0 4px 15px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* Television / 10-foot UI Scaled Tokens */
+@media (min-width: 1920px) {
+  :root {
+    --sidebar-width: 320px;
+    --sidebar-collapsed-width: 90px;
+    --topbar-height: 80px;
+  }
+}

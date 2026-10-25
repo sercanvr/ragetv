@@ -1,0 +1,23 @@
+{
+  "name": "RageTV — Live Esports Streams",
+  "short_name": "RageTV",
+  "description": "Ultra-fast, privacy-first live esports tournament hub powered exclusively by official embedded players.",
+  "start_url": "/cs2",
+  "display": "standalone",
+  "background_color": "#0B0B0E",
+  "theme_color": "#0B0B0E",
+  "icons": [
+    {
+      "src": "/logos/rtv-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logos/rtv-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
